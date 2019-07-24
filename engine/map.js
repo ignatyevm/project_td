@@ -6,12 +6,21 @@ class Map{
 
 	constructor(game_field, map_id){
 
-		let data_provider = new DataProvider(map_id);
+		/*let data_provider = new DataProvider(map_id);
 
 		this.tower_locations = data_provider.read("tower_locations");
 		this.headquarters = data_provider.read("headquarters");
-		this.roads = data_provider.read("roads");
+		this.roads = data_provider.read("roads");*/
 
+		let map_background = document.createElementNS("http://www.w3.org/2000/svg", "image");
+		map_background.setAttributeNS(null, "x", 0);
+		map_background.setAttributeNS(null, "y", 0);
+		map_background.setAttributeNS("http://www.w3.org/1999/xlink", "href", "maps/map 1.png");
+		game_field.appendChild(map_background);
+
+		let sprite = new Sprite(new Position(0, 0, 0, 0), "sprites/towerDefense_tile001.png");
+		sprite.render(game_field);
+		
 	}
 
 	render(){
