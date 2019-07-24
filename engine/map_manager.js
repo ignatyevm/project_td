@@ -13,8 +13,9 @@ const CHAR_TO_SPRITE = {
 
 class MapManager{
 
-	constructor(source_str){
+	constructor(static_image, source_str){
 
+		this.static_image = static_image;
 		this.width = 20;
 		this.height = 20;
 
