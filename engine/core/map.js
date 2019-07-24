@@ -1,6 +1,7 @@
 
-const MAP_HEIGHT = 70;
+const MAP_HEIGHT = 75;
 const MAP_WIDTH = 150;
+
 class Map{
 
 	constructor(game_field, map_id){
