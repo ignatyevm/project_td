@@ -1,4 +1,4 @@
-const FIELD_SIZE = 16;
+const FIELD_SIZE = 32;
 const SPRITE_WIDTH = 32;
 const SPRITE_HEIGHT = 32;
 
