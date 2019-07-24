@@ -23,7 +23,6 @@ class Sprite{
 
 	render(svg_container){
 		let sprite = document.createElementNS("http://www.w3.org/2000/svg", "image");
-		console.log(this.pos);	
 		sprite.setAttribute("block_x",this.pos.block_x);
 		sprite.setAttribute("block_y", this.pos.block_y);
 		sprite.setAttribute("x", this.pos.x * FIELD_SIZE);
