@@ -69,27 +69,3 @@ function start_game(number_of_players){
 })() 
 
 
-
-// function is_gameover(players, number_of_players){
-// 	is_over = true;
-// 	for (i = 0; i < number_of_players; ++i){
-// 		if (!players[i].hp >= 0){
-// 			is_over = false;
-// 		}
-// 	}
-// 	return is_over;
-// }
-
-// function start_round(tower, number_of_tower){
-// 	current_number_of_enemy = number_of_enemy;
-// 	let enemy[];
-// 	for (i = 0; i < number_of_enemy; ++i){
-// 		enemy[i] = new Enemy(test_enemy_hp, test_enemy_speed, test_enemy_price, test_enemy_x, test_enemy_y, test_enemy_skin, test_enemy_cur_cell, test_enemy_path, test_enemy_player);
-// 	}
-// 	while (current_number_of_enemy != 0){
-// 		for (i = 0; i < number_of_enemy; ++i)
-// 			enemy[i].move(x,y);
-// 		for (i = 0; i < number_of_tower; ++i)
-// 			tower[i].attack(enemy, current_number_of_enemy);
-// 	}
-// }
