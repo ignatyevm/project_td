@@ -1,0 +1,29 @@
+<html>
+
+
+<head>
+</head>
+
+<body>
+
+	<svg id="game_field" version="1.1" width="1200px" height="700px"
+	     xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
+	</svg>
+	
+	<script src="engine/core/engine.js"></script>
+	<script src="engine/core/map.js"></script>
+	<script src="engine/core/data_provider.js"></script>
+	<script src="engine/core/sprite.js"></script>
+
+	<script>
+		
+		let game_field = document.getElementById("game_field");
+
+		let map_builder = new MapBuilder(game_field);	
+		map_builder.generate_sprites_block(5, 5, 10, 10, "sprites/towerDefense_tile002.png");
+
+	</script>
+
+</body>
+
+</html>
