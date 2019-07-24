@@ -18,7 +18,6 @@ class Enemy{
 		}
 	}
 
-	// ?????????????
 	move(){
 		this.cur_cell++; 
 		if (this.cur_cell >= this.path.length){
