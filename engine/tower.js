@@ -21,7 +21,7 @@ class Tower {
 	}
 }
 
-class MachineGun extends tower {
+class MachineGun extends Tower {
 	improvement() {
 	    this.atk_speed += 20;
 		this.damage *= 2;
@@ -31,7 +31,7 @@ class MachineGun extends tower {
 	}
 }
 
-class MagneticGun extends tower {
+class MagneticGun extends Tower {
 	improvement() {
 	    this.atk_speed += 10;
 		this.damage *= 2;
@@ -42,7 +42,7 @@ class MagneticGun extends tower {
 	}
 }
 
-class BunchGun extends tower {
+class BunchGun extends Tower {
 	improvement() {
 	    this.atk_speed += 20;
 		this.damage *= 2;

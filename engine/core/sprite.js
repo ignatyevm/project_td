@@ -2,10 +2,20 @@ const FIELD_SIZE = 16;
 const SPRITE_WIDTH = 32;
 const SPRITE_HEIGHT = 32;
 
+class Position{
+
+	constructor(x, y, block_x, block_y){
+		this.x = x;
+		this.y = y;
+		this.block_x = block_x;
+		this.block_y = block_y;
+	}
+
+}
+
 class Sprite{
 
 	constructor(pos, sprite_url){
-
 		this.pos = pos;
 		this.sprite_url = sprite_url;
 
@@ -23,5 +33,4 @@ class Sprite{
 		sprite.setAttributeNS("http://www.w3.org/1999/xlink", "href", this.sprite_url);
 		svg_container.appendChild(sprite);
 	}
-
 }
