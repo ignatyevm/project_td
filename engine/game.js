@@ -53,7 +53,7 @@ const test_enemy_player = 0;
 (function launch_game(){
 
 	let game_field = document.getElementById("game_field");
-	let map_builder = new MapBuilder(game_field);
-	map_builder.generate_sprites_block(0, 0, MAP_WIDTH, MAP_HEIGHT, "sprites/towerDefense_tile002.png");
-	//start_game(1);
+	let map = new Map(game_field, "");
+	map.render();
+
 })() 
