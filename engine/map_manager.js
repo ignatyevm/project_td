@@ -23,7 +23,7 @@ class MapManager{
 		for(let i = 0; i < 20; i++){
 			this.map_container[i] = new Array(this.width);
 			for(let j = 0; j < 20; j++){
-				this.map_container[i][j] = CHAR_TO_SPRITE[source_str[i * 20 + j]];
+				this.map_container[i][j] = CHAR_TO_SPRITE[source_str[i][j]];
 			}
 		}
 
