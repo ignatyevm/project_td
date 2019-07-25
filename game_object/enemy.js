@@ -4,15 +4,14 @@ const DOWN = 4;
 const RIGHT = 2;
 
 class Enemy extends GameObject {
-	constructor(hp, price, pos, sprite, pos_in_path, road_om_map) {
-		super(pos, sprite);
+	constructor(hp, price, sprite, road_om_map) {
+		super(road_om_map.road[0], sprite);
 		this.max_hp = hp;
 		this.hp = hp;
 		this.price = price;
 		this.is_alive = true;
-		this.pos_in_path = pos_in_path;
+		this.pos_in_path = 0;
 		this.road_om_map = road_om_map;
-		this.direction;
 	}
 
 	is_reach_base(base_pos) {

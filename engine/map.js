@@ -1,17 +1,5 @@
 "use strict";
 
-class PathManager {
-	constructor(finish_pos, path) {
-		this.finish_pos = finish_pos;
-		this.path = path;
-	}
-
-	get_next_step(enemy_pos) {
-		if (enemy_pos.x == this.finish_pos.x && enemy_pos.y == this.finish_pos.y) return false;
-		return this.path[enemy_pos.x][enemy_pos.y]; 
-	}
-}
-
 const WIDTH = 36;
 const HEIGHT = 36;
 const CHAR_UP = ".";

@@ -6,23 +6,23 @@ const FINISHED = 2;
 const IN_GAME = 1;
 const IN_LOBBY = 0;
 
-class Game{
-	constructor(player_number, canvas){
+class Game {
+	constructor(player_number, canvas) {
 		this.game_state = IN_LOBBY;
 		this.session = new Session(player_number);
 		this.render = new Render(canvas);
 	}
 
-	load_session(){
+	load_session() {
 		this.render.render_map();
 	}
 
-	alert(){
+	alert() {
 		alert("You Died");
 	}
 
 	make_turn(){
-		if (game_state != FINISHED){
+		if (game_state != FINISHED) {
 			this.session.make_turn();
 			this.render.render_map();
 			this.game_state = this.render.render_object(this.session.objects);
