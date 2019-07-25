@@ -1,15 +1,7 @@
 class Player{
-	constructor(hp, money, income){
+	constructor(hp, money){
 		this.hp = hp;
 		this.money = money;
-		this.income = income;
-		this.is_dead = false;
-	}
-
-	reload_player(hp, money, income){
-		this.hp = hp;
- 		this.income = income;
- 		this.money = money;
 	}
 
 	get_damage(){
@@ -21,16 +13,8 @@ class Player{
 		}
 	}
 
-	increase_income(){
-
-	}
-
-	decrease_income(){
-
-	}
-
-	increase_money(){
-		this.money += this.income;
+	increase_money(money){
+		this.money += money;
 	}
 
 	decrease_money(cost){
