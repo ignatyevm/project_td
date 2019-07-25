@@ -23,6 +23,14 @@ let current_round = 0;
 let id_timer_round;
 let id_timer_income;
 
+var canvas = document.getElementById('game_field');
+var ctx = canvas.getContext('2d');
+var objects = [];
+var field_url = "maps/map_4.png";
+var test_object = "sprites/towerDefense_tile271.png"
+
+
+
 function set_game_state(){
 	if (enemy.length != 0)
 		game_state = 1;
@@ -85,5 +93,13 @@ function add_enemy(number){
 }
 
 (function launch_game(){
+	render_map(field_url);
+	let image = new Image();
+	let pos = new ObjectPosition(0, 20);
+	image.src = test_object;
+	let object = new GameObject(pos, image);
+	objects.push(object);
+	id_timer = setInterval(function(){for (i = 0; i < objects.length; ++i){objects[i].translate_pos(1, 0);};
+									  render_objects(objects);} , 30)
 	//start_game(1);
 })()
