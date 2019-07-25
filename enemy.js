@@ -6,7 +6,6 @@ class Enemy extends GameObject{
 		this.speed = speed;
 		this.price = price;
 		this.is_alive = true;
-		this.is_on_Base = false;
 		this.cur_cell = cur_cell;
 		this.path = path;
 		this.direction;

@@ -1,24 +1,29 @@
 const SPRITE_WIDTH = 20;
 const SPRITE_HEIGHT = 20;
+const BLOCK_OFFSET = 20;
 
 class ObjectPosition{
 	constructor(x, y){
 		this.x = x;
 		this.y = y;
-		this.block_x = x / SPRITE_WIDTH;
-		this.block_y = x / SPRITE_HEIGHT;
+	}
+
+	set_pos(x, y){
+		this.x = x;
+		this.y = y;
+	}
+
+	move_pos(x, y){
+		this.x += x;
+		this.y += y;
 	}
 }
 
 class GameObject{
-	constructor(pos, image){
+	constructor(pos, image_url){
 		this.pos = pos;
-		this.image = image;
-	}
-
-	translate_pos(x, y) {
-		this.pos.x += x;
-		this.pos.y += y;	
+		this.image = new Image();
+		this.image.src = image_url;
 	}
 
 	is_outmap(){

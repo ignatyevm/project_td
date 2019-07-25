@@ -16,7 +16,7 @@ class Render{
 	render_objects(objects){	
 		this.ctx.save();	
 		for (let i = 0; i < objects.length; ++i){
-			if (objects[	i].is_outmap()){
+			if (objects[i].is_outmap()){
 				objects.splice(i, 1);
 				continue;
 			}
