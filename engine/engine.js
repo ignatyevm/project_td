@@ -10,11 +10,10 @@ class Render {
 	}
 
 	render_map() {
-		this.ctx.drawImage(this.map, 0, 0, this.canvas.width, this.canvas.height);
+		this.ctx.drawImage(this.map, 0, 0);	
 	}
 
 	render_objects(objects) {	
-		this.ctx.save();
 		for (let i = 0; i < objects.length; ++i){
 			if (objects[i].is_outmap()){
 				objects.splice(i, 1);
@@ -22,6 +21,5 @@ class Render {
 			}
 			this.ctx.drawImage(objects[i].image, objects[i].pos.x, objects[i].pos.y, SPRITE_WIDTH, SPRITE_HEIGHT);
 		}
-		this.ctx.restore();
 	}
 }

@@ -49,16 +49,18 @@ class Session {
 			for (let j = 0; j < this.player.length; ++j)
 				if (this.objects[i].is_reach_base(this.player[j].base_pos)){
 					this.player[j].get_damage();
+					--this.active_enemy;
 				}
 			else if (!this.objects[i].is_alive){
-				this.objects.splice(i, 1); 
+				this.objects.splice(i, 1);
+				--this.active_enemy;
 			}
 		}
 	}
 
 	make_turn() {
 		++round;
-		if (this.enemy.length == 0){
+		if (this.active_enemy == 0){
 			this.add_enemy();
 		}
 		for (let i = 0; i < objects.length; ++i){

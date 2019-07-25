@@ -1,6 +1,3 @@
-//debug var
-var map_url = "maps/test_map/map_4.png"
-
 //game state
 const FINISHED = 2;
 const IN_GAME = 1;
