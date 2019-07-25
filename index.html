@@ -13,9 +13,14 @@
 		<script src="game_object/enemy.js"></script> 
 		<script src="game.js"></script>
 		<script>
+			var map_url = "maps/test_map/map_4.png"
 			var game = new Game(1, "game_field");
 			game.render.set_map(map_url);
-			var id_timer = setInterval(function(){game.render.render_map()}, 100);	
+			setTimeout(launch, 5, game);
+
+			function launch(game){
+				game.render.render_map();
+			}
 		</script>
 	</body>
 </html>

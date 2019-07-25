@@ -1,7 +1,7 @@
 const SPRITE_WIDTH = 20;
 const SPRITE_HEIGHT = 20;
-const BLOCK_OFFSET = 20;
- 
+const BLOCK_OFFSET = 20; 
+//debug var
 class Position {
     constructor(x, y){
         this.x = x;

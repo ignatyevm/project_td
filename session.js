@@ -40,16 +40,18 @@ class Session {
 			for (let j = 0; j < this.player.length; ++j)
 				if (this.objects[i].is_reach_base(this.player[j].road_on_map.amount - 1)) {
 					this.player[j].get_damage();
+					--this.active_enemy;
 				}
-			else if (!this.objects[i].is_alive) {
-				this.objects.splice(i, 1); 
+			else if (!this.objects[i].is_alive){
+				this.objects.splice(i, 1);
+				--this.active_enemy;
 			}
 		}
 	}
 
 	make_turn() {
 		++round;
-		if (this.active_enemy.length == 0){
+		if (this.active_enemy == 0){
 			this.add_enemy();
 		}
 
