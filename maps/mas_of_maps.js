@@ -1,5 +1,12 @@
+const WIDTH = 36;
+const HEIGHT = 36
 const FIRST = 1;
 const SECOND = 2;
+const LEFT = 1;
+const RIGHT = 2;
+const UP = 3;
+const DOWN = 4;
+
 
 class CreateMap {
 	constructor(number) {
@@ -47,11 +54,34 @@ class CreateMap {
 
 class RoadOnMap {
 	constructor(number, map) {
+		this.amount = 0;
 		this.map = map;
+		this.direction = new Array(HEIGHT * WIDTH + 1);
+		this.road = new Array(HEIGHT * WIDTH + 1);
 		if (number == FIRST) {
-			for (let i = 0; i < 36; ++i) {
-				for (let j = 0; j < 36; ++j) {
+			for (let i = 0; i < HEIGHT; ++i) {
+				for (let j = 0; j < WIDTH; ++j) {
+					if (map[i][j] == "0") {
+						if (this.amount != 0) {
+							if (this.road[this.amount - 1].x < this.road[this.amount].x) {
+								this.direction[this.amount - 1] = RIGHT;
+							}
 
+							if (this.road[this.amount - 1].x > this.road[this.amount].x) {
+								this.direction[this.amount - 1] = LEFT;
+							}
+
+							if (this.road[this.amount - 1].y < this.road[this.amount].y) {
+								this.direction[this.amount - 1] = UP;
+							}
+
+							if (this.road[this.amount - 1].y > this.road[this.amount].y) {
+								this.direction[this.amount - 1] = DOWN;
+							}
+						}
+						
+						this.road[this.amount++] = new Position(i * 20, j * 20);
+					}
 				}
 			}
 		}
