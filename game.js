@@ -24,7 +24,7 @@ class GameObject{
 
 	is_outmap(){
 		if (this.pos.x >= canvas.width + SPRITE_WIDTH || this.pos.y >= canvas.height + SPRITE_HEIGHT 
-			|| this.pos.x <= 0 - SPRITE_WIDTH || this.pos.y <= 0 - SPRITE_HEIGHT)
+			|| this.pos.x <= - SPRITE_WIDTH || this.pos.y <= - SPRITE_HEIGHT)
 			return true;
 		return false;
 	}
