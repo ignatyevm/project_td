@@ -1,6 +1,7 @@
 class Enemy{
-	constructor(hp, speed, price, sprite, cur_cell, path){
+	constructor(hp, speed, price, pos, sprite, cur_cell, path){
 		this.max_hp = hp;
+		this.pos = pos;
 		this.hp = hp;
 		this.speed = speed;
 		this.price = price;
@@ -9,6 +10,7 @@ class Enemy{
 		this.is_on_Base = false;
 		this.cur_cell = cur_cell;
 		this.path = path;
+		this.direction;
 	}
 
 	get_damage(damage){
@@ -17,16 +19,51 @@ class Enemy{
 			this.is_alive = false;
 		}
 	}
-
+	set_direction(){
+		let x = this.path[cur_cell].x;
+		let y = this.path[cur_cell].y;
+		this.cur_cell++;
+		if (x == this.path[cur_cell].x){
+			if (y < this.path[cur_cell].y){
+				this.direction = up;
+			}
+			else if (y > this.path[cur_cell].y){
+				this.direction = down;
+			}
+		}
+		if (this.pos.y == this.path[cur_cell].y){
+			if (x < this.path[cur_cell].x){
+				this.direction = left;
+			}
+			else if (x > this.path[cur_cell].x){
+				this.direction = right;
+			}
+		}
+	}
+	// ?????????????
 	move(){
-		this.cur_cell++; 
-		if (this.cur_cell >= this.path.length){
+		if (Math.floor(this.pos.x) == path[this.cur_cell].x && Math.floor(this.pos.y) == path[this.cur_cell].y){
+			this.set_direction();
+		}
+		if (this.cur_cell == path.length){
 			this.is_on_Base = true;
 		}
-		else
-		{
-			this.posX = this.path[this.cur_cell].x;
-			this.posY = this.path[this.cur_cell].y;
+		else{
+			switch (direction){
+			case up:
+				this.pos.y -= speed;
+				break;
+			case down:
+				this.pos.y += speed;
+				break;
+			case left:
+				this.pos.x -= speed;
+				break;
+			case right:
+				this.pos.x += speed;
+				break;
+			}
+		
 		}
 	}
 }
@@ -83,9 +120,3 @@ class Strongest extends Enemy{
 		this.path = path;
 	}
 }
-
-
-
-
-
-
