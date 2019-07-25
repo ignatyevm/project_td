@@ -1,5 +1,4 @@
 "use strict";
-
 const WIDTH = 36;
 const HEIGHT = 36;
 const CHAR_UP = ".";
@@ -32,26 +31,6 @@ const CHAR_TO_SPRITE = {
 	"s": "sprites/towerDefense_tile127.png",
 	"d": "sprites/towerDefense_tile105.png",
 	"f": "sprites/towerDefense_tile125.png",
-}
-
-var id_timer;
-
-class MapManager{
-
-	constructor(static_image, source_str) {
-		this.static_image = static_image;
-		this.width = WIDTH;
-		this.height = HEIGHT;
-
-		this.map_container = new Array(this.height);
-
-		for(let i = 0; i < WIDTH; i++) {
-			this.map_container[i] = new Array(this.width);
-			for(let j = 0; j < HEIGHT; j++) {
-				this.map_container[i][j] = CHAR_TO_SPRITE[source_str[i][j]];
-			}
-		}
-	}
 }
 
 var mas = [[".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "x", "#", "#", "#", "#", "#", "#", "#", 
@@ -125,32 +104,4 @@ var mas = [[".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "x", "#", "#", "#"
 		   ["#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#",
 		    "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"],
 		   ["#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#",
-		    "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"]];
 
-var canvas = document.getElementById('game_fild'),
-ctx = canvas.getContext('2d');
-
-var static_image = new Image();
-static_image.src = "maps/map_4.png";
-
-var map_manager = new MapManager(static_image, mas);
-
-function render_map() {
-	for (let i = 0; i < map_manager.width; ++i) {
-		for (let j = 0; j < map_manager.height; ++j) {
-			if (mas[i][j] == "#") continue;
-			let tmp_image = new Image();
-			tmp_image.src = map_manager.map_container[i][j];
-			tmp_image.onload = function() {
-		    	ctx.drawImage(tmp_image, j * 20, i * 20, 20, 20);
-		  	}
-		}
-	}
-}
-
-(function test(){
-	static_image.onload = function() {
-    	ctx.drawImage(static_image, 0, 0);
-  	}
-	id_timer = setInterval(render_map, 16);
-})()

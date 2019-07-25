@@ -72,10 +72,6 @@ function start_game(number_of_players){
 	id_timer_round = setInterval(start_round, ROUND_DELAY);
 }
 
-(function launch_game(){
-	start_game(1);
-})()
-
 function add_money_to_players(){
 	for (i = 0; i < player.length; ++i){
 		player[i].increase_money();
@@ -87,3 +83,7 @@ function add_enemy(number){
 		enemy.push(new Enemy(TEST_ENEMY_HP, TEST_ENEMY_SPEED, TEST_ENEMY_PRICE, TEST_ENEMY_X, TEST_ENEMY_Y, TEST_ENEMY_SKIN, TEST_ENEMY_PATH));
 	}
 }
+
+(function launch_game(){
+	//start_game(1);
+})()
