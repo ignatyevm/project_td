@@ -12,21 +12,6 @@ class PathManager {
 	}
 }
 
-var start_pos = new Position(0, 0);
-var road_index = new Array(36);
-for (let i = 0; i < 36; ++i) {
- 	road_index[i] = new Array(36);
-}
-
-road_index[0][0] = new Position(0, 1);
-road_index[1][0] = new Position(1, 1);
-road_index[1][1] = new Position(1, 2);
-road_index[1][2] = new Position(2, 2);
-
-let enemy = new Enemy(0, 0, 0, new Position(0, 0), "sprites/enemies/enemy_first_plane.png", 0, 0);
-
-enemy.move(road_index);
-
 const WIDTH = 36;
 const HEIGHT = 36;
 const CHAR_UP = ".";
@@ -59,5 +44,3 @@ const CHAR_TO_SPRITE = {
 	"d": "sprites/towerDefense_tile105.png",
 	"f": "sprites/towerDefense_tile125.png",
 }
-
-var mas = new CreateMap(1);

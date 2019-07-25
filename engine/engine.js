@@ -1,20 +1,20 @@
 class Render {
 	constructor(canvas) {
-		this.canvas = canvas;
-		this.ctx = canvas.getContext('2d');
+		this.canvas = document.getElementById(canvas);
+		this.ctx = this.canvas.getContext('2d');
 		this.map = new Image();
 	}
 
 	set_map(map_url) {
-		this.map.src = map_url;	
+		this.map.src = map_url;
 	}
 
 	render_map() {
-		this.ctx.drawImage(this.map, 0, 0); 	
+		this.ctx.drawImage(this.map, 0, 0, this.canvas.width, this.canvas.height);
 	}
 
 	render_objects(objects) {	
-		this.ctx.save();	
+		this.ctx.save();
 		for (let i = 0; i < objects.length; ++i){
 			if (objects[i].is_outmap()){
 				objects.splice(i, 1);

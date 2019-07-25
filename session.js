@@ -15,8 +15,8 @@ const TEST_ENEMY_CUR_CELL = 0;
 const TEST_ENEMY_PATH = 0;
 //
 
-class session{
-	constructor(player_number){
+class Session {
+	constructor(player_number) {
 		this.player = [];
 		this.objects = [];
 		this.round = 1;
@@ -26,25 +26,25 @@ class session{
 		}
 	}
 
-	add_enemy(){
+	add_enemy() {
 		for (let i = 0; i < (this.player.length * this.round); ++i){
 			this.objects.push(new Enemy(TEST_ENEMY_HP, TEST_ENEMY_SPEED, TEST_ENEMY_PRICE, TEST_ENEMY_X, TEST_ENEMY_Y, TEST_ENEMY_SKIN, TEST_ENEMY_PATH));
 		}
 	}
 
-	gameover(){
+	gameover() {
 		if (this.player.length == 0)
 			return true;
 		return false
 	}
 
-	remove_player(){
+	remove_player() {
 		for (let i = 0; i < this.player.length; ++i)
 			if (this.player[i].is_dead)
 				player.splice(i,1);
 	}
 
-	remove_enemy(){
+	remove_enemy() {
 		for (let i = 0; i < this.objects.length; ++i){
 			for (let j = 0; j < this.player.length; ++j)
 				if (this.objects[i].is_reach_base(this.player[j].base_pos)){
@@ -56,7 +56,7 @@ class session{
 		}
 	}
 
-	make_turn(){
+	make_turn() {
 		++round;
 		if (this.enemy.length == 0){
 			this.add_enemy();
