@@ -1,16 +1,23 @@
-class Enemy {
+class Enemy extends GameObject{
 	constructor(hp, speed, price, pos, sprite, cur_cell, path) {
+		super(pos, sprite);
 		this.max_hp = hp;
-		this.pos = pos;
 		this.hp = hp;
 		this.speed = speed;
 		this.price = price;
-		this.sprite = sprite;
 		this.is_alive = true;
 		this.is_on_Base = false;
 		this.cur_cell = cur_cell;
 		this.path = path;
 		this.direction;
+	}
+
+	is_reach_base(base_pos){
+		if (is_alive){
+			if (this.pos == base_pos)
+				return true;
+		}
+		return false;
 	}
 
 	get_damage(damage) {

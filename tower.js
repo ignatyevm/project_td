@@ -1,8 +1,10 @@
 "use strict";
+const MAX_TOWER_LVL = 3
 
-class Tower {
-	constructor(damage, atk_speed, price, range, slowdown, region, player) {
-		this.player = player
+class Tower extends GameObject {
+	constructor(damage, atk_speed, price, range, pos, image){
+		super(pos, image);
+		this.player = player;
 		this.atk_speed = atk_speed;
 		this.damage = damage;
 		this.price = price;
@@ -12,14 +14,51 @@ class Tower {
 		this.level = 1;
 	}
 
-	baffers() {
-		//todo
+	attack(){
+
+
 	}
 
-	disposition() {
-		//todo
-	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class MachineGun extends Tower {
 	improvement() {
