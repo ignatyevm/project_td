@@ -8,7 +8,7 @@ var ctx = canvas.getContext('2d');
 let bX;
 let bY;
 
-canvas.addEventListener("mousemove", function(event){
+canvas.addEventListener("mousemove", function(event) {
 	let x = event.clientX;
 	let y = event.clientY;
 	let bX = Math.floor(x / SPRITE_WIDTH);
@@ -17,53 +17,38 @@ canvas.addEventListener("mousemove", function(event){
 	ctx.fillRect(SPRITE_WIDTH * bX, SPRITE_HEIGHT * bY, SPRITE_WIDTH, SPRITE_HEIGHT);
 });
 
-
-
-
-
-
-
-/*function mouseMoveHandler(e){
-		let x = e.clientX;
-		let y = e.ClientY;
-		this.bX = x / SPRITE_WIDTH;
-		this.by = y / SPRITE_HEIGHT;
-}*/
-
 function render_map(map_url) {
 	var map = new Image();
 	map.src = map_url;	
 	ctx.drawImage(map, 0, 0);
 }
 
-class Position{
-	constructor(x, y, block_x, block_y){
+class Position {
+	constructor(x, y) {
 		this.x = x;
 		this.y = y;
-		this.block_x = block_x;
-		this.block_y = block_y;
 	}
 }
 
-class GameObject{
-	constructor(pos, sprite_url){
+class GameObject {
+	constructor(pos, sprite_url) {
 		this.pos = pos;
 		this.sprite_url = sprite_url;
 	}
 
-	translate_pos(x, y){
+	translate_pos(x, y) {
 		this.pos.x += x;
 		this.pos.y += y;	
 	}
 
-	is_outmap(){
+	is_outmap() {
 		if (this.pos.x > canvas.width + SPRITE_WIDTH || this.pos.y > canvas.height + SPRITE_HEIGHT 
-			|| this.pos.x < 0 - SPRITE_WIDTH || this.pos.y < 0 - SPRITE_HEIGHT)
+			|| this.pos.x < - SPRITE_WIDTH || this.pos.y < - SPRITE_HEIGHT)
 			return true;
 		return false;
 	}
 	
-	render(image){
+	render(image) {
 		if (this.is_outmap())
 			return false;
 		render_map("maps/map_4.png");
@@ -76,7 +61,7 @@ class GameObject{
 
 }
 
-class MapManager{
+class MapManager {
 	constructor(static_image, source_str) {
 		this.static_image = static_image;
 		this.width = WIDTH;
