@@ -59,28 +59,27 @@ class session{
 		this.player = [];
 		this.enemy = [];
 		this.round = 1;
-		this.enemy_number = 1;
-		this.enemy_spawn = 0;
+		this.active_enemy = 0;
 		for (i = 0; i < player_number; ++i){
 			this.player.push(new Player(START_PLAYER_HP, START_PLAYER_MONEY))
 		}
 	}
 
 	add_enemy(){
-		this.enemy_number = this.player.length * this.round;
-		for (i = 0; i < this.enemy_number; ++i){
+		for (i = 0; i < this.player.length * this.round; ++i){
 			this.enemy.push(new Enemy(TEST_ENEMY_HP, TEST_ENEMY_SPEED, TEST_ENEMY_PRICE, TEST_ENEMY_X, TEST_ENEMY_Y, TEST_ENEMY_SKIN, TEST_ENEMY_PATH));
 		}
 	}
 
 	spawn_enemy(){
-		for (i = 0; i < this.player.length; ++i){
+		for (i = 0; i < this.active_enemy; ++i){
 			this.enemy[i].move();
 		}
 	}
 
 	make_turn(){
 		if (this.enemy_spawn == 0){
+			add_enemy
 
 		}
 		++round;

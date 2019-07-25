@@ -1,5 +1,5 @@
-class Enemy{
-	constructor(hp, speed, price, pos, sprite, cur_cell, path){
+class Enemy {
+	constructor(hp, speed, price, pos, sprite, cur_cell, path) {
 		this.max_hp = hp;
 		this.pos = pos;
 		this.hp = hp;
@@ -13,39 +13,40 @@ class Enemy{
 		this.direction;
 	}
 
-	get_damage(damage){
+	get_damage(damage) {
 		this.hp -= damage;
-		if (this.hp <= 0){
+		if (this.hp <= 0) {
 			this.is_alive = false;
 		}
 	}
-	set_direction(){
+	
+	set_direction() {
 		let x = this.path[cur_cell].x;
 		let y = this.path[cur_cell].y;
 		this.cur_cell++;
-		if (x == this.path[cur_cell].x){
-			if (y < this.path[cur_cell].y){
+		if (x == this.path[cur_cell].x) {
+			if (y < this.path[cur_cell].y) {
 				this.direction = up;
 			}
-			else if (y > this.path[cur_cell].y){
+			else if (y > this.path[cur_cell].y) {
 				this.direction = down;
 			}
 		}
-		if (this.pos.y == this.path[cur_cell].y){
+		if (this.pos.y == this.path[cur_cell].y) {
 			if (x < this.path[cur_cell].x){
 				this.direction = left;
 			}
-			else if (x > this.path[cur_cell].x){
+			else if (x > this.path[cur_cell].x) {
 				this.direction = right;
 			}
 		}
 	}
 	// ?????????????
-	move(){
-		if (Math.floor(this.pos.x) == path[this.cur_cell].x && Math.floor(this.pos.y) == path[this.cur_cell].y){
+	move() {
+		if (Math.floor(this.pos.x) == path[this.cur_cell].x && Math.floor(this.pos.y) == path[this.cur_cell].y) {
 			this.set_direction();
 		}
-		if (this.cur_cell == path.length){
+		if (this.cur_cell == path.length) {
 			this.is_on_Base = true;
 		}
 		else{
@@ -68,8 +69,8 @@ class Enemy{
 	}
 }
 
-class Weak extends Enemy{
-	constructor(path){
+class Weak extends Enemy {
+	constructor(path) {
 		super();
 		this.max_hp = 10;
 		this.hp = 10;
@@ -87,8 +88,8 @@ class Weak extends Enemy{
 
 }
 
-class Stronger extends Enemy{
-	constructor(path){
+class Stronger extends Enemy {
+	constructor(path) {
 		super();
 		this.max_hp = 20;
 		this.hp = 20;
@@ -104,8 +105,8 @@ class Stronger extends Enemy{
 	}
 }
 
-class Strongest extends Enemy{
-	constructor(path){
+class Strongest extends Enemy {
+	constructor(path) {
 		super();
 		this.max_hp = 30;
 		this.hp = 30;

@@ -8,7 +8,7 @@ var ctx = canvas.getContext('2d');
 let bX;
 let bY;
 
-canvas.addEventListener("mousemove", function(event){
+canvas.addEventListener("mousemove", function(event) {
 	let x = event.clientX;
 	let y = event.clientY;
 	let bX = Math.floor(x / SPRITE_WIDTH);
@@ -48,7 +48,7 @@ class GameObject{
 		this.image = image;
 	}
 
-	translate_pos(x, y){
+	translate_pos(x, y) {
 		this.pos.x += x;
 		this.pos.y += y;	
 	}
@@ -59,7 +59,7 @@ class GameObject{
 			return true;
 		return false;
 	}
-}
+
 
 function render_map(map_url) {
 	var map = new Image();
