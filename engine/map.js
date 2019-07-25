@@ -138,9 +138,10 @@ var map_manager = new MapManager(static_image, mas);
 function render_map() {
 	for (let i = 0; i < map_manager.width; ++i) {
 		for (let j = 0; j < map_manager.height; ++j) {
+			if (mas[i][j] == "#") continue;
 			let tmp_image = new Image();
 			tmp_image.src = map_manager.map_container[i][j];
-			tmp_image.onload = function(){
+			tmp_image.onload = function() {
 		    	ctx.drawImage(tmp_image, j * 20, i * 20, 20, 20);
 		  	}
 		}
@@ -148,8 +149,8 @@ function render_map() {
 }
 
 (function test(){
-	static_image.onload = function(){
+	static_image.onload = function() {
     	ctx.drawImage(static_image, 0, 0);
   	}
-	id_timer = setInterval(render_map, 50);
+	id_timer = setInterval(render_map, 16);
 })()
