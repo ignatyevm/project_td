@@ -50,19 +50,19 @@ class Session {
 	}
 
 	make_turn() {
-		++round;
+		++this.round;
 		if (this.active_enemy == 0){
 			this.add_enemy();
 		}
 
-		for (let i = 0; i < objects.length; ++i){
+		for (let i = 0; i < this.objects.length; ++i){
 			this.objects[i].move(this.objects[i].road_on_map);
-			this.objects[i].attack();
+			//this.objects[i].attack();
 		}
 
 		this.remove_enemy();
 		this.remove_player();
-		if (this.is_gameover())
+		if (this.gameover())
 			return FINISHED;
 		return IN_GAME;
 	}

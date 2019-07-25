@@ -15,7 +15,7 @@ class Enemy extends GameObject {
 	}
 
 	is_reach_base(base_pos) {
-		if (is_alive) {
+		if (this.is_alive) {
 			if (this.pos == base_pos)
 				return true;
 		}
