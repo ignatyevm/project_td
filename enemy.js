@@ -41,83 +41,22 @@ class Enemy {
 			}
 		}
 	}
-	// ?????????????
-	move() {
-		if (Math.floor(this.pos.x) == path[this.cur_cell].x && Math.floor(this.pos.y) == path[this.cur_cell].y) {
-			this.set_direction();
+	
+	move(path) {
+		let pm = new PathManager(new Position(2, 2), path);
+		let step = pm.get_next_step(new Position(0, 0));
+
+		while (step != false) {
+			this.pos.x = step.x;
+			this.pos.y = step.y;
+			step = pm.get_next_step(step);
+
+			let image = new Image();
+			image.src = this.sprite_url;
+			ctx.save();
+			ctx.restore();
+			ctx.drawImage(image, this.pos.x, this.pos.y, SPRITE_WIDTH, SPRITE_HEIGHT);
+			sleep(1000);
 		}
-		if (this.cur_cell == path.length) {
-			this.is_on_Base = true;
-		}
-		else{
-			switch (direction){
-			case up:
-				this.pos.y -= speed;
-				break;
-			case down:
-				this.pos.y += speed;
-				break;
-			case left:
-				this.pos.x -= speed;
-				break;
-			case right:
-				this.pos.x += speed;
-				break;
-			}
-		
-		}
-	}
-}
-
-class Weak extends Enemy {
-	constructor(path) {
-		super();
-		this.max_hp = 10;
-		this.hp = 10;
-		this.speed = 5;
-		this.price = 30;
-		this.posX = 0;
-		this.posY = 0;
-		this.skin = skin_weak;
-		this.is_alive = true;
-		this.is_on_Base = false;
-		this.cur_cell = 0;
-		this.path = path;
-	}
-
-
-}
-
-class Stronger extends Enemy {
-	constructor(path) {
-		super();
-		this.max_hp = 20;
-		this.hp = 20;
-		this.speed = 10;
-		this.price = 50;
-		this.posX = 0;
-		this.posY = 0;
-		this.skin = skin_stronger;
-		this.is_alive = true;
-		this.is_on_Base = false;
-		this.cur_cell = 0;
-		this.path = path;
-	}
-}
-
-class Strongest extends Enemy {
-	constructor(path) {
-		super();
-		this.max_hp = 30;
-		this.hp = 30;
-		this.speed = 15;
-		this.price = 70;
-		this.posX = 0;
-		this.posY = 0;
-		this.skin = skin_strongest;
-		this.is_alive = true;
-		this.is_on_Base = false;
-		this.cur_cell = 0;
-		this.path = path;
 	}
 }
