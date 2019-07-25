@@ -27,7 +27,7 @@ class session{
 	}
 
 	add_enemy(){
-		for (let i = 0; i < this.player.length * this.round; ++i){
+		for (let i = 0; i < (this.player.length * this.round); ++i){
 			this.objects.push(new Enemy(TEST_ENEMY_HP, TEST_ENEMY_SPEED, TEST_ENEMY_PRICE, TEST_ENEMY_X, TEST_ENEMY_Y, TEST_ENEMY_SKIN, TEST_ENEMY_PATH));
 		}
 	}
@@ -45,13 +45,13 @@ class session{
 	}
 
 	remove_enemy(){
-		for (let i = 0; i < objects.length; ++i){
-			for (let j = 0; j < palyer.length; ++j)
-				if (objects[i].is_reach_base(player[j].base_pos)){
+		for (let i = 0; i < this.objects.length; ++i){
+			for (let j = 0; j < this.player.length; ++j)
+				if (this.objects[i].is_reach_base(this.player[j].base_pos)){
 					this.player[j].get_damage();
 				}
-			else if (!objects[i].is_alive){
-				objects.splice(i, 1); 
+			else if (!this.objects[i].is_alive){
+				this.objects.splice(i, 1); 
 			}
 		}
 	}
@@ -59,17 +59,17 @@ class session{
 	make_turn(){
 		++round;
 		if (this.enemy.length == 0){
-			add_enemy();
+			this.add_enemy();
 		}
 		for (let i = 0; i < objects.length; ++i){
-			objects[i].move();
-			objects[i].attack();
+			this.objects[i].move();
+			this.objects[i].attack();
 		}
 		this.remove_enemy();
 		this.remove_player();
 		if (this.is_gameover())
-			return finished;
-		return in_game;
+			return FINISHED;
+		return IN_GAME;
 	}
 }
 // Обработка шага

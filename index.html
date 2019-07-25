@@ -3,10 +3,19 @@
 	</head>
 	<body>
 		<canvas id="game_field" width="720" height="720" style="outline: 5px solid black;" align = "center"></canvas>
+		<button id="=turn"></button>
+		<script src="engine/game_object.js"></script>
 		<script src="engine/engine.js"></script>
-		<script src="engine/map.js"></script>
+		<script src="engine/map.js"></script>		
+		<script src="session.js"></script>
 		<script src="player.js"></script>
 		<script src="game_object/tower.js"></script> 
+		<script src="game_object/enemy.js"></script> 
 		<script src="game.js"></script>
+		<script>
+			var canvas = document.getElementById("game_field");
+			var game = new Game(1, canvas);
+			game.load_session();
+		</script>
 	</body>
 </html>

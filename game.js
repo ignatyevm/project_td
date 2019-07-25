@@ -14,10 +14,19 @@ class Game{
 		this.render.render_map();
 	}
 
-	
+	alert(){
+		alert("You Died");
+	}
 
-
-
+	make_turn(){
+		if (game_state != FINISHED){
+			this.session.make_turn();
+			this.render.render_map();
+			this.game_state = this.render.render_object(this.session.objects);
+			if (this.game_state == FINISHED)
+				this.alert();
+		}
+	}
 }
 
 // class Lobby{

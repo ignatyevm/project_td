@@ -1,30 +1,34 @@
 const SPRITE_WIDTH = 20;
 const SPRITE_HEIGHT = 20;
+const BLOCK_OFFSET = 20;
+ 
+class ObjectPosition {
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+    }
 
-class ObjectPosition{
-	constructor(x, y){
-		this.x = x;
-		this.y = y;
-		this.block_x = x / SPRITE_WIDTH;
-		this.block_y = x / SPRITE_HEIGHT;
-	}
+    translate_pos(x, y) {
+        this.x += x;
+        this.y += y;   
+    }
 }
+ 
+class GameObject {
+    constructor(pos, image_url){
+        this.pos = pos;
+        this.image = new Image();
+        this.image.src = image_url;
+    }
 
-class GameObject{
-	constructor(pos, image){
-		this.pos = pos;
-		this.image = image;
-	}
-
-	translate_pos(x, y) {
-		this.pos.x += x;
-		this.pos.y += y;	
-	}
-
-	is_outmap(){
-		if (this.pos.x >= canvas.width + SPRITE_WIDTH || this.pos.y >= canvas.height + SPRITE_HEIGHT 
-			|| this.pos.x <= 0 - SPRITE_WIDTH || this.pos.y <= 0 - SPRITE_HEIGHT)
-			return true;
-		return false;
-	}
+    move(x, y) {
+    	this.pos.translate_pos(x, y);
+    }    
+ 
+    is_outmap() {
+        if (this.pos.x >= canvas.width + SPRITE_WIDTH || this.pos.y >= canvas.height + SPRITE_HEIGHT
+            || this.pos.x <= 0 - SPRITE_WIDTH || this.pos.y <= 0 - SPRITE_HEIGHT)
+            return true;
+        return false;
+    }
 }
