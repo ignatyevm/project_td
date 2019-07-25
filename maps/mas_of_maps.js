@@ -1,6 +1,9 @@
+const FIRST = 1;
+const SECOND = 2;
+
 class CreateMap {
 	constructor(number) {
-		if (number == 1) {
+		if (number == FIRST) {
 			this.mas = ["..........x#########################",
 		                "0000000000z#########################",
 		                "ccccccccv0z#####b.............x#####",
@@ -38,6 +41,19 @@ class CreateMap {
 					    "####################################",
 					    "####################################"]; 
 			return this.mas;
+		}
+	}
+}
+
+class RoadOnMap {
+	constructor(number, map) {
+		this.map = map;
+		if (number == FIRST) {
+			for (let i = 0; i < 36; ++i) {
+				for (let j = 0; j < 36; ++j) {
+
+				}
+			}
 		}
 	}
 }
