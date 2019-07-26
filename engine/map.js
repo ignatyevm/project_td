@@ -1,7 +1,4 @@
 "use strict";
-
-const WIDTH = 36;
-const HEIGHT = 36;
 const CHAR_UP = ".";
 const CHAR_FILL = "#";
 const CHAR_ROAD = "0";
@@ -17,10 +14,10 @@ const CHAR_LEFT_DOWN_TURN = "d";
 const CHAR_RIGHT_DOWN_TURN = "a";
 
 const CHAR_TO_SPRITE = {
-	".": "sprites/towerDefense_tile080.png",
+	'.': "sprites/towerDefense_tile080.png",
 	"x": "sprites/towerDefense_tile081.png",
 	"#": "sprites/towerDefense_tile129.png",
-	"0": "sprites/towerDefense_tile034.png",
+	'0': "sprites/towerDefense_tile034.png",
 	"z": "sprites/towerDefense_tile104.png",
 	"c": "sprites/towerDefense_tile126.png",
 	"v": "sprites/towerDefense_tile083.png",

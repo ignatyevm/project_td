@@ -2,26 +2,25 @@
 	<head>
 	</head>
 	<body>
-		<canvas id="game_field" width="720" height="720" style="outline: 5px solid black;" align = "center"></canvas>
-		<button id="=turn"></button>
+        <canvas id="game_field" width="720" height="720" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+        <canvas id="map" width="720" height="720" style="position: absolute; left: 0; top: 0; z-index: -1;"></canvas>
+		<script src="engine/map.js"></script>
 		<script src="maps/mas_of_maps.js"></script>
 		<script src="engine/game_object.js"></script>
-		<script src="engine/engine.js"></script>	
+		<script src="engine/grafics.js"></script>	
 		<script src="player.js"></script>
-		<script src="session.js"></script>
 		<script src="game_object/tower.js"></script> 
 		<script src="game_object/enemy.js"></script> 
 		<script src="game.js"></script>
-		<script>
-			var map_url = "maps/test_map/map_4.png"
-			var game = new Game(1, "game_field");
-			game.render.set_map(map_url);
-			setTimeout(launch, 5, game);
-
-			function launch(game){
-				game.render.render_map();
-				game.make_turn();
-			}
-		</script>
+		<script src="launch.js"></script>
+		<script> 
+			game_field = document.getElementById("game_field")
+			map = document.getElementById("map")
+			var bg_map = new CreateMap(1);
+			var render = new Render(map, game_field); 
+			render.set_map(bg_map);
+			render.render_map();
+		</script>>
+		<button id="turn" onclick="launch()"></button>
 	</body>
 </html>
