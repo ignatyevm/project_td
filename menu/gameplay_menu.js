@@ -1,107 +1,43 @@
 
+function create_element(element, parent, class_name){
+	let new_element = document.createElement(element);
+	parent.appendChild(new_element);
+	new_element.className = class_name;
+	return new_element;
+}
+
+function add_text(text, parent){
+	let new_text = document.createTextNode(text);
+	parent.appendChild(new_text);
+}
 
 function create_menu(){
 
-	const CONTAINER_WIDTH = "400"; 
-	const CONTAINER_HEIGHT = "200"; 
-	const INFO_WIDTH = "150";
-	const INFO_HEIGHT = "200";
-	const MENU_WIDTH = "600";
-	const MENU_HEIGHT = "700";
-	const BUTTON_WIDTH = "150";
-	const HEADER_HEIGHT = "50";
+	let game_menu = create_element("div", document.body, "game_menu");
 
-	const BACKGROUND_COLOR = "MediumSeaGreen";
-	const ENEMIES_COLOR = "SeaGreen"; 
-	const TOWERS_COLOR = "SeaGreen";
+	let header = create_element("div", game_menu, "header");
+	let exit = create_element("button", header, "exit");
+	add_text("EXIT", exit);
 
+	let towers = create_element("div", game_menu, "objects_field");
+	let towersContainer = create_element("div", towers, "container");
+	let towerInfo = create_element("input", towers, "info");
+	let tower_type1 = create_element("button", towersContainer, "button");
 
-	let gameMenu = document.createElement("div");
-	gameMenu.style.width = MENU_WIDTH;
-	gameMenu.style.height = MENU_HEIGHT;
-	gameMenu.style.backgroundColor = BACKGROUND_COLOR;
-	gameMenu.style.float = "right";
+	add_text("TOWER", tower_type1);
+	tower_type1.style.margin = "30";
 
+	tower_type1.addEventListener("click", function(){
+		is_tower_chosen = true;
+		//tower = new GameObject("C:/Users/kvidi/Documents/HOMEWORK/summer practice 1/tower defense/project_td-master/project_td/sprites/towerDefense_tile291.png");
+	});
 
-	document.body.appendChild(gameMenu);
-	
-
-	let header = document.createElement("div");
-	header.style.width = MENU_WIDTH;
-	header.style.height = HEADER_HEIGHT;
-
-
-
-	let exit = document.createElement("button");
-	let exitText = document.createTextNode("EXIT");
-	exit.appendChild(exitText);
-	exit.style.float = "right";
-	exit.style.margin = "15";
-	exit.style.align = "center";
-
-	header.appendChild(exit);
-
-
-	gameMenu.appendChild(header);
-
-
-	let towers = document.createElement("div");
-	towers.style.width = MENU_WIDTH;
-	let towersContainer = document.createElement("div");
-	towersContainer.style.width = CONTAINER_WIDTH;
-	towersContainer.style.height = CONTAINER_HEIGHT;
-	towersContainer.style.backgroundColor = TOWERS_COLOR;
-	towersContainer.style.float = "left";
-
-	let towerInfo = document.createElement("input");
-	towerInfo.style.width = INFO_WIDTH;
-	towerInfo.style.height = INFO_HEIGHT;
-	towerInfo.style.float = "right";
-
-	towers.appendChild(towersContainer);
-	towers.appendChild(towerInfo);
-
-	gameMenu.appendChild(towers);
-
-
-	let setTower = document.createElement("button");
-
-
-	setTower.style.width = BUTTON_WIDTH;
-	let setTowerText = document.createTextNode("SET TOWER");
-	setTower.appendChild(setTowerText);
-	setTower.style.margin = "30";
-	gameMenu.appendChild(setTower);
-
-
-
-	let enemies = document.createElement("div");
-	enemies.style.width = MENU_WIDTH;
-	let enemiesContainer = document.createElement("div");
-	let enemyInfo = document.createElement("input");
-	enemiesContainer.style.float = "left";
-	enemiesContainer.style.backgroundColor = ENEMIES_COLOR;
-	enemiesContainer.style.width = CONTAINER_WIDTH;
-	enemiesContainer.style.height = CONTAINER_HEIGHT;
-
-	enemyInfo.style.height = INFO_HEIGHT;
-	enemyInfo.style.float = "right";
-	enemyInfo.style.float = "up";
-	enemyInfo.style.width = INFO_WIDTH;
-
-	enemies.appendChild(enemiesContainer);
-	enemies.appendChild(enemyInfo);
-
-
-	gameMenu.appendChild(enemies);
-
-
-	let attack = document.createElement("button");
-	attack.style.width = BUTTON_WIDTH;
-	let attckText = document.createTextNode("ATTACK");
-	attack.appendChild(attckText);
+	let enemies = create_element("div", game_menu, "objects_field");
+	enemies.style.marginTop = 250;
+	let enemiesContainer = create_element("div", enemies, "container");
+	let enemyInfo = create_element("input", enemies, "info");
+	let attack = create_element("button", game_menu, "button");	add_text("ATTACK", attack);
 	attack.style.margin = "30";
-	gameMenu.appendChild(attack);
 
 	attack.addEventListener('click', ()=>{
 		objects.push(new WeakEnemy());
@@ -110,9 +46,5 @@ function create_menu(){
 
 }
 	
-
-
-
-	//enemiesContainer
 
 
