@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="engine/drawer.js"></script>
 		<script type="text/javascript" src="engine/map.js"></script>
 		<script type="text/javascript" src="engine/game_object.js"></script>
+		<script type="text/javascript" src="bullet.js"></script>
 
 		<script type="text/javascript">
 
@@ -59,7 +60,7 @@
 			let k = 0;
 
 			let t = 0;
-			let max_t = 20;
+			let max_t = 10;
 
 			setInterval(function(){
 
@@ -92,27 +93,9 @@
 						
 						if(t == max_t){
 
-							let bullet = {};//new GameObject(tower.x, tower.y, objects_drawer);
-							//bullet.set_sprite("sprites/towerDefense_tile295.png");
-								
-							bullet.x = tower.x;
-							bullet.y = tower.y;
+							let bullet = new Bullet(tower, enemy, objects_drawer);
+							bullet.set_sprite("sprites/towerDefense_tile295.png");
 
-							let dx = enemy.x - tower.x;
-							let dy = enemy.y - tower.y;
-							let d = Math.sqrt(dx * dx + dy * dy);
-							dx /= d; dy /= d;
-							let speed = 10;
-							bullet.step = function(){
-								bullet.x += dx * speed;
-								bullet.y += dy * speed;
-							};
-
-							bullet.sprite = new Image(); 
-							bullet.sprite.onload = function(){
-								game_field_ctx.drawImage(bullet.sprite, bullet.x, bullet.y, 16, 16);
-							};
-							bullet.sprite.src = "sprites/towerDefense_tile295.png";
 							bullets.push(bullet);
 							
 							t = 0;
@@ -127,11 +110,8 @@
 				}
 
 				for(let b of bullets){
-					//b.x += -2;
-					//b.y += b.f(b.x) / 1000;
-					//b.render();
-					b.step();
-					game_field_ctx.drawImage(b.sprite, b.x, b.y, 32, 32);
+					b.render();
+					b.update();
 				}
 
 			}, 20);
