@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="engine/map.js"></script>
 		<script type="text/javascript" src="engine/game_object.js"></script>
 		<script type="text/javascript" src="bullet.js"></script>
+		<script type="text/javascript" src="engine/math_helper.js"></script>
 
 		<script type="text/javascript">
 
@@ -84,12 +85,8 @@
 				let r = 72;
 
 				for(let tower of towers){
-					
 
-					let x = enemy.x - tower.x;
-					let y = enemy.y - tower.y;
-
-					if(x * x + y * y < r * r){
+					if(is_in_radius(tower, enemy, r)){
 						
 						if(t == max_t){
 
