@@ -36,6 +36,9 @@ function create_menu(){
 	enemies.style.marginTop = 250;
 	let enemiesContainer = create_element("div", enemies, "container");
 	let enemyInfo = create_element("input", enemies, "info");
+	let enemy_type1 = create_element("button", enemiesContainer, "button");
+	add_text("ENEMY", enemy_type1);
+	enemy_type1.style.margin = "30";
 	let attack = create_element("button", game_menu, "button");	add_text("ATTACK", attack);
 	attack.style.margin = "30";
 
