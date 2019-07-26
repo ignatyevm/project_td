@@ -1,3 +1,5 @@
+
+
 class Tower{
 	constructor(x, y){
 		this.x = x;
@@ -21,6 +23,25 @@ class Tower{
 		ctx.stroke();
 	}
 }
+
+let is_tower_chosen = false;
+
+let tower1_button = document.getElementById("tower_type1");
+let tower2_button = document.getElementById("tower_type2");
+let attack_tower = document.getElementById("attack");
+tower1_button.addEventListener("click", ()=>{
+		is_tower_chosen = true;
+		towerInfo.value = "tower 1";
+});
+tower2_button.addEventListener("click", ()=>{
+	is_tower_chosen = true;
+	towerInfo.value = "tower 2";
+});
+attack.addEventListener('click', ()=>{
+	//objects.push(new GameObject(enemy));
+});
+
+
 
 canvas.addEventListener("mousemove", function(event) {
 	let x = event.clientX;
