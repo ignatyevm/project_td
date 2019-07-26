@@ -14,10 +14,10 @@
 		<script src="game.js"></script>
 		<script src="launch.js"></script>
 		<script> 
-			game_field = document.getElementById("game_field")
-			map = document.getElementById("map")
-			var bg_map = new CreateMap(1);
-			var render = new Render(map, game_field); 
+			let game_field = document.getElementById("game_field")
+			let map = document.getElementById("map")
+			let bg_map = new CreateMap(1);
+			let render = new Render(map, game_field); 
 			render.set_map(bg_map);
 			render.render_map();
 		</script>>

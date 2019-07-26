@@ -13,8 +13,8 @@ class Render {
 	draw(ctx, img, x, y){
 		ctx.drawImage(img, x, y, SPRITE_WIDTH, SPRITE_HEIGHT);
 	}
-
-	render_map(ctx) {
+S
+	render_map() {
 		let local_map = this.map;
 		let local_map_ctx = this.map_ctx;
 		let local_draw = this.draw;
@@ -24,7 +24,7 @@ class Render {
             	sprite.onload = function(){
             		local_draw(local_map_ctx, sprite, j * SPRITE_WIDTH, i * SPRITE_HEIGHT);
             	}
-        		sprite.src = CHAR_TO_SPRITE[this.map.mas[i][j]];
+        		sprite.src = CHAR_TO_SPRITE[this.map[i][j]];
             }
         }
 	}
