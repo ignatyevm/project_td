@@ -14,21 +14,16 @@ class Bullet extends GameObject{
 
         this.resize(20, 20);
 
-        this.dx = this.target.x - this.source.x;
-		this.dy = this.target.y - this.source.y;
+		let d = get_distance(this.target, this.source);
 
-		let d = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
-
-		this.dx /= d; 
-		this.dy /= d;
+		this.dx = (this.target.x - this.source.x) / d; 
+		this.dy = (this.target.y - this.source.y) / d;
 
 		this.speed = 10;
-			
-		//this.x += this.dx * speed;
-		//this.y += this.dy * speed;
+		
 	}
 
-	update(){
+	update_motion(){
 		this.x += this.dx * this.speed;
 		this.y += this.dy * this.speed;
 	}
