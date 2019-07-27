@@ -2,10 +2,11 @@
 
 class GameSession{
 
-	constructor(map_drawer, objects_drawer){
+	constructor(map_drawer, objects_drawer, meta_drawer){
 
 		this.map_drawer = map_drawer;
 		this.objects_drawer = objects_drawer;
+		this.meta_drawer = meta_drawer;
 
 		this.enemies = [];
 		this.towers = [];
@@ -42,9 +43,16 @@ class GameSession{
 
 		}
 
-		/*for(let tower of towers){
-
-		}*/
+		for(let tower of this.towers){
+			for(let enemy of this.enemies){
+				if(is_in_radius(tower, enemy, tower.radius)){
+					let bullet = new Bullet(tower, enemy, this.objects_drawer);
+					bullet.set_sprite("sprites/towerDefense_tile295.png");
+					this.bullets.push(bullet);
+				}
+			}
+			tower.render();
+		}
 
 		for(let bullet of this.bullets){
 			bullet.render();
@@ -72,8 +80,10 @@ class GameSession{
 		this.enemies.push(enemy);
 	}
 
-	build_tower(){
-
+	build_tower(x, y){
+		let tower = new Tower(x, y, 72, this.objects_drawer, this.meta_drawer);
+		tower.set_sprite("sprites/towerDefense_tile250.png");
+		this.towers.push(tower);
 	}
 
 }

@@ -12,7 +12,9 @@
 		<script type="text/javascript" src="engine/game_object.js"></script>
 		<script type="text/javascript" src="engine/math_helper.js"></script>
 		<script type="text/javascript" src="enemy.js"></script>
+		<script type="text/javascript" src="tower.js"></script>
 		<script type="text/javascript" src="bullet.js"></script>
+		<script type="text/javascript" src="tower.js"></script>
 		<script type="text/javascript" src="game_session.js"></script>
 	
 		<script type="text/javascript">
@@ -35,17 +37,19 @@
 
 			let map_ctx = document.getElementById("map").getContext("2d");
 			let game_field_ctx = document.getElementById("game_field").getContext("2d");
-
+			let meta_ctx = document.getElementById("meta").getContext("2d"); 
 
 			let map_drawer = new Drawer(map_ctx, CANVAS_WIDTH, CANVAS_HEIGHT);
 			let objects_drawer = new Drawer(game_field_ctx, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-			let session = new GameSession(map_drawer, objects_drawer);
+			let session = new GameSession(map_drawer, objects_drawer, meta_drawer);
 			session.set_map(5, 25, map_src);
 			session.render_map();
 
 			session.spawn_enemy(0, 36, [[13, 1, 2, 0], [13, 4, 0, 2], [25, 4, 2, 0], [-1, -1, -1, -1]], 3);
 			session.spawn_enemy(36, 36, [[13, 1, 2, 0], [13, 4, 0, 2], [25, 4, 2, 0], [-1, -1, -1, -1]], 3);
+
+			session.build_tower(12 * 36, 3 * 36);
 
 			session.render_scene();
 

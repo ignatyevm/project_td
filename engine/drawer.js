@@ -14,4 +14,12 @@ class Drawer{
 		this.ctx.clearRect(0, 0, this.width, this.height);		
 	}
 
+	render_circle(x, y, radius){
+		this.ctx.beginPath();
+		this.ctx.strokeStyle = "red";
+		this.ctx.arc(x, y, radius, 0, 2 * Math.PI);
+		this.ctx.closePath();
+		this.ctx.stroke();
+	}
+
 }
