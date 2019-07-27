@@ -1,21 +1,43 @@
 
 
+
 class Enemy extends GameObject {
 
-    constructor(x, y, drawer, hp) {
+    constructor(x, y, drawer) {
         super(x, y, drawer);
-        this.hp = hp;
+        this.speed = 1;
+        this.current_point_index = 0;
+        this.is_arrive = false;
     }
 
-    set_path(path, path_length) {
+    set_path(path, path_len) {
         this.path = path;
-        this.path_length = path_length;
-        this.path_index = 0;
+        this.path_len = path_len;
     }
 
-    move(){
-        this.x += this.path[this.path_index][2];
-        this.y += this.path[this.path_index][3];
+    update_motion(){
+        
+        if(this.current_point_index == this.path_len){
+            this.is_arrive = true;
+            console.log("ti pidor!");
+        }
+
+        let point = this.path[this.current_point_index];
+
+
+        if(Math.floor(this.x / BLOCK_SIZE)  == point[0] && Math.floor(this.y / BLOCK_SIZE)  == point[1]){
+            this.current_point_index++;
+        }
+            
+        point = this.path[this.current_point_index];
+
+        this.x += point[2] * this.speed;
+        this.y += point[3] * this.speed;
+
+    }
+
+    destroy(){
+
     }
 
 }
