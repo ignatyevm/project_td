@@ -10,11 +10,11 @@ class Bullet extends GameObject {
         this.source = source;
  		this.target = target;
 
-        this.resize(5, 5);
+        this.resize(3, 3);
 
 		let d = get_distance(this.target, this.source);
 
-		this.dx = (this.target.x - this.source.x + this.target.x / 32) / d; 
+		this.dx = (this.target.x - this.source.x + this.target.x / 16) / d; 
 		this.dy = (this.target.y - this.source.y) / d;
 		
 	}

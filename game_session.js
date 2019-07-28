@@ -33,7 +33,7 @@ class GameSession {
 		for(let i = 0; i < this.enemies.length; ++i) {
 			let enemy = this.enemies[i];
 
-			enemy.render();
+			enemy.render_rotated(90);
 			enemy.update_motion();
 
 			if(enemy.is_arrive) {
@@ -58,8 +58,28 @@ class GameSession {
 					}
 				}
 			}
-			if(tower.targets_queue.length > 0) tower.fire(tower.targets_queue[0]);
-			tower.render();
+			if(tower.targets_queue.length > 0){
+
+				let target = tower.targets_queue[0];
+				tower.fire(target);
+
+				let ox = [target.x - tower.x, 0];
+				let vector = [target.x - tower.x, target.y - tower.y];
+
+				let ox_length = Math.sqrt(ox[0] * ox[0] + ox[1] * ox[1]);;
+				let vector_length = Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1]);
+
+				let _cos = (ox[0] * vector[0] + ox[1] * vector[1]) / (ox_length * vector_length);
+
+				let angle = Math.acos(_cos) * (180 / Math.PI);
+
+				console.log(angle);
+
+			 	tower.render_rotated(angle + 90);
+
+			}else{
+				tower.render();
+			}
 			tower.update_bullets();
 		}
 
@@ -73,6 +93,7 @@ class GameSession {
 		enemy.set_path(target_path, target_path_len);
 		enemy.set_speed(1);
 		enemy.set_hp(5);
+
 		this.enemies_id = (++this.enemies_id) % MAX_ACTIVE_ENEMIES;
 		enemy.id = this.enemies_id;
 
@@ -82,7 +103,7 @@ class GameSession {
 	build_tower(x, y) {
 		let tower = new Tower(x, y, 144, this.objects_drawer, this.meta_drawer);
 		tower.set_sprite("sprites/mars/tower_sprites/tower_1/tower1_level_1.png");
-		tower.set_fire_rate(0.2);
+		tower.set_fire_rate(0.1);
 		this.towers.push(tower);
 	}
 
