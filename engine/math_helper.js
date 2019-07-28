@@ -17,3 +17,20 @@ function get_distance(point1, point2){
 	return Math.sqrt(x * x + y * y);
 
 }
+
+/*
+
+	a ___ d
+	 |	 |
+	b|___|c
+
+	a, b, c, d = [x, y]
+
+	square = [a, b, c, d]
+
+	point = [x, y]
+
+*/
+function is_point_in_square(square, point){
+
+}
