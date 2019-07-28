@@ -1,4 +1,4 @@
-
+const MAX_ACTIVE_ENEMIES = 5000;
 
 class GameSession{
 
@@ -7,10 +7,10 @@ class GameSession{
 		this.map_drawer = map_drawer;
 		this.objects_drawer = objects_drawer;
 		this.meta_drawer = meta_drawer;
+		this.enemies_id = 0;
 
 		this.enemies = [];
 		this.towers = [];
-		this.bullets = [];
 
 	}
 
@@ -30,15 +30,15 @@ class GameSession{
 
 		this.objects_drawer.clear();
 
-		for(let enemy of this.enemies){
-			
+		for(let i = 0; i < this.enemies.length; ++i){
+			let enemy = this.enemies[i];
 
 			enemy.render();
 			enemy.update_motion();
 
 			if(enemy.is_arrive){
 				enemy.destroy();
-				this.enemies.splice(enemy.id, 1);
+				this.enemies.splice(i, 1);
 			}
 
 		}
@@ -73,7 +73,8 @@ class GameSession{
 		enemy.set_path(target_path, target_path_len);
 		enemy.set_speed(1);
 		enemy.set_hp(5);
-		enemy.id = this.enemies.length;
+		this.enemies_id = (++this.enemies_id) % MAX_ACTIVE_ENEMIES;
+		enemy.id = this.enemies_id;
 
 		this.enemies.push(enemy);
 	}
@@ -81,7 +82,7 @@ class GameSession{
 	build_tower(x, y){
 		let tower = new Tower(x, y, 144, this.objects_drawer, this.meta_drawer);
 		tower.set_sprite("sprites/towerDefense_tile250.png");
-		tower.set_fire_rate(0.5);
+		tower.set_fire_rate(0.2);
 		this.towers.push(tower);
 	}
 
