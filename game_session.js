@@ -30,45 +30,40 @@ class GameSession{
 
 		this.objects_drawer.clear();
 
-		for(let i = 0; i < this.enemies.length; i++){
+		for(let enemy of this.enemies){
 			
 
-			this.enemies[i].render();
-			this.enemies[i].update_motion();
+			enemy.render();
+			enemy.update_motion();
 
-			if(this.enemies[i].is_arrive){
-				this.enemies[i].destroy();
-				this.enemies.splice(i, 1);
+			if(enemy.is_arrive){
+				enemy.destroy();
+				this.enemies.splice(enemy.id, 1);
 			}
 
 		}
 
 		for(let tower of this.towers){
-			for(let enemy of this.enemies){
+			for(let i = 0; i < this.enemies.length; i++){
+				let enemy = this.enemies[i];
 				if(is_in_radius(tower, enemy, tower.radius)){
-					let bullet = new Bullet(tower, enemy, this.objects_drawer);
-					bullet.set_sprite("sprites/towerDefense_tile295.png");
-					this.bullets.push(bullet);
+					if(tower.targets_set[enemy.id] === undefined){
+						tower.targets_queue.push(enemy);
+						tower.targets_set[enemy.id] = true;
+					}
+				}else{
+					if(tower.targets_set[enemy.id] === true){
+						tower.targets_set[enemy.id] = false;
+					 	tower.targets_queue.shift();
+					}
 				}
 			}
+			if(tower.targets_queue.length > 0) tower.fire(tower.targets_queue[0]);
 			tower.render();
-		}
-
-		for(let bullet of this.bullets){
-			bullet.render();
-			bullet.update_motion();
+			tower.update_bullets();
 		}
 
 	}
-
-	/*add_path(source_x, source_y, target_x, target_y, path){
-
-		let pm = new PathManager([target_x, target_y]);
-		pm.set(path);
-
-		this.paths.push(pm);
-
-	}*/
 
 	spawn_enemy(x, y, target_path, target_path_len){
 
@@ -76,13 +71,17 @@ class GameSession{
 
 		enemy.set_sprite("sprites/towerDefense_tile270.png");
 		enemy.set_path(target_path, target_path_len);
+		enemy.set_speed(1);
+		enemy.set_hp(5);
+		enemy.id = this.enemies.length;
 
 		this.enemies.push(enemy);
 	}
 
 	build_tower(x, y){
-		let tower = new Tower(x, y, 72, this.objects_drawer, this.meta_drawer);
+		let tower = new Tower(x, y, 144, this.objects_drawer, this.meta_drawer);
 		tower.set_sprite("sprites/towerDefense_tile250.png");
+		tower.set_fire_rate(0.5);
 		this.towers.push(tower);
 	}
 
