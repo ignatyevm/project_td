@@ -1,6 +1,6 @@
-class GameObject{
+class GameObject {
 
-	constructor(x, y, drawer){
+	constructor(x, y, drawer) {
 		this.x = x;
 		this.y = y;
 		this.width = SPRITE_WIDTH;
@@ -8,7 +8,7 @@ class GameObject{
 		this.drawer = drawer;
 	}
 
-	set_sprite(sprite_link){
+	set_sprite(sprite_link) {
 
 		let local_drawer = this.drawer;
 		let local_x = this.x;
@@ -19,7 +19,7 @@ class GameObject{
 
 		this.sprite = local_sprite;
 
-		this.sprite.onload = function(){
+		this.sprite.onload = function() {
 			local_drawer.render(local_sprite, local_x, local_y, local_width, local_height);
 		};
 
@@ -27,12 +27,12 @@ class GameObject{
 		
 	}
 
-	resize(width, height){
+	resize(width, height) {
 		this.width = width;
 		this.height = height;
 	}
 
-	render(){
+	render() {
 		this.drawer.render(this.sprite, this.x, this.y, this.width, this.height);
 	}
 

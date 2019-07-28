@@ -1,6 +1,4 @@
-
-
-class Bullet extends GameObject{
+class Bullet extends GameObject {
 
  	constructor(source, target, drawer) {
 
@@ -21,11 +19,11 @@ class Bullet extends GameObject{
 		
 	}
 
-	set_speed(speed){
+	set_speed(speed) {
 		this.speed = speed;
 	}
 
-	update_motion(){
+	update_motion() {
 		this.x += this.dx * this.speed;
 		this.y += this.dy * this.speed;
 	}

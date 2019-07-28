@@ -6,7 +6,7 @@ let sprites_link = {
 	't': "sprites/mars/map_sprites/top_right_turn.png",
 	'b': "sprites/mars/map_sprites/bottom_right_turn.png",};
 
-class Map{
+class Map {
 
 	constructor(width, height, map_src, drawer){
 		this.width = width
@@ -15,13 +15,13 @@ class Map{
 		this.drawer = drawer;
 	}
 
-	render(){
+	render() {
 		let local_drawer = this.drawer;
 
-		for(let i = 0; i < this.width; i++){
-			for(let j = 0; j < this.height; j++){
+		for(let i = 0; i < this.width; i++) {
+			for(let j = 0; j < this.height; j++) {
 				let sprite = new Image();
-				sprite.onload = function(){
+				sprite.onload = function() {
 					local_drawer.render(sprite, j * BLOCK_SIZE, i * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
 				}
                	sprite.src = sprites_link[this.map_src[i][j]];

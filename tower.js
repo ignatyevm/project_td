@@ -1,8 +1,4 @@
-
-
-
-
-class Tower extends GameObject{
+class Tower extends GameObject {
 	
 	constructor(x, y, radius, drawer, meta_drawer) {
 
@@ -35,23 +31,23 @@ class Tower extends GameObject{
 
 	}
 
-	set_damage(damge){
+	set_damage(damge) {
 		this.damage = damage;
 	}
 
-	set_fire_rate(fire_rate){
+	set_fire_rate(fire_rate) {
 		this.max_fire_rate = fire_rate * 50;
 	}
 
-	update_bullets(){
-		for(let bullet of this.bullets){
+	update_bullets() {
+		for(let bullet of this.bullets) {
 			bullet.render();
 			bullet.update_motion();
 		}
 	}
 
-	fire(target){
-		if(this.current_fire_rate % this.max_fire_rate == 0){
+	fire(target) {
+		if(this.current_fire_rate % this.max_fire_rate == 0) {
 			let bullet = new Bullet(this, target, this.drawer);
 			bullet.set_sprite("sprites/mars/bullets/res_bullet.png");
 			bullet.set_speed(7);
@@ -61,7 +57,7 @@ class Tower extends GameObject{
 		this.current_fire_rate++;
 	}
 
-	render(){
+	render() {
 		super.render();
 		this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
 	}
