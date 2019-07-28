@@ -17,9 +17,10 @@ class Enemy extends GameObject {
 
     update_motion(){
         
-        if(this.current_point_index == this.path_len){
+        if (this.current_point_index == this.path_len){
             this.is_arrive = true;
             console.log("ti pidor!");
+            return;
         }
 
         let point = this.path[this.current_point_index];
