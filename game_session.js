@@ -10,7 +10,6 @@ class GameSession{
 
 		this.enemies = [];
 		this.towers = [];
-		this.bullets = [];
 
 	}
 
@@ -30,15 +29,15 @@ class GameSession{
 
 		this.objects_drawer.clear();
 
-		for(let enemy of this.enemies){
-			
+		for(let i = 0; i < this.enemies.length; ++i){
+			let enemy = this.enemies[i];
 
 			enemy.render();
 			enemy.update_motion();
 
 			if(enemy.is_arrive){
 				enemy.destroy();
-				this.enemies.splice(enemy.id, 1);
+				this.enemies.splice(i, 1);
 			}
 
 		}
