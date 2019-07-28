@@ -1,6 +1,4 @@
-
-
-function is_in_radius(center, point, radius){
+function is_in_radius(center, point, radius) {
 
 	let x = point.x - center.x;
 	let y = point.y - center.y;
@@ -9,7 +7,7 @@ function is_in_radius(center, point, radius){
 
 }
 
-function get_distance(point1, point2){
+function get_distance(point1, point2) {
 
 	let x = point1.x - point2.x;
 	let y = point1.y - point2.y;
@@ -18,19 +16,11 @@ function get_distance(point1, point2){
 
 }
 
-/*
+function intersection_square(square, point) {
+	intersection_1 = (square[1][0] - square[0][0]) * (point[1] - square[0][1]) - (square[1][1] - square[0][1]) * (point[0] - square[0][0]);
+	intersection_2 = (square[2][0] - square[1][0]) * (point[1] - square[1][1]) - (square[2][1] - square[1][1]) * (point[0] - square[1][0]);
+	intersection_3 = (square[3][0] - square[2][0]) * (point[1] - square[2][1]) - (square[3][1] - square[2][1]) * (point[0] - square[2][0]);
+	intersection_4 = (square[4][0] - square[3][0]) * (point[1] - square[3][1]) - (square[4][1] - square[3][1]) * (point[0] - square[3][0]);
 
-	a ___ d
-	 |	 |
-	b|___|c
-
-	a, b, c, d = [x, y]
-
-	square = [a, b, c, d]
-
-	point = [x, y]
-
-*/
-function is_point_in_square(square, point){
-
+	if (intersection_1 < 0 && intersection_2 < 0 && intersection_3 < 0 && intersection_4 < 0) return true;
 }
