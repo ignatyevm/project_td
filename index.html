@@ -1,7 +1,10 @@
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="styles/game_menu.css">
 	</head>
 	<body>
+
+		<div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
 
 		<canvas id="game_field" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
 		<canvas id="map" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: -2;"></canvas>
@@ -21,10 +24,10 @@
 			const CANVAS_WIDTH = 900
 			const CANVAS_HEIGHT = 900;
 
-			const SPRITE_WIDTH = 36;
-			const SPRITE_HEIGHT = 36;
+			const SPRITE_WIDTH = 32;
+			const SPRITE_HEIGHT = 32;
 
-			const BLOCK_SIZE = 36;
+			const BLOCK_SIZE = 32;
 
 			let map_src = [
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
