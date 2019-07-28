@@ -49,7 +49,7 @@ class Tower extends GameObject {
 	fire(target) {
 		if(this.current_fire_rate % this.max_fire_rate == 0) {
 			let bullet = new Bullet(this, target, this.drawer);
-			bullet.set_sprite("sprites/towerDefense_tile295.png");
+			bullet.set_sprite("sprites/mars/bullets/res_bullet.png");
 			bullet.set_speed(7);
 			this.bullets.push(bullet);
 			this.current_fire_rate = 0;

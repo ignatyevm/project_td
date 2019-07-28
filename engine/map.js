@@ -1,9 +1,15 @@
-let sprites_link = {'x': "sprites/towerDefense_tile024.png", '.': "sprites/towerDefense_tile093.png"};
+
+let sprites_link = {
+	'x': "sprites/mars/map_sprites/ground.png", 
+	'.': "sprites/mars/map_sprites/straight_road_g.png",
+	',': "sprites/mars/map_sprites/straight_road_v.png",
+	't': "sprites/mars/map_sprites/top_right_turn.png",
+	'b': "sprites/mars/map_sprites/bottom_right_turn.png",};
 
 class Map {
 
-	constructor(width, height, map_src, drawer) {
-		this.width = width;
+	constructor(width, height, map_src, drawer){
+		this.width = width
 		this.height = height;
 		this.map_src = map_src;
 		this.drawer = drawer;
