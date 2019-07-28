@@ -69,7 +69,7 @@ class GameSession{
 
 		let enemy = new Enemy(x, y, objects_drawer);
 
-		enemy.set_sprite("sprites/towerDefense_tile270.png");
+		enemy.set_sprite("sprites/mars/enemy_sprite/bug_1/bug_1_1.png");
 		enemy.set_path(target_path, target_path_len);
 		enemy.set_speed(1);
 		enemy.set_hp(5);
@@ -81,7 +81,7 @@ class GameSession{
 
 	build_tower(x, y){
 		let tower = new Tower(x, y, 144, this.objects_drawer, this.meta_drawer);
-		tower.set_sprite("sprites/towerDefense_tile250.png");
+		tower.set_sprite("sprites/mars/tower_sprites/tower_1/tower1_level_1.png");
 		tower.set_fire_rate(0.2);
 		this.towers.push(tower);
 	}

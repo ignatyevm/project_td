@@ -28,10 +28,10 @@
 
 			let map_src = [
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
-				"..............xxxxxxxxxxx",
-				"xxxxxxxxxxxxx.xxxxxxxxxxx",
-				"xxxxxxxxxxxxx.xxxxxxxxxxx",
-				"xxxxxxxxxxxxx............",
+				".............txxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxxb...........",
 			];
 
 			let map_ctx = document.getElementById("map").getContext("2d");
@@ -46,7 +46,7 @@
 			session.set_map(5, 25, map_src);
 			session.render_map();
 
-			var id_timer = setInterval(function(){session.spawn_enemy(0, BLOCK_SIZE, [[13, 1, 2, 0], [13, 4, 0, 2], [25, 4, 2, 0], [0, 0, 0, 0]], 3)}, 1000);
+			var id_timer = setInterval(function(){session.spawn_enemy(0, BLOCK_SIZE, [[13, 1, 2, 0], [13, 4, 0, 2], [25, 4, 2, 0], [0, 0, 0, 0]], 3)}, 2000);
 
 			session.build_tower(12 * BLOCK_SIZE, 2 * BLOCK_SIZE);
 			session.build_tower(5 * BLOCK_SIZE, 2 * BLOCK_SIZE);
