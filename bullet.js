@@ -6,8 +6,8 @@ class Bullet extends GameObject{
 
         super(source.x, source.y, drawer);
 
-        this.x = source.x;
-        this.y = source.y;
+        this.x = source.x + source.width / 2 - 10;
+        this.y = source.y + source.height / 2 - 10;
 
         this.source = source;
  		this.target = target;
@@ -18,9 +18,11 @@ class Bullet extends GameObject{
 
 		this.dx = (this.target.x - this.source.x) / d; 
 		this.dy = (this.target.y - this.source.y) / d;
-
-		this.speed = 10;
 		
+	}
+
+	set_speed(speed){
+		this.speed = speed;
 	}
 
 	update_motion(){

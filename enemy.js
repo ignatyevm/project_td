@@ -8,6 +8,15 @@ class Enemy extends GameObject {
         this.speed = 1;
         this.current_point_index = 0;
         this.is_arrive = false;
+        this.in_radius = false;
+    }
+
+    set_speed(speed){
+        this.speed = speed;
+    }
+
+    set_hp(hp){
+        this.hp = hp;
     }
 
     set_path(path, path_len) {
@@ -19,7 +28,7 @@ class Enemy extends GameObject {
         
         if(this.current_point_index == this.path_len){
             this.is_arrive = true;
-            console.log("ti pidor!");
+            return;
         }
 
         let point = this.path[this.current_point_index];
