@@ -31,4 +31,9 @@ class Drawer {
 		this.ctx.stroke();
 	}
 
+		render_square(x, y, width, height){
+		this.ctx.fillStyle = 'yellow';
+		this.ctx.fillRect(x, y, width, height);
+	}
+
 }
