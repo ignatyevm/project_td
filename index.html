@@ -1,11 +1,37 @@
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="styles/game_menu.css">
+		<link rel="stylesheet" href="styles/game_menu.css" type="text/css">
 	</head>
 	<body>
-
-		<div class="footer">This footer will always be positioned at the bottom of the page, but <strong>not fixed</strong>.</div>
-
+		<div class="game_menu">
+			<div class="header">
+				<input class="timer" value="00:59">
+				<output class="round">  round: 1  </output>
+				<output class="game_state">  BUILD   </output>
+				<output class="player_info" id="player_hp"> 20 </output>
+				<img src="styles/hp.png" width="20" height="20">
+				<output class="player_info" id="player_budget"> 2000$ </output>
+				<img src="styles/money.png" width="25" height="25">
+				<button class="exit"> EXIT </button>
+			</div>
+			<div class="objects_fields">
+				<div class="container">
+					<button> 1 </button>
+					<button> 2 </button>
+					<button> 3 </button>
+				</div>	
+				<input class="info" id="towerInfo">
+				<button class="action_button" id="tower_upgrade"> UPGRADE </button>
+			</div>
+			<div class="objects_fields">
+				<div class="container">
+					<button> 1 </button>
+					<button> 2 </button>
+					<button> 3 </button>
+				</div>
+				<input class="info" id="enemyInfo">	
+				<button class="action_button" id="spawn_enemy"> ATTACK </button>
+			</div>
 		<canvas id="game_field" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
 		<canvas id="map" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: -2;"></canvas>
 		<canvas id="meta" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
@@ -20,9 +46,12 @@
 		<script type="text/javascript" src="game_session.js"></script>
 	
 		<script type="text/javascript">
-
+			
 			const CANVAS_WIDTH = 900
 			const CANVAS_HEIGHT = 900;
+
+			const MAP_WIDTH = 25;
+			const MAP_HEIGHT = 25;
 
 			const SPRITE_WIDTH = 32;
 			const SPRITE_HEIGHT = 32;
@@ -31,10 +60,30 @@
 
 			let map_src = [
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
-				".............txxxxxxxxxxx",
+				"xxxxxxxxxxxxxxxxxxxxxxxxx",
+				"b............/xxxxxxxxxxx",
 				"xxxxxxxxxxxxx,xxxxxxxxxxx",
 				"xxxxxxxxxxxxx,xxxxxxxxxxx",
-				"xxxxxxxxxxxxxb...........",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx,xxxxxxxxxxx",
+				"xxxxxxxxxxxxx*..........b",
+				"xxxxxxxxxxxxxxxxxxxxxxxxx",
+				"xxxxxxxxxxxxxxxxxxxxxxxxx",
 			];
 
 			let map_ctx = document.getElementById("map").getContext("2d");
@@ -46,17 +95,16 @@
 			let meta_drawer = new Drawer(meta_ctx, CANVAS_WIDTH, CANVAS_HEIGHT);
 
 			let session = new GameSession(map_drawer, objects_drawer, meta_drawer);
-			session.set_map(5, 25, map_src);
+			session.set_map(MAP_WIDTH, MAP_HEIGHT, map_src);
 			session.render_map();
 
-			var id_timer = setInterval(function(){session.spawn_enemy(0, BLOCK_SIZE, [[13, 1, 2, 0], [13, 4, 0, 2], [25, 4, 2, 0], [0, 0, 0, 0]], 3)}, 2000);
+			var id_timer = setInterval(function(){session.spawn_enemy(0, 2 * BLOCK_SIZE, [[13, 2, 3, 0], [13, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]], 3)}, 2000);
 
-			session.build_tower(12 * BLOCK_SIZE, 2 * BLOCK_SIZE);
-			session.build_tower(5 * BLOCK_SIZE, 2 * BLOCK_SIZE);
-			session.build_tower(20 * BLOCK_SIZE, 2 * BLOCK_SIZE);
+			session.build_tower(12 * BLOCK_SIZE, 3 * BLOCK_SIZE);
+			session.build_tower(5 * BLOCK_SIZE, 3 * BLOCK_SIZE);
+			session.build_tower(12 * BLOCK_SIZE, 8 * BLOCK_SIZE);
 
 			session.render_scene();
-
 		</script>
 
 	</body>
