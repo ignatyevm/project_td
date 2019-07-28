@@ -1,0 +1,68 @@
+
+
+.game_menu
+{
+	width: 600;
+	height: 700;
+	background-color: MediumSeaGreen;
+	float: right;
+}
+
+.header
+{
+	width: 600;
+	height: 50;
+}
+
+.exit
+{
+	float: right;
+	margin: 15;
+	width: 60;
+	height: 30;
+}
+
+.objects_field
+{
+	width: 600;
+}
+
+.container
+{
+	width: 400;
+	height: 150;
+	background-color: SeaGreen;
+	float: left;
+	margin-left: 15;
+}
+
+.info
+{
+	margin-right: 15;
+	float: right;
+	width: 150;
+	height: 150;
+
+}
+
+.timer
+{
+	margin: 15;
+	width: 100;
+}
+
+.button
+{
+	width: 50;
+	height: 50;
+}
+
+.action_button
+{
+	margin: 20;
+	width: 100;
+	height: 25;
+}
+
+
+
