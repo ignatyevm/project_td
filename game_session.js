@@ -29,6 +29,7 @@ class GameSession {
 	on_update() {
 
 		this.objects_drawer.clear();
+		this.meta_drawer.clear();
 
 		for(let i = 0; i < this.enemies.length; ++i) {
 			let enemy = this.enemies[i];
@@ -43,6 +44,7 @@ class GameSession {
 
 		}
 
+		check_tower(game_field_ctx);
 		for(let tower of this.towers) {
 			for(let i = 0; i < this.enemies.length; i++) {
 				let enemy = this.enemies[i];

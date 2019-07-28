@@ -16,9 +16,9 @@
 			</div>
 			<div class="objects_fields">
 				<div class="container">
-					<button> 1 </button>
-					<button> 2 </button>
-					<button> 3 </button>
+					<button id="tb1"> 1 </button>
+					<button id="tb2"> 2 </button>
+					<button id="tb3"> 3 </button>
 				</div>	
 				<input class="info" id="towerInfo">
 				<button class="action_button" id="tower_upgrade"> UPGRADE </button>
@@ -44,6 +44,8 @@
 		<script type="text/javascript" src="tower.js"></script>
 		<script type="text/javascript" src="bullet.js"></script>
 		<script type="text/javascript" src="game_session.js"></script>
+		<script type="text/javascript" src="event_handler.js"></script>
+		<script type="text/javascript" src="engine/UI.js"></script>
 	
 		<script type="text/javascript">
 			
@@ -86,6 +88,8 @@
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
 			];
 
+			let new_map = map_src.slice();
+
 			let map_ctx = document.getElementById("map").getContext("2d");
 			let game_field_ctx = document.getElementById("game_field").getContext("2d");
 			let meta_ctx = document.getElementById("meta").getContext("2d"); 
@@ -100,9 +104,9 @@
 
 			var id_timer = setInterval(function(){session.spawn_enemy(0, 2 * BLOCK_SIZE, [[13, 2, 3, 0], [13, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]], 3)}, 2000);
 
-			session.build_tower(12 * BLOCK_SIZE, 3 * BLOCK_SIZE);
-			session.build_tower(5 * BLOCK_SIZE, 3 * BLOCK_SIZE);
-			session.build_tower(12 * BLOCK_SIZE, 8 * BLOCK_SIZE);
+			//session.build_tower(12 * BLOCK_SIZE, 3 * BLOCK_SIZE);
+			//session.build_tower(5 * BLOCK_SIZE, 3 * BLOCK_SIZE);
+			//session.build_tower(12 * BLOCK_SIZE, 8 * BLOCK_SIZE);
 
 			session.render_scene();
 		</script>

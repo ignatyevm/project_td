@@ -64,7 +64,8 @@ class Tower extends GameObject {
 
 	render_rotated(degrees){
 		super.render_rotated(degrees);
-		this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
+		if (this.selected)
+			this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
 	}
 
 }
