@@ -1,17 +1,46 @@
 
 
+#canvas_field
+{
+	float: left;
+	margin-left: 0;
+}
+
+#hp_img
+{
+	width: 20;
+	height: 20;
+}
+
+.canvas
+{
+	width: 800;
+	height: 800;
+}
+
+#money_img
+{
+	width: 25;
+	height: 25
+}
+
+#towers_container
+{
+	margin-top: 50;
+}
+
 .game_menu
 {
-	width: 440;
-	height: 700;
+	float: left;
+	width: 500;
+	height: 800;
 	background-color: MediumSeaGreen;
-	float: right;
 }
 
 .header
 {
-	width: 600;
-	height: 50;
+	width: 500;
+	height: 40;
 }
 
 .exit
@@ -19,12 +48,13 @@
 	float: right;
 	margin: 15;
 	width: 60;
-	height: 30;
+	height: 25;
 }
 
 .objects_field
 {
-	width: 440;
+	margin-top: 100;
+	width: 500;
 }
 
 .container
