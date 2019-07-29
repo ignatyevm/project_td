@@ -38,7 +38,7 @@ class Enemy extends GameObject {
 
         let point = this.path[this.current_point_index];
 
-        if(Math.floor((this.x - BLOCK_SIZE / 4 + BLOCK_SIZE / 8)  / BLOCK_SIZE) == point[0] && Math.floor((this.y - BLOCK_SIZE / 4) / BLOCK_SIZE)  == point[1]) {
+        if(Math.floor((this.x - BLOCK_SIZE / 4 + BLOCK_SIZE / 8)  / BLOCK_SIZE) == point[0] && Math.floor((this.y - BLOCK_SIZE / 4 - BLOCK_SIZE / 8) / BLOCK_SIZE)  == point[1]) {
             this.current_point_index++;
             point = this.path[this.current_point_index];
         }
