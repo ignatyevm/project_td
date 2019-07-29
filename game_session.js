@@ -24,7 +24,7 @@ class GameSession {
 	}
 
 	render_scene() {
-		this.interval_id = setInterval(this.on_update.bind(this), 30);
+		this.interval_id = setInterval(this.on_update.bind(this), 20);
 	}
 
 	on_update() {
@@ -40,7 +40,7 @@ class GameSession {
 			if(enemy.is_arrive) {
 				enemy.destroy();
 				this.enemies.splice(i, 1);
-				--i;
+				
 			}
 		}
 
@@ -81,7 +81,7 @@ class GameSession {
 
 		let enemy = new Enemy(x, y, objects_drawer);
 
-		enemy.set_sprite("sprites/mars/enemy_sprite/bug_1/bug_1_1.png");
+		enemy.set_sprite("sprites/mars/enemy_sprite/bug_1/bug_1_2.png");
 		enemy.set_path(target_path, target_path_len);
 		enemy.set_speed(1);
 		enemy.set_hp(5);
