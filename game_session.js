@@ -90,13 +90,12 @@ class GameSession {
 
 	spawn_enemy(x, y, target_path, target_path_len) {
 
-		let enemy = new Enemy(x + SPRITE_WIDTH / 4, y + SPRITE_HEIGHT / 4, objects_drawer);
-
+		let enemy = new Enemy(x + SPRITE_WIDTH / 4, y + SPRITE_HEIGHT / 4 + SPRITE_HEIGHT / 8, objects_drawer);
+		enemy.resize(SPRITE_WIDTH / 2, SPRITE_HEIGHT / 2);
 		enemy.set_sprite(BASIC_ENEMY_SPRITE);
 		enemy.set_path(target_path, target_path_len);
 		enemy.set_speed(BASIC_ENEMY_SPEED);
 		enemy.set_hp(BASIC_ENEMY_HP);
-		enemy.resize(SPRITE_WIDTH / 2, SPRITE_HEIGHT / 2);
 		this.enemies_id = (++this.enemies_id) % MAX_ACTIVE_ENEMIES;
 		enemy.id = this.enemies_id;
 
