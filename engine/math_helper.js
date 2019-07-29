@@ -1,3 +1,5 @@
+const HALF_PI = 90;
+
 function is_in_radius(center, point, radius) {
 
 	let x = point.x - center.x;
@@ -40,12 +42,12 @@ function tower_rotate_angel(tower, target){
 	let angle = Math.acos(_cos) * (180 / Math.PI);
 
 	if (tower.x >= target.x && tower.y >= target.y)
-		angle = angle - 90;
+		angle = angle - HALF_PI;
 	else if (tower.x < target.x && tower.y >= target.y)
-		angle = -angle + 90;
+		angle = -angle + HALF_PI;
 	else if (tower.x > target.x && tower.y <= target.y)
-		angle = -angle - 90;
+		angle = -angle - HALF_PI;
 	else
-		angle += 90;
+		angle += HALF_PI;
 	return angle;
 }
