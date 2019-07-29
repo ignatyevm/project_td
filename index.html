@@ -3,40 +3,43 @@
 		<link rel="stylesheet" href="styles/game_menu.css" type="text/css">
 	</head>
 	<body>
-		<div class="game_menu">
-			<div class="header">
-				<input class="timer" readonly value="00:59">
-				<output class="round">  round: 1  </output>
-				<output class="game_state">  BUILD   </output>
-				<output class="player_info" id="player_hp"> 20 </output>
-				<img src="styles/hp.png" width="20" height="20">
-				<output class="player_info" id="player_budget"> 2000$ </output>
-				<img src="styles/money.png" width="25" height="25">
-				<button class="exit"> EXIT </button>
-			</div>
-			<div class="objects_fields">
-				<div class="container">
-					<button id="tb1"> 1 </button>
-					<button id="tb2"> 2 </button>
-					<button id="tb3"> 3 </button>
-				</div>	
-				<input class="info" id="towerInfo" readonly>
-				<button class="action_button" id="tower_upgrade"> UPGRADE </button>
-				<button class="action_button" id="sell"> SELL </button>
-			</div>
-			<div class="objects_fields">
-				<div class="container">
-					<button id="eb1"> 1 </button>
-					<button id="eb2"> 2 </button>
-					<button id="eb3"> 3 </button>
+		<div>
+			<div class="game_menu" style="z-index: 1">
+				<div class="header">
+					<input class="timer" readonly value="00:59">
+					<output class="round">  round: 1  </output>
+					<output class="game_state">  BUILD   </output>
+					<output class="player_info" id="player_hp"> 20 </output>
+					<img src="styles/hp.png" width="20" height="20">
+					<output class="player_info" id="player_budget"> 2000$ </output>
+					<img src="styles/money.png" width="25" height="25">
+					<button class="exit"> EXIT </button>
 				</div>
-				<input class="info" id="enemyInfo" readonly>	
-				<button class="action_button" id="spawn_enemy"> ATTACK </button>
+				<div class="objects_fields">
+					<div class="container">
+						<button id="tb1"> 1 </button>
+						<button id="tb2"> 2 </button>
+						<button id="tb3"> 3 </button>
+					</div>	
+					<input class="info" id="towerInfo" readonly>
+					<button class="action_button" id="tower_upgrade"> UPGRADE </button>
+					<button class="action_button" id="sell"> SELL </button>
+				</div>
+				<div class="objects_fields">
+					<div class="container">
+						<button id="eb1"> 1 </button>
+						<button id="eb2"> 2 </button>
+						<button id="eb3"> 3 </button>
+					</div>
+					<input class="info" id="enemyInfo" readonly>	
+					<button class="action_button" id="spawn_enemy"> ATTACK </button>
+				</div>
+			<div style="z-index: 0; ">
+				<canvas id="game_field" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+				<canvas id="map" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: -2;"></canvas>
+				<canvas id="meta" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
 			</div>
-		<canvas id="game_field" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
-		<canvas id="map" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: -2;"></canvas>
-		<canvas id="meta" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
-		<script type="text/javascript" src="constant.js"></script>
+		</div>
 		<script type="text/javascript" src="engine/drawer.js"></script>
 		<script type="text/javascript" src="engine/map.js"></script>
 		<script type="text/javascript" src="engine/game_object.js"></script>
@@ -49,6 +52,7 @@
 		<script type="text/javascript" src="engine/UI.js"></script>
 	
 		<script type="text/javascript">
+
 
 			let map_src = [
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -93,11 +97,6 @@
 			session.render_map();
 
 			var id_timer = setInterval(function(){session.spawn_enemy(0, 2 * BLOCK_SIZE, [[13, 2, 3, 0], [13, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]], 3)}, 5000);
-
-			//session.build_tower(12 * BLOCK_SIZE, 3 * BLOCK_SIZE);
-			//session.build_tower(5 * BLOCK_SIZE, 3 * BLOCK_SIZE);
-			//session.build_tower(12 * BLOCK_SIZE, 8 * BLOCK_SIZE);
-
 			session.render_scene();
 		</script>
 

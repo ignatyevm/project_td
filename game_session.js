@@ -23,7 +23,7 @@ class GameSession {
 	}
 
 	render_scene() {
-		this.interval_id = setInterval(this.on_update.bind(this), 30);
+		this.interval_id = setInterval(this.on_update.bind(this), 20);
 	}
 
 	on_update() {
