@@ -1,12 +1,12 @@
 const BASE_X = 768;
 const BASE_Y = 700;
 
-
-
-var bX = 10;
-var bY = 10;
 var is_tower_chosen = false;
 var is_enemy_chosen = false;
+var is_tower_to_sell = false;
+
+let bY = 0;
+let bX = 0;
 let tower_x = 0;
 let tower_y = 0;
 let canvas = document.getElementById("meta");
@@ -54,8 +54,13 @@ canvas.addEventListener("click", function(event){
 	if (is_enemy_chosen){
 		if (Math.abs(event.clientX - BASE_X) < SPRITE_WIDTH &&
 			Math.abs(event.clientY - BASE_Y) < SPRITE_HEIGHT){
-			alert("ENEMY SPWNED");
+			alert("ENEMY SPAWNED");
 		} 
+	}
+	for (t of session.towers){
+		if (t.selected){
+			is_tower_to_sell = true;
+		}
 	}
 });
 
