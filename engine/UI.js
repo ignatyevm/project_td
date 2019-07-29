@@ -1,6 +1,12 @@
+const BASE_X = 768;
+const BASE_Y = 700;
+
+
+
 var bX = 10;
 var bY = 10;
 var is_tower_chosen = false;
+var is_enemy_chosen = false;
 let tower_x = 0;
 let tower_y = 0;
 let canvas = document.getElementById("meta");
@@ -8,6 +14,7 @@ let canvas = document.getElementById("meta");
 canvas.addEventListener("mousemove", function(event) {
 	let x = event.clientX;
  	let y = event.clientY;
+		
 	if (is_tower_chosen){
 		bX = Math.floor(x / SPRITE_WIDTH);
 		bY = Math.floor(y / SPRITE_HEIGHT);
@@ -44,6 +51,12 @@ canvas.addEventListener("click", function(event){
 			is_tower_chosen = false;
 		}
 	}
+	if (is_enemy_chosen){
+		if (Math.abs(event.clientX - BASE_X) < SPRITE_WIDTH &&
+			Math.abs(event.clientY - BASE_Y) < SPRITE_HEIGHT){
+			alert("ENEMY SPWNED");
+		} 
+	}
 });
 
 function check_tower(ctx){
@@ -53,3 +66,5 @@ function check_tower(ctx){
 			ctx.fillRect(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
 	}
 }
+
+
