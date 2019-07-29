@@ -31,7 +31,7 @@ class Tower extends GameObject {
 
 	}
 
-	set_damage(damge) {
+	set_damage(damage) {
 		this.damage = damage;
 	}
 
@@ -43,11 +43,15 @@ class Tower extends GameObject {
 		for(let i = 0; i < this.bullets.length; i) {
 			let target = this.bullets[i].target;
 			let bullet_point = [this.bullets[i].x, this.bullets[i].y];
-			let enemy_sprite = [[target.x, target.y + BLOCK_SIZE], 
-								[target.x + BLOCK_SIZE, target.y + BLOCK_SIZE],
-			                    [target.x + BLOCK_SIZE, target.y],
-			                    [target.x, target.y]];
-			if (is_in_square(enemy_sprite, bullet_point)) {
+			let enemy_box = [[target.x, target.y + BLOCK_SIZE], 
+							 [target.x + BLOCK_SIZE, target.y + BLOCK_SIZE],
+			                 [target.x + BLOCK_SIZE, target.y],
+			                 [target.x, target.y]];
+			if (is_in_square(enemy_box, bullet_point)) {
+				target.take_damage(this.bullets[i].damage);
+				if (!target.is_alive()){
+					this.targets_queue.shift();
+				}
 				this.bullets.splice(i, 1);
 				continue;
 			}
@@ -60,6 +64,7 @@ class Tower extends GameObject {
 	fire(target) {
 		if(this.current_fire_rate % this.max_fire_rate == 0) {
 			let bullet = new Bullet(this, target, this.drawer);
+			bullet.set_damage(this.damage);
 			bullet.set_sprite("sprites/mars/bullets/res_bullet.png");
 			bullet.set_speed(7);
 			this.bullets.push(bullet);

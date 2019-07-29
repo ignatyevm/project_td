@@ -19,6 +19,10 @@ class Bullet extends GameObject {
 		
 	}
 
+	set_damage(damage){
+		this.damage = damage;
+	}
+
 	set_speed(speed) {
 		this.speed = speed;
 	}
