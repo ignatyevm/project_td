@@ -70,7 +70,8 @@ class Tower extends GameObject {
 
 	render() {
 		super.render();
-		this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
+		if (this.selected)
+			this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
 	}
 
 }
