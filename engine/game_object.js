@@ -26,7 +26,7 @@ class GameObject {
 		
 	}
 
-	animate(first_sprite, second_sprite){
+	animate(){
         if (this.sprite_type == FIRST_FRAME){
             this.set_sprite("sprites/mars/enemy_sprite/bug_1/bug_1_1.png");
             this.sprite_type = SECOND_FRAME;

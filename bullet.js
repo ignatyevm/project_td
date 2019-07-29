@@ -24,15 +24,7 @@ class Bullet extends GameObject {
 	}
 
 	update_motion() {
-
-		let src_copy = new (class Points{
-			constructor(x,y){
-				this.x = x;
-				this.y = y;
-			}
-		})(this.x, this.y);
-
-		let d = get_distance(this.target, src_copy);
+		let d = get_distance(this.target, {'x':this.x, 'y':this.y});
 		this.dx = (this.target.x - this.x + SPRITE_WIDTH / 2) / d; 
 		this.dy = (this.target.y - this.y + SPRITE_HEIGHT / 2) / d;
 
