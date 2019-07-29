@@ -4,6 +4,7 @@ const BASE_Y = 700;
 var is_tower_chosen = false;
 var is_enemy_chosen = false;
 var is_tower_to_sell = false;
+var is_base_chosen = false;
 
 let bY = 0;
 let bX = 0;
@@ -54,12 +55,14 @@ canvas.addEventListener("click", function(event){
 	if (is_enemy_chosen){
 		if (Math.abs(event.clientX - BASE_X) < SPRITE_WIDTH &&
 			Math.abs(event.clientY - BASE_Y) < SPRITE_HEIGHT){
-			alert("ENEMY SPAWNED");
+			is_base_chosen = true;
+			alert("base_chosen");
 		} 
 	}
 	for (t of session.towers){
 		if (t.selected){
-			is_tower_to_sell = true;
+			t.to_sell = true;
+			alert("gg");
 		}
 	}
 });
