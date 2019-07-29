@@ -21,7 +21,7 @@ const BASIC_ENEMY_HP = 50;
 const BASIC_ENEMY_SPEED = 0.25;
 const BASIC_ENEMY_SPRITE = "sprites/mars/enemy_sprite/bug_1/bug_1_1.png";
 
-const BASIC_BULLET_SPEED = 10;
+const BASIC_BULLET_SPEED = 5;
 const BASIC_BULLET_SPRITE = "sprites/mars/bullets/res_bullet.png";
 
 const BASIC_TOWER_DAMAGE = 5;
