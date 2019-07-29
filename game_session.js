@@ -31,6 +31,18 @@ class GameSession {
 		this.objects_drawer.clear();
 		this.meta_drawer.clear();
 
+		for(let i = 0; i < this.enemies.length; ++i) {
+			let enemy = this.enemies[i];
+			enemy.render_rotated(90);
+			enemy.update_motion();
+
+			if(enemy.is_arrive) {
+				enemy.destroy();
+				this.enemies.splice(i, 1);
+				
+				}
+		}
+
 		check_tower(game_field_ctx);
 		for(let tower of this.towers) {
 			for(let i = 0; i < this.enemies.length; i++) {
@@ -62,15 +74,16 @@ class GameSession {
 			tower.update_bullets();
 		}
 
-		for(let i = 0; i < this.enemies.length; ++i) {
+		for(let i = 0; i < this.enemies.length; i) {
 			let enemy = this.enemies[i];
 			enemy.render_rotated(90);
 			enemy.update_motion();
 
 			if (enemy.is_arrive || !enemy.is_alive()) {
 				this.enemies.splice(i, 1);
-				--i;
+				continue;
 			}
+			++i;
 		}
 
 	}
