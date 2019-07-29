@@ -64,7 +64,7 @@ class GameSession {
 
 				let target = tower.targets_queue[0];
 				tower.fire(target);
-				let angle = tower_rotate_angel(tower, tower.targets_queue[0])
+				let angle = get_rotation_angel(tower, tower.targets_queue[0]);
 			 	tower.render_rotated(angle);
 
 

@@ -27,10 +27,10 @@ function is_in_square(square, point) {
 		(intersection_1 < 0 && intersection_2 < 0 && intersection_3 < 0 && intersection_4 < 0));
 }
 
-function tower_rotate_angel(tower, target){
+function get_rotation_angel(point1, point2){
 
-	let ox = [target.x - tower.x, 0];
-	let vector = [target.x - tower.x, target.y - tower.y];
+	let ox = [point2.x - point1.x, 0];
+	let vector = [point2.x - point1.x, point2.y - point1.y];
 
 	let ox_length = Math.sqrt(ox[0] * ox[0] + ox[1] * ox[1]);;
 	let vector_length = Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1]);
@@ -38,13 +38,14 @@ function tower_rotate_angel(tower, target){
 	let _cos = (ox[0] * vector[0] + ox[1] * vector[1]) / (ox_length * vector_length);
 	let angle = Math.acos(_cos) * (180 / Math.PI);
 
-	if (tower.x >= target.x && tower.y >= target.y)
-		angle = angle - HALF_PI;
-	else if (tower.x < target.x && tower.y >= target.y)
-		angle = -angle + HALF_PI;
-	else if (tower.x > target.x && tower.y <= target.y)
-		angle = -angle - HALF_PI;
-	else
-		angle += HALF_PI;
-	return angle;
+	if (point1.x >= point2.x && point1.y >= point2.y){
+		return angle - HALF_PI;
+	}else if (point1.x < point2.x && point1.y >= point2.y){
+		return - angle + HALF_PI;
+	}else if (point1.x > point2.x && point1.y <= point2.y){
+		return - angle - HALF_PI;
+	}else{
+		return angle + HALF_PI;
+	}
+
 }
