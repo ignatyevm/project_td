@@ -7,6 +7,9 @@ class Tower extends GameObject {
 		this.x = x;
 		this.y = y;
 
+		this.posX = x;
+		this.posY = y;
+
 		this.width = SPRITE_WIDTH;
 		this.height = SPRITE_HEIGHT;
 
@@ -15,7 +18,7 @@ class Tower extends GameObject {
 
 		this.radius = radius;
 
-		this.selected = true;
+		this.selected = false;
 
 
 		this.bullets = [];
@@ -59,13 +62,15 @@ class Tower extends GameObject {
 
 	render() {
 		super.render();
-		this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
+		if (this.selected)
+			this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
 	}
 
 	render_rotated(degrees){
 		super.render_rotated(degrees);
 		if (this.selected)
 			this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
+		
 	}
 
 }
