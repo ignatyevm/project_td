@@ -16,7 +16,7 @@ const START_PLAYER_HP = 20;
 const START_PLAYER_MONEY = 500;
 
 const BASIC_ENEMY_HP = 50;
-const BASIC_ENEMY_SPEED = 2;
+const BASIC_ENEMY_SPEED = 0.25;
 const BASIC_ENEMY_SPRITE = "sprites/mars/enemy_sprite/bug_1/bug_1_1.png";
 
 const BASIC_BULLET_SPEED = 10;

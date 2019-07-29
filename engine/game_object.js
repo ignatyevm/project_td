@@ -26,23 +26,6 @@ class GameObject {
 		
 	}
 
-	/*animate() {
-        if (this.sprite_type == FIRST_FRAME){
-            this.set_sprite("sprites/mars/enemy_sprite/bug_1/bug_1_1.png");
-            this.sprite_type = SECOND_FRAME;
-        }
-        else if (this.sprite_type == SECOND_FRAME){
-            this.sprite_type = THIRD_FRAME;
-        }
-        else if (this.sprite_type == THIRD_FRAME){
-        	this.set_sprite("sprites/mars/enemy_sprite/bug_1/bug_1_2.png");
-            this.sprite_type = FORTH_FRAME;
-        }
-        else{
-            this.sprite_type = FIRST_FRAME;
-        }
-    }*/
-
 	resize(width, height) {
 		this.width = width;
 		this.height = height;
