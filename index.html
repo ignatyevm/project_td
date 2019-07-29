@@ -26,9 +26,9 @@
 			</div>
 			<div class="objects_fields">
 				<div class="container">
-					<button> 1 </button>
-					<button> 2 </button>
-					<button> 3 </button>
+					<button id="eb1"> 1 </button>
+					<button id="eb2"> 2 </button>
+					<button id="eb3"> 3 </button>
 				</div>
 				<input class="info" id="enemyInfo" readonly>	
 				<button class="action_button" id="spawn_enemy"> ATTACK </button>
@@ -36,7 +36,7 @@
 		<canvas id="game_field" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
 		<canvas id="map" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: -2;"></canvas>
 		<canvas id="meta" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
-
+		<script type="text/javascript" src="constant.js"></script>
 		<script type="text/javascript" src="engine/drawer.js"></script>
 		<script type="text/javascript" src="engine/map.js"></script>
 		<script type="text/javascript" src="engine/game_object.js"></script>
@@ -49,22 +49,6 @@
 		<script type="text/javascript" src="engine/UI.js"></script>
 	
 		<script type="text/javascript">
-			
-			const CANVAS_WIDTH = 900
-			const CANVAS_HEIGHT = 900;
-
-			const MAP_WIDTH = 25;
-			const MAP_HEIGHT = 25;
-
-			const SPRITE_WIDTH = 32;
-			const SPRITE_HEIGHT = 32;
-
-			const BLOCK_SIZE = 32;
-
-			const FIRST_FRAME = 1;
-			const SECOND_FRAME = 2;
-			const THIRD_FRAME = 3;
-			const FORTH_FRAME = 4;
 
 			let map_src = [
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",

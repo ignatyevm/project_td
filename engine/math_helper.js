@@ -1,4 +1,3 @@
-const HALF_PI = 90;
 
 function is_in_radius(center, point, radius) {
 

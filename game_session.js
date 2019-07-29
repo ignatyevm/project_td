@@ -1,4 +1,3 @@
-const MAX_ACTIVE_ENEMIES = 5000;
 
 class GameSession {
 
@@ -80,10 +79,10 @@ class GameSession {
 
 		let enemy = new Enemy(x, y, objects_drawer);
 
-		enemy.set_sprite("sprites/mars/enemy_sprite/bug_1/bug_1_1.png");
+		enemy.set_sprite(BASIC_ENEMY_SPRITE);
 		enemy.set_path(target_path, target_path_len);
-		enemy.set_speed(1);
-		enemy.set_hp(50);
+		enemy.set_speed(BASIC_ENEMY_SPEED);
+		enemy.set_hp(BASIC_ENEMY_HP);
 
 		this.enemies_id = (++this.enemies_id) % MAX_ACTIVE_ENEMIES;
 		enemy.id = this.enemies_id;
@@ -92,11 +91,10 @@ class GameSession {
 	}
 
 	build_tower(x, y) {
-		let tower = new Tower(x, y, 144, this.objects_drawer, this.meta_drawer);
-		tower.set_sprite("sprites/mars/tower_sprites/tower_1/tower1_level_1.png");
-		tower.set_fire_rate(0.1);
-		tower.set_damage(1);
+		let tower = new Tower(x, y, BASIC_TOWER_RADIUS, this.objects_drawer, this.meta_drawer);
+		tower.set_sprite(BASIC_TOWER_SPRITE_LVL_1);
+		tower.set_fire_rate(BASIC_TOWER_FIRE_RATE);
+		tower.set_damage(BASIC_TOWER_DAMAGE);
 		this.towers.push(tower);
 	}
-
 }
