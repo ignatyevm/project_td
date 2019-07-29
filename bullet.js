@@ -10,11 +10,11 @@ class Bullet extends GameObject {
         this.source = source;
  		this.target = target;
 
-        this.resize(5, 5);
+        this.resize(3, 3);
 
 		let d = get_distance(this.target, this.source);
 
-		this.dx = (this.target.x - this.source.x + this.target.x / 32) / d; 
+		this.dx = (this.target.x - this.source.x) / d; 
 		this.dy = (this.target.y - this.source.y) / d;
 		
 	}
@@ -24,6 +24,18 @@ class Bullet extends GameObject {
 	}
 
 	update_motion() {
+
+		let src_copy = new (class Points{
+			constructor(x,y){
+				this.x = x;
+				this.y = y;
+			}
+		})(this.x, this.y);
+
+		let d = get_distance(this.target, src_copy);
+		this.dx = (this.target.x - this.x) / d; 
+		this.dy = (this.target.y - this.y) / d;
+
 		this.x += this.dx * this.speed;
 		this.y += this.dy * this.speed;
 	}
