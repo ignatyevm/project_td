@@ -60,6 +60,11 @@
 
 			const BLOCK_SIZE = 32;
 
+			const FIRST_FRAME = 1;
+			const SECOND_FRAME = 2;
+			const THIRD_FRAME = 3;
+			const FORTH_FRAME = 4;
+
 			let map_src = [
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -102,7 +107,7 @@
 			session.set_map(MAP_WIDTH, MAP_HEIGHT, map_src);
 			session.render_map();
 
-			var id_timer = setInterval(function(){session.spawn_enemy(0, 2 * BLOCK_SIZE, [[13, 2, 3, 0], [13, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]], 3)}, 2000);
+			var id_timer = setInterval(function(){session.spawn_enemy(0, 2 * BLOCK_SIZE, [[13, 2, 3, 0], [13, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]], 3)}, 10000);
 
 			//session.build_tower(12 * BLOCK_SIZE, 3 * BLOCK_SIZE);
 			//session.build_tower(5 * BLOCK_SIZE, 3 * BLOCK_SIZE);

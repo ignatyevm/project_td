@@ -6,6 +6,7 @@ class Enemy extends GameObject {
         this.current_point_index = 0;
         this.is_arrive = false;
         this.in_radius = false;
+        this.sprite_type = 0
     }
 
     set_speed(speed) {
@@ -42,8 +43,11 @@ class Enemy extends GameObject {
 
     }
 
+    
+
     destroy() {
 
     }
 
 }
+

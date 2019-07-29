@@ -27,3 +27,25 @@ function intersection_square(square, point) {
 
 	return false;
 }
+
+function tower_rotate_angel(tower, target){
+
+	let ox = [target.x - tower.x, 0];
+	let vector = [target.x - tower.x, target.y - tower.y];
+
+	let ox_length = Math.sqrt(ox[0] * ox[0] + ox[1] * ox[1]);;
+	let vector_length = Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1]);
+
+	let _cos = (ox[0] * vector[0] + ox[1] * vector[1]) / (ox_length * vector_length);
+	let angle = Math.acos(_cos) * (180 / Math.PI);
+
+	if (tower.x >= target.x && tower.y >= target.y)
+		angle = angle - 90;
+	else if (tower.x < target.x && tower.y >= target.y)
+		angle = -angle + 90;
+	else if (tower.x > target.x && tower.y <= target.y)
+		angle = -angle - 90;
+	else
+		angle += 90;
+	return angle;
+}

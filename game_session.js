@@ -8,6 +8,7 @@ class GameSession {
 		this.objects_drawer = objects_drawer;
 		this.meta_drawer = meta_drawer;
 		this.enemies_id = 0;
+		this.interval_id;
 
 		this.enemies = [];
 		this.towers = [];
@@ -23,7 +24,7 @@ class GameSession {
 	}
 
 	render_scene() {
-		setInterval(this.on_update.bind(this), 20);
+		this.interval_id = setInterval(this.on_update.bind(this), 30);
 	}
 
 	on_update() {
@@ -33,15 +34,14 @@ class GameSession {
 
 		for(let i = 0; i < this.enemies.length; ++i) {
 			let enemy = this.enemies[i];
-
 			enemy.render_rotated(90);
 			enemy.update_motion();
 
 			if(enemy.is_arrive) {
 				enemy.destroy();
 				this.enemies.splice(i, 1);
+				--i;
 			}
-
 		}
 
 		check_tower(game_field_ctx);
@@ -57,6 +57,7 @@ class GameSession {
 					if(tower.targets_set[enemy.id] === true) {
 						tower.targets_set[enemy.id] = false;
 					 	tower.targets_queue.shift();
+					 	--i;
 					}
 				}
 			}
@@ -64,20 +65,9 @@ class GameSession {
 
 				let target = tower.targets_queue[0];
 				tower.fire(target);
-
-				let ox = [target.x - tower.x, 0];
-				let vector = [target.x - tower.x, target.y - tower.y];
-
-				let ox_length = Math.sqrt(ox[0] * ox[0] + ox[1] * ox[1]);;
-				let vector_length = Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1]);
-
-				let _cos = (ox[0] * vector[0] + ox[1] * vector[1]) / (ox_length * vector_length);
-
-				let angle = Math.acos(_cos) * (180 / Math.PI);
-
+				let angle = tower_rotate_angel(tower, tower.targets_queue[0])
 				console.log(angle);
-
-			 	tower.render_rotated(angle + 90);
+			 	tower.render_rotated(angle);
 
 			}else{
 				tower.render();
