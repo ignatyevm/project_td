@@ -67,6 +67,13 @@ class Tower extends GameObject {
 		}
 		this.current_fire_rate++;
 	}
+	
+	render_rotated(degrees){
+		super.render_rotated(degrees);
+		if (this.selected)
+			this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
+		
+	}
 
 	render() {
 		super.render();
