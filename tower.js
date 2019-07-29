@@ -1,6 +1,6 @@
 class Tower extends GameObject {
 	
-	constructor(x, y, radius, drawer, meta_drawer) {
+	constructor(x, y, radius, player, drawer, meta_drawer) {
 
 		super(x, y, drawer);
 
@@ -19,7 +19,7 @@ class Tower extends GameObject {
 
 		this.to_sell = false;
 
-
+		this.player = player;
 
 		this.bullets = [];
 

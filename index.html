@@ -52,7 +52,6 @@
 		<script type="text/javascript" src="event_handler.js"></script>
 		<script type="text/javascript" src="engine/UI.js"></script>
 		<script type="text/javascript" src="player.js"></script>
-		<script type="text/javascript" src="base.js"></script>
 	
 		<script type="text/javascript">
 
@@ -99,12 +98,20 @@
 			let session = new GameSession(map_drawer, objects_drawer, meta_drawer);
 			session.set_map(MAP_WIDTH, MAP_HEIGHT, map_src);
 
-			session.add_player(0, 3 * 32);
-			session.add_player(24 * 32, 24 * 32);
+			let player = session.add_player(0, 2 * 32);
+			let bot = session.add_player(24 * 32, 22 * 32);
+
+			session.add_path(player, bot, [[19, 2, 2, 0], [19, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]]);
+			session.add_path(bot, player, [[4, 22, -2, 0], [4, 1, 0, -2], [0, 1, -2, 0], [0, 0, 0, 0]]);
 
 			session.render_map();
 
-			var id_timer = setInterval(function(){session.spawn_enemy(0, 2 * BLOCK_SIZE, [[13, 2, 3, 0], [13, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]], 3)}, 500);
+			var id_timer1 = setInterval(function(){session.spawn_enemy(player, bot)}, 500);
+			var id_timer2 = setInterval(function(){session.spawn_enemy(bot, player)}, 500);
+
+			session.build_tower(4 * 32, 3 * 32, player);
+			session.build_tower(22 * 32, 23 * 32, player);
+
 			session.render_scene();
 		</script>
 

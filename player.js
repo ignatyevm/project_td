@@ -1,6 +1,10 @@
-class Player extends GameObject {
-	constructor(x, y, drawer) {
-		super(x, y, drawer);
+class Player {
+
+	constructor(id, base_x, base_y, base_hp) {
+		this.id = id;
+		this.base_x = base_x;
+		this.base_y = base_y;
+		this.base_hp = base_hp;
 	}
 
 	set_money(money) {

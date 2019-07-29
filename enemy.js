@@ -1,11 +1,12 @@
 class Enemy extends GameObject {
-    constructor(x, y, drawer) {
+    constructor(x, y, plyaer, drawer) {
         super(x, y, drawer);
         this.speed = 1;
         this.current_point_index = 0;
         this.is_arrive = false;
         this.in_radius = false;
-        this.sprite_type = 0
+        this.sprite_type = 0;
+        this.player = player;
     }
 
     set_speed(speed) {
