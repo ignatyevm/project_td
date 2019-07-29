@@ -7,6 +7,9 @@ class Tower extends GameObject {
 		this.x = x;
 		this.y = y;
 
+		this.posX = x;
+		this.posY = y;
+
 		this.width = SPRITE_WIDTH;
 		this.height = SPRITE_HEIGHT;
 
@@ -15,14 +18,14 @@ class Tower extends GameObject {
 
 		this.radius = radius;
 
-		this.selected = true;
+		this.selected = false;
 
 
 		this.bullets = [];
 
 		// 50 - 1s
 		// 100 - 2s
-		// 25 - 0.5.s
+		// 25 - 05.s
 		this.max_fire_rate = 1;
 		this.current_fire_rate = 0;
 
@@ -40,19 +43,9 @@ class Tower extends GameObject {
 	}
 
 	update_bullets() {
-		for(let i = 0; i < this.bullets.length; i) {
-			let bullet_point = [this.bullets[i].x, this.bullets[i].y];
-			let enemy_sprite = [[this.targets_queue[0].x, this.targets_queue[0].y + 32], 
-								[this.targets_queue[0].x + 32, this.targets_queue[0].y + 32],
-			                    [this.targets_queue[0].x + 32, this.targets_queue[0].y],
-			                    [this.targets_queue[0].x, this.targets_queue[0].y]];
-			if (intersection_square(enemy_sprite, bullet_point)) {
-				this.bullets.splice(i, 1);
-				continue;
-			}
-			this.bullets[i].render();
-			this.bullets[i].update_motion()
-			++i;
+		for(let bullet of this.bullets) {
+			bullet.render();
+			bullet.update_motion();
 		}
 	}
 
@@ -69,7 +62,15 @@ class Tower extends GameObject {
 
 	render() {
 		super.render();
-		this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
+		if (this.selected)
+			this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
+	}
+
+	render_rotated(degrees){
+		super.render_rotated(degrees);
+		if (this.selected)
+			this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
+		
 	}
 
 }
