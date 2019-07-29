@@ -5,7 +5,7 @@
 	<body>
 		<div class="game_menu">
 			<div class="header">
-				<input class="timer" value="00:59">
+				<input class="timer" readonly value="00:59">
 				<output class="round">  round: 1  </output>
 				<output class="game_state">  BUILD   </output>
 				<output class="player_info" id="player_hp"> 20 </output>
@@ -20,8 +20,9 @@
 					<button id="tb2"> 2 </button>
 					<button id="tb3"> 3 </button>
 				</div>	
-				<input class="info" id="towerInfo">
+				<input class="info" id="towerInfo" readonly>
 				<button class="action_button" id="tower_upgrade"> UPGRADE </button>
+				<button class="action_button" id="sell"> SELL </button>
 			</div>
 			<div class="objects_fields">
 				<div class="container">
@@ -29,7 +30,7 @@
 					<button> 2 </button>
 					<button> 3 </button>
 				</div>
-				<input class="info" id="enemyInfo">	
+				<input class="info" id="enemyInfo" readonly>	
 				<button class="action_button" id="spawn_enemy"> ATTACK </button>
 			</div>
 		<canvas id="game_field" width="900" height="900" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
