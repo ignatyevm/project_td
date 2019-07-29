@@ -41,17 +41,18 @@ class Tower extends GameObject {
 
 	update_bullets() {
 		for(let i = 0; i < this.bullets.length; i) {
+			let target = this.bullets[i].target;
 			let bullet_point = [this.bullets[i].x, this.bullets[i].y];
-			let enemy_sprite = [[this.targets_queue[0].x, this.targets_queue[0].y + 32], 
-								[this.targets_queue[0].x + 32, this.targets_queue[0].y + 32],
-			                    [this.targets_queue[0].x + 32, this.targets_queue[0].y],
-			                    [this.targets_queue[0].x, this.targets_queue[0].y]];
-			if (intersection_square(enemy_sprite, bullet_point)) {
+			let enemy_sprite = [[target.x, target.y + BLOCK_SIZE], 
+								[target.x + BLOCK_SIZE, target.y + BLOCK_SIZE],
+			                    [target.x + BLOCK_SIZE, target.y],
+			                    [target.x, target.y]];
+			if (is_in_square(enemy_sprite, bullet_point)) {
 				this.bullets.splice(i, 1);
 				continue;
 			}
 			this.bullets[i].render();
-			this.bullets[i].update_motion()
+			this.bullets[i].update_motion();
 			++i;
 		}
 	}
