@@ -29,8 +29,6 @@ class Enemy extends GameObject {
         return this.hp > 0;
     }
 
-
-
     update_motion() {
         
         if (this.current_point_index == this.path_len) {
@@ -42,11 +40,10 @@ class Enemy extends GameObject {
 
         if(Math.floor(this.x / BLOCK_SIZE)  == point[0] && Math.floor(this.y / BLOCK_SIZE)  == point[1]) {
             this.current_point_index++;
+            point = this.path[this.current_point_index];
         }
-            
-        point = this.path[this.current_point_index];
 
-        this.x += point[2] * this.speed ;
+        this.x += point[2] * this.speed;
         this.y += point[3] * this.speed;
     }
 
