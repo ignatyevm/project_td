@@ -44,14 +44,15 @@ class GameSession {
 		}
 
 		for(let tower of this.towers) {
-			for(let i = 0; i < this.enemies.length; i++) {
+			for(let i = 0; i < this.enemies.length; ++i) {
 				let enemy = this.enemies[i];
 				if(is_in_radius(tower, enemy, tower.radius)) {
 					if(tower.targets_set[enemy.id] === undefined) {
-						tower.targets_queue.push(enemy);
+						tower.targets_queue.push(enemy, i);
 						tower.targets_set[enemy.id] = true;
 					}
-				}else{
+				} 
+				else {
 					if(tower.targets_set[enemy.id] === true) {
 						tower.targets_set[enemy.id] = false;
 					 	tower.targets_queue.shift();
@@ -59,10 +60,11 @@ class GameSession {
 				}
 			}
 			if(tower.targets_queue.length > 0) tower.fire(tower.targets_queue[0]);
+			
+			
 			tower.render();
 			tower.update_bullets();
 		}
-
 	}
 
 	spawn_enemy(x, y, target_path, target_path_len) {

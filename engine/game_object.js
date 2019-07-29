@@ -1,5 +1,4 @@
 class GameObject {
-
 	constructor(x, y, drawer) {
 		this.x = x;
 		this.y = y;

@@ -1,5 +1,4 @@
 class Enemy extends GameObject {
-
     constructor(x, y, drawer) {
         super(x, y, drawer);
         this.speed = 1;
@@ -39,11 +38,9 @@ class Enemy extends GameObject {
 
         this.x += point[2] * this.speed;
         this.y += point[3] * this.speed;
-
     }
 
     destroy() {
 
     }
-
 }
