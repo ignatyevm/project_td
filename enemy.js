@@ -21,6 +21,16 @@ class Enemy extends GameObject {
         this.path_len = path_len;
     }
 
+    take_damage(damage){
+        this.hp -= damage;
+    }
+
+    is_alive(){
+        return this.hp > 0;
+    }
+
+
+
     update_motion() {
         
         if (this.current_point_index == this.path_len) {
