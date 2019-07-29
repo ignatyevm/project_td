@@ -15,7 +15,10 @@ class Tower extends GameObject {
 
 		this.radius = radius;
 
-		this.selected = true;
+		this.selected = false;
+
+		this.to_sell = false;
+
 
 
 		this.bullets = [];
@@ -43,9 +46,9 @@ class Tower extends GameObject {
 		for(let i = 0; i < this.bullets.length; i) {
 			let target = this.bullets[i].target;
 			let bullet_point = [this.bullets[i].x, this.bullets[i].y];
-			let enemy_box = [[target.x, target.y + ENEMY_HITBOX], 
-							 [target.x + ENEMY_HITBOX, target.y + ENEMY_HITBOX],
-			                 [target.x + ENEMY_HITBOX, target.y],
+			let enemy_box = [[target.x, target.y + BLOCK_SIZE], 
+							 [target.x + BLOCK_SIZE, target.y + BLOCK_SIZE],
+			                 [target.x + BLOCK_SIZE, target.y],
 			                 [target.x, target.y]];
 			if (is_in_square(enemy_box, bullet_point)) {
 				target.take_damage(this.bullets[i].damage);

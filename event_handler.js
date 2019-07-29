@@ -32,3 +32,20 @@ document.getElementById("eb3").addEventListener("click", ()=>{
 	change_selected_object(false, true);
 	enemyInfo.value = "enemy 3";
 });
+
+document.getElementById("sell").addEventListener("click", ()=>{
+	for (let i = 0; i < session.towers.length; i++){
+		let t = session.towers[i];
+		if (t.to_sell){
+			session.towers.splice(i, 1);
+		}
+	}
+});
+
+document.getElementById("spawn_enemy").addEventListener("click", ()=>{
+	if (is_base_chosen && is_enemy_chosen){
+		is_enemy_chosen = false;
+		is_base_chosen = false;
+		alert("SPAWN ENEMY");
+	}
+});
