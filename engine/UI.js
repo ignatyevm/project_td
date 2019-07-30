@@ -47,15 +47,15 @@ canvas.addEventListener("click", function(event){
 	if (is_tower_chosen){
 		if (new_map[bY][bX] == 'x'){
 			new_map = set_tower(new_map, bY, bX);
-			session.build_tower(tower_x, tower_y, 0);
+			session.build_tower(tower_x, tower_y);
 			is_tower_chosen = false;
 		}
 	}
 	if (is_enemy_chosen){
 		if (Math.abs(event.clientX - BASE_X) < SPRITE_WIDTH &&
 			Math.abs(event.clientY - BASE_Y) < SPRITE_HEIGHT){
-			is_base_chosen = true;
-			alert("base_chosen");
+			session.spawn_enemy(player, bot);
+
 		} 
 	}
 	
@@ -90,6 +90,7 @@ function delete_tower(x, y){
 	bX = Math.floor(x / SPRITE_WIDTH);
 	bY = Math.floor(y / SPRITE_HEIGHT);
 	new_map[bY][bX] = 'x';
+
 }
 
 
