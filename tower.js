@@ -52,8 +52,10 @@ class Tower extends GameObject {
 			                 [target.x, target.y]];
 			if (is_in_square(enemy_box, bullet_point)) {
 				target.take_damage(this.bullets[i].damage);
-				if (!target.is_alive()){
-					this.targets_queue.shift();
+				if (this.targets_queue.length > 0){
+					if (!target.is_alive() && target.id === this.targets_queue[0].id){
+						this.targets_queue.shift();
+					}
 				}
 				this.bullets.splice(i, 1);
 				continue;

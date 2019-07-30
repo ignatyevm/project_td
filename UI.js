@@ -27,13 +27,13 @@ canvas.addEventListener("mousemove", function(event) {
 	}
 });
 
-function set_tower(map, y, x, ch){
+function set_tower(map, y, x){
 	let new_field = [];
 	for (let i = 0; i < y; i++){
 		new_field.push(map[i]);
 	}
 	new_field.push("");
-	new_field[y] = map[y].substr(0, x) + ch + map[y].substr(x + 1, map[y].length - x);
+	new_field[y] = map[y].substr(0, x) + "T" + map[y].substr(x + 1, map[y].length - x);
 	y += 1;
 	for (let i = y; y < map.length; y++){
 		new_field.push(map[y]);
@@ -45,7 +45,7 @@ function set_tower(map, y, x, ch){
 canvas.addEventListener("click", function(event){ 
 	if (is_tower_chosen){
 		if (bX < 25 && bY < 25 && new_map[bY][bX] == 'x'){
-			new_map = set_tower(new_map, bY, bX, "T");
+			new_map = set_tower(new_map, bY, bX);
 			session.build_tower(tower_x, tower_y);
 			is_tower_chosen = false;
 			
@@ -76,7 +76,7 @@ canvas.addEventListener("click", function(event){
 	
 });
 
-function draw_tower_place(drawer){
+function check_tower(drawer){
 
 	if (bX < 25 && bY < 25 && new_map[bY][bX] == 'x' && is_tower_chosen){
 		drawer.ctx.fillStyle = 'yellow';
@@ -93,7 +93,7 @@ function draw_tower_place(drawer){
 function delete_tower(x, y){
 	bX = Math.floor(x / SPRITE_WIDTH);
 	bY = Math.floor(y / SPRITE_HEIGHT);
-	new_map = set_tower(new_map, bY, bX, 'x');
+	new_map[bY][bX] = 'x';
 
 }
 
