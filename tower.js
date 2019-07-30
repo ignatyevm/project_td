@@ -29,7 +29,7 @@ class Tower extends GameObject {
 		this.max_fire_rate = 1;
 		this.current_fire_rate = 0;
 
-		this.targets_set = {};
+		this.targets_set = [];
 		this.targets_queue = [];
 
 	}
@@ -53,7 +53,7 @@ class Tower extends GameObject {
 			if (is_in_square(enemy_box, bullet_point)) {
 				target.take_damage(this.bullets[i].damage);
 				if (this.targets_queue.length > 0){
-					if (!target.is_alive() &&  target.id === this.targets_queue[0].id){
+					if (!target.is_alive() && target.id === this.targets_queue[0].id){
 						this.targets_queue.shift();
 					}
 				}
