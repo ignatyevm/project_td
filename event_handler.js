@@ -6,22 +6,28 @@ function change_selected_object(select1, select2){
 	}
 }
 
+
+
 document.getElementById("tb1").addEventListener("click", ()=>{
-	//if (session.player.money >= BASIC_TOWER_PRICE){
+	if (document.getElementById("player_budget").value >= BASIC_TOWER_PRICE){
 		change_selected_object(true, false);
 		towerInfo.value = "tower 1";
-	//}
+	}
 
 });
 
 document.getElementById("tb2").addEventListener("click", ()=>{
-	change_selected_object(true, false);
-	towerInfo.value = "tower 2";
+	if (document.getElementById("player_budget").value >= BASIC_TOWER_PRICE){
+		change_selected_object(true, false);
+		towerInfo.value = "tower 2";
+	}
 });
 
 document.getElementById("tb3").addEventListener("click", ()=>{
-	change_selected_object(true, false);
-	towerInfo.value = "tower 3";
+	if (document.getElementById("player_budget").value >= BASIC_TOWER_PRICE){
+		change_selected_object(true, false);
+		towerInfo.value = "tower 3";
+	}
 });
 
 document.getElementById("eb1").addEventListener("click", ()=>{

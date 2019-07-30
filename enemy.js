@@ -3,13 +3,10 @@ class Enemy extends GameObject {
         super(x, y, drawer);
         this.speed = 1;
         this.current_point_index = 0;
+        this.is_arrive = false;
         this.in_radius = false;
         this.sprite_type = 0;
         this.player = player;
-    }
-
-    set_id(id){
-        this.id = id;
     }
 
     set_speed(speed) {
@@ -33,13 +30,10 @@ class Enemy extends GameObject {
         return this.hp > 0;
     }
 
-    is_arrive(){
-        return this.current_point_index == this.path_len;
-    }
-
     update_motion() {
         
-        if (this.is_arrive()) {
+        if (this.current_point_index == this.path_len) {
+            this.is_arrive = true;
             return;
         }
 
