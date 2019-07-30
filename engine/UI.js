@@ -51,8 +51,7 @@ canvas.addEventListener("click", function(event){
 			is_tower_chosen = false;
 			
 			let money = document.getElementById("player_budget");
-			money.value = String(Number(money.value) - BASIC_TOWER_PRICE);	
-			session.player.money -= BASIC_TOWER_PRICE;			
+			money.value = String(Number(money.value) - BASIC_TOWER_PRICE);			
 		}
 	}
 	if (is_enemy_chosen){
