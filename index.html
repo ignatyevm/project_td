@@ -100,10 +100,11 @@
 			let bot = session.add_player(24 * 32, 22 * 32);
 
 			session.add_path(player, bot, [[19, 2, 2, 0], [19, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]]);
-			session.add_path(bot, player, [[4, 22, -2, 0], [4, 1, 0, -2], [0, 1, -2, 0], [0, 0, 0, 0]]);
+			session.add_path(bot, player, [[4, 22, -2, 0], [4, 1, 0, -2], [-1, 1, -2, 0], [0, 0, 0, 0]]);
 
 			session.render_map();
-
+			var id_timer1 = setInterval(function(){session.spawn_enemy(0, 1)}, 500);
+			var id_timer2 = setInterval(function(){session.spawn_enemy(1, 0)}, 500);
 			//var id_timer1 = setInterval(function(){session.spawn_enemy(player, bot)}, 500);
 			var id_timer2 = setInterval(function(){session.spawn_enemy(bot, player)}, 500);
 
