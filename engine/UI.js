@@ -3,7 +3,6 @@ const BASE_Y = 700;
 
 var is_tower_chosen = false;
 var is_enemy_chosen = false;
-var is_tower_to_sell = false;
 var is_base_chosen = false;
 
 let bY = 0;
@@ -59,12 +58,18 @@ canvas.addEventListener("click", function(event){
 			alert("base_chosen");
 		} 
 	}
+	
 	for (t of session.towers){
-		if (t.selected){
+		if (t.selected && !t.to_sell){
 			t.to_sell = true;
 			alert("gg");
+			is_tower_to_sell = true;
+		}
+		else{
+			t.to_sell = false;
 		}
 	}
+	
 });
 
 function check_tower(ctx){
@@ -72,7 +77,20 @@ function check_tower(ctx){
 	if (new_map[bY][bX] == 'x' && is_tower_chosen){
 			ctx.fillStyle = 'yellow';
 			ctx.fillRect(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
+
+			ctx.beginPath();
+			ctx.strokeStyle = "red";
+			ctx.arc(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2,  BASIC_TOWER_RADIUS, 0, 2 * Math.PI);
+			ctx.closePath();
+			ctx.stroke();
 	}
+}
+
+function delete_tower(x, y){
+	bX = Math.floor(x / SPRITE_WIDTH);
+	bY = Math.floor(y / SPRITE_HEIGHT);
+	new_map[bY][bX] = 'x';
+
 }
 
 
