@@ -47,7 +47,7 @@ canvas.addEventListener("click", function(event){
 	if (is_tower_chosen){
 		if (new_map[bY][bX] == 'x'){
 			new_map = set_tower(new_map, bY, bX);
-			session.build_tower(tower_x, tower_y);
+			session.build_tower(tower_x, tower_y, 0);
 			is_tower_chosen = false;
 		}
 	}
@@ -90,7 +90,6 @@ function delete_tower(x, y){
 	bX = Math.floor(x / SPRITE_WIDTH);
 	bY = Math.floor(y / SPRITE_HEIGHT);
 	new_map[bY][bX] = 'x';
-
 }
 
 

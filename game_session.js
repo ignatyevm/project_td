@@ -63,7 +63,7 @@ class GameSession {
 
 				let enemy = this.enemies[i];
 
-				console.log(tower.player.id + " " + enemy.player.id);
+				//console.log(tower.player.id + " " + enemy.player.id);
 
 				if(tower.player.id == enemy.player.id) continue;
 
@@ -108,7 +108,10 @@ class GameSession {
 
 	}
 
-	spawn_enemy(source_player, target_player) {
+	spawn_enemy(source_player_id, target_player_id) {
+
+		let source_player = this.players[source_player_id];
+		let target_player = this.players[target_player_id];
 
 		let target_path = this.paths[source_player.id][target_player.id];
 
@@ -130,8 +133,8 @@ class GameSession {
 
 	}
 
-	build_tower(x, y, player) {
-		let tower = new Tower(x, y, BASIC_TOWER_RADIUS, player, this.objects_drawer, this.meta_drawer);
+	build_tower(x, y, player_id) {
+		let tower = new Tower(x, y, BASIC_TOWER_RADIUS, this.players[player_id], this.objects_drawer, this.meta_drawer);
 		tower.set_sprite(BASIC_TOWER_SPRITE_LVL_1);
 		tower.set_fire_rate(BASIC_TOWER_FIRE_RATE);
 		tower.set_damage(BASIC_TOWER_DAMAGE);

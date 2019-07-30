@@ -1,5 +1,5 @@
 class Enemy extends GameObject {
-    constructor(x, y, plyaer, drawer) {
+    constructor(x, y, player, drawer) {
         super(x, y, drawer);
         this.speed = 1;
         this.current_point_index = 0;

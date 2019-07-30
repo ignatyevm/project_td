@@ -105,11 +105,8 @@
 
 			session.render_map();
 
-			var id_timer1 = setInterval(function(){session.spawn_enemy(player, bot)}, 500);
-			var id_timer2 = setInterval(function(){session.spawn_enemy(bot, player)}, 500);
-
-			session.build_tower(4 * 32, 3 * 32, player);
-			session.build_tower(22 * 32, 23 * 32, player);
+			var id_timer1 = setInterval(function(){session.spawn_enemy(0, 1)}, 2000);
+			var id_timer2 = setInterval(function(){session.spawn_enemy(1, 0)}, 2000);
 
 			session.render_scene();
 		</script>
