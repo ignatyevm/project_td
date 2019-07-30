@@ -1,4 +1,4 @@
-
+const BUILD_SECONDS = 10;
 class GameSession {
 
 	constructor(map_drawer, objects_drawer, meta_drawer) {
@@ -10,7 +10,7 @@ class GameSession {
 		this.meta_drawer = meta_drawer;
 		this.enemies_id = 0;
 		this.interval_id;
-
+		this.state = "building";
 		this.enemies = [];
 		this.towers = [];
 
@@ -24,6 +24,24 @@ class GameSession {
 			this.paths[i] = new Array(2);
 		}
 
+	}
+
+	start_building(){
+		this.state = "building";
+		this.build_counter = BUILD_SECONDS;
+		this.build_counter_id = window.setInterval(()=>{
+			document.getElementById('timer').value = this.build_counter;
+			this.build_counter--;
+			if (this.build_counter <= 0){
+				this.start_war();
+				window.clearInterval(this.build_counter_id);
+			}
+		}, 1000);
+	}
+
+	start_war(){
+		this.state = "war";
+		this.disable_menu();
 	}
 
 	set_map(width, height, map_src) {
@@ -42,119 +60,85 @@ class GameSession {
 		this.interval_id = setInterval(this.on_update.bind(this), 20);
 	}
 
+	disable_menu(){
+		document.getElementById("tb1").disabled = true;
+		document.getElementById("tb2").disabled = true;
+		document.getElementById("tb3").disabled = true;
+		document.getElementById("eb1").disabled = true;
+		document.getElementById("eb2").disabled = true;
+		document.getElementById("eb3").disabled = true;
+	}
+
 	on_update() {
-		let sec = 30;
-		switch(this.state){
-			case "building":{
-				document.getElementById("tb1").disable = false;
-				document.getElementById("tb2").disable = false;
-				document.getElementById("tb3").disable = false;
-				document.getElementById("eb1").disable = true;
-				document.getElementById("eb2").disable = true;
-				document.getElementById("eb3").disable = true;
-
-				//clearInterval(id_timer2);
-
-				document.getElementById("timer").innerHTML = "00" + String(--sec);
-
-
-				if (sec == 0){
-					this.state = "war";
-					document.getElementById("timer") = "00:30";
-				}
-
-
-				break;
-			}
-			case "war":{
-				document.getElementById("tb1").disable = true;
-				document.getElementById("tb2").disable = true;
-				document.getElementById("tb3").disable = true;
-				document.getElementById("eb1").disable = false;
-				document.getElementById("eb2").disable = false;
-				document.getElementById("eb3").disable = false;
-
-				//id_timer2 = setInterval(function(){session.spawn_enemy(bot, player)}, 500);
-
-				document.getElementById("timer") = "00:" + sec--;
-
-				if (sec == 0){
-					this.state = "building";
-					document.getElementById("timer") = "00:30";
-				}
-
-				break;
-			}
-		}
 
 		this.objects_drawer.clear();
 		this.meta_drawer.clear();
 
-		for(let i = 0; i < this.enemies.length; ++i) {
-			let enemy = this.enemies[i];
-			enemy.render_rotated(90);
-			enemy.update_motion();
-
-			if(enemy.is_arrive) {
-				enemy.destroy();
-				this.enemies.splice(i, 1);
-				
-				}
+		if (this.state == "building"){
+			draw_tower_place(this.objects_drawer);
+			for (let t of session.towers){
+				t.render();
+			}
 		}
 
-		check_tower(this.objects_drawer, this.map);
-		for(let tower of this.towers) {
-			/*if (tower.to_sell){
-				game_field_ctx.rect(tower.x, tower.y, SPRITE_WIDTH, SPRITE_HEIGHT);
-				game_field_ctx.stroke();
-			}*/
-			for(let i = 0; i < this.enemies.length; i++) {
 
+		if (this.state == "war") {
+			for(let i = 0; i < this.enemies.length; ++i) {
 				let enemy = this.enemies[i];
+				enemy.render_rotated(90);
+				enemy.update_motion();
 
-				//console.log(tower.player.id + " " + enemy.player.id);
-
-				//if(tower.player.id == enemy.player.id) continue;
-
-				if(is_in_radius(tower, enemy, tower.radius)) {
-					if(tower.targets_set[enemy.id] === undefined) {
-						tower.targets_queue.push(enemy);
-						tower.targets_set[enemy.id] = true;
-					}
-				}else{
-					if(tower.targets_set[enemy.id] === true) {
-						tower.targets_set[enemy.id] = false;
-					 	tower.targets_queue.shift();
-					 	--i;
-					}
+				if(enemy.is_arrive) {
+					enemy.destroy();
+					this.enemies.splice(i, 1);
 				}
 			}
-			if (tower.targets_queue.length > 0) {
-
-				let target = tower.targets_queue[0];
-				tower.fire(target);
-				let angle = get_rotation_angel(tower, tower.targets_queue[0]);
-			 	tower.render_rotated(angle);
 
 
-			}else {
-				tower.render();
+			for(let tower of this.towers) {
+				for(let i = 0; i < this.enemies.length; i++) {
+
+					let enemy = this.enemies[i];
+
+					if(is_in_radius(tower, enemy, tower.radius)) {
+						if(tower.targets_set[enemy.id] === undefined) {
+							tower.targets_queue.push(enemy);
+							tower.targets_set[enemy.id] = true;
+						}
+					}else{
+						if(tower.targets_set[enemy.id] === true) {
+							tower.targets_set[enemy.id] = false;
+					 		tower.targets_queue.shift();
+					 		--i;
+						}
+					}
+				}
+				if (tower.targets_queue.length > 0) {
+
+					let target = tower.targets_queue[0];
+					tower.fire(target);
+					let angle = get_rotation_angel(tower, tower.targets_queue[0]);
+				 	tower.render_rotated(angle);
+
+
+				}else {
+					tower.render();
+				}
+				tower.update_bullets();
 			}
-			tower.update_bullets();
-		}
 
-		for(let i = 0; i < this.enemies.length; i) {
-			let enemy = this.enemies[i];
-			enemy.render_rotated(90);
-			enemy.update_motion();
+			for(let i = 0; i < this.enemies.length; i) {
+				let enemy = this.enemies[i];
+				enemy.render_rotated(90);
+				enemy.update_motion();
 
-			if (enemy.is_arrive || !enemy.is_alive()) {
-				this.enemies.splice(i, 1);
-				continue;
+				if (enemy.is_arrive || !enemy.is_alive()) {
+					this.enemies.splice(i, 1);
+					continue;
+				}
+				++i;
 			}
-			++i;
 		}
-
 	}
 
 	spawn_enemy(source_player, target_player) {
