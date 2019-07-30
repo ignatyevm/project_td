@@ -77,7 +77,7 @@ canvas.addEventListener("click", function(event){
 
 function check_tower(drawer, map){
 
-	if (map.map_src[bY][bX] == 'x' && is_tower_chosen){
+	if (map_src[bY][bX] == 'x' && is_tower_chosen){
 		drawer.ctx.fillStyle = 'yellow';
 		drawer.ctx.fillRect(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
