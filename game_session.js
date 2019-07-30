@@ -45,50 +45,31 @@ class GameSession {
 		this.objects_drawer.clear();
 		this.meta_drawer.clear();
 
-		for(let i = 0; i < this.enemies.length; ++i) {
-			let enemy = this.enemies[i];
-			enemy.render_rotated(90);
-			enemy.update_motion();
-
-			if(enemy.is_arrive) {
-				enemy.destroy();
-				this.enemies.splice(i, 1);
-				
-				}
-		}
-
 		check_tower(game_field_ctx);
 		for(let tower of this.towers) {
 			for(let i = 0; i < this.enemies.length; i++) {
-
 				let enemy = this.enemies[i];
-
-				//console.log(tower.player.id + " " + enemy.player.id);
-
 				if(tower.player.id == enemy.player.id) continue;
-
-				if(is_in_radius(tower, enemy, tower.radius)) {
-					if(tower.targets_set[enemy.id] === undefined) {
+				if (is_in_radius(tower, enemy, tower.radius)) {
+					if (tower.targets_set[enemy.id] === undefined || tower.targets_set[enemy.id] == false) {
 						tower.targets_queue.push(enemy);
 						tower.targets_set[enemy.id] = true;
 					}
-				}else{
-					if(tower.targets_set[enemy.id] === true) {
+				} else {
+					if (tower.targets_set[enemy.id] == true) {
 						tower.targets_set[enemy.id] = false;
 					 	tower.targets_queue.shift();
-					 	--i;
 					}
 				}
+				console.log(tower.targets_queue);
 			}
-			if (tower.targets_queue.length > 0) {
 
+			if (tower.targets_queue.length > 0) {
 				let target = tower.targets_queue[0];
 				tower.fire(target);
 				let angle = get_rotation_angel(tower, tower.targets_queue[0]);
 			 	tower.render_rotated(angle);
-
-
-			}else {
+			} else {
 				tower.render();
 			}
 			tower.update_bullets();
@@ -98,8 +79,7 @@ class GameSession {
 			let enemy = this.enemies[i];
 			enemy.render_rotated(90);
 			enemy.update_motion();
-
-			if (enemy.is_arrive || !enemy.is_alive()) {
+			if (enemy.is_arrive() || !enemy.is_alive()) {
 				this.enemies.splice(i, 1);
 				continue;
 			}
@@ -120,14 +100,14 @@ class GameSession {
 		enemy.resize(ENEMY_HITBOX, ENEMY_HITBOX);
 		enemy.set_sprite(BASIC_ENEMY_SPRITE);
 
-		enemy.set_path(target_path, target_path.length);
+		enemy.set_path(target_path, target_path.length - 1);
 
 		enemy.set_speed(BASIC_ENEMY_SPEED);
 		enemy.set_hp(BASIC_ENEMY_HP);
 
-		this.enemies_id = (++this.enemies_id) % MAX_ACTIVE_ENEMIES;
+		this.enemies_id = (this.enemies_id + 1) % MAX_ACTIVE_ENEMIES;
 
-		enemy.id = this.enemies_id;
+		enemy.set_id(this.enemies_id);	
 
 		this.enemies.push(enemy);
 
