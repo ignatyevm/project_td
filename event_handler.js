@@ -7,8 +7,11 @@ function change_selected_object(select1, select2){
 }
 
 document.getElementById("tb1").addEventListener("click", ()=>{
-	change_selected_object(true, false);
-	towerInfo.value = "tower 1";
+	//if (session.player.money >= BASIC_TOWER_PRICE){
+		change_selected_object(true, false);
+		towerInfo.value = "tower 1";
+	//}
+
 });
 
 document.getElementById("tb2").addEventListener("click", ()=>{
@@ -41,7 +44,7 @@ document.getElementById("sell").addEventListener("click", ()=>{
 		let t = session.towers[i];
 		if (t.to_sell){
 			session.towers.splice(i, 1);
-			delete_tower(tower[i].x, tower[i].y);
+			delete_tower(t.x, t.y);
 		}
 	}
 });
