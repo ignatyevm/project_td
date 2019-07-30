@@ -47,15 +47,19 @@ canvas.addEventListener("click", function(event){
 	if (is_tower_chosen){
 		if (new_map[bY][bX] == 'x'){
 			new_map = set_tower(new_map, bY, bX);
-			session.build_tower(tower_x, tower_y, 0);
+			session.build_tower(tower_x, tower_y);
 			is_tower_chosen = false;
+			
+			let money = document.getElementById("player_budget");
+			money.value = String(Number(money.value) - BASIC_TOWER_PRICE);	
+			session.player.money -= BASIC_TOWER_PRICE;			
 		}
 	}
 	if (is_enemy_chosen){
 		if (Math.abs(event.clientX - BASE_X) < SPRITE_WIDTH &&
 			Math.abs(event.clientY - BASE_Y) < SPRITE_HEIGHT){
-			is_base_chosen = true;
-			alert("base_chosen");
+			session.spawn_enemy(player, bot);
+
 		} 
 	}
 	
@@ -72,17 +76,17 @@ canvas.addEventListener("click", function(event){
 	
 });
 
-function check_tower(ctx){
+function check_tower(drawer, map){
 
-	if (new_map[bY][bX] == 'x' && is_tower_chosen){
-			ctx.fillStyle = 'yellow';
-			ctx.fillRect(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
+	if (map.map_src[bY][bX] == 'x' && is_tower_chosen){
+		drawer.ctx.fillStyle = 'yellow';
+		drawer.ctx.fillRect(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-			ctx.beginPath();
-			ctx.strokeStyle = "red";
-			ctx.arc(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2,  BASIC_TOWER_RADIUS, 0, 2 * Math.PI);
-			ctx.closePath();
-			ctx.stroke();
+		drawer.ctx.beginPath();
+		drawer.ctx.strokeStyle = "red";
+		drawer.ctx.arc(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2,  BASIC_TOWER_RADIUS, 0, 2 * Math.PI);
+		drawer.ctx.closePath();
+		drawer.ctx.stroke();
 	}
 }
 
@@ -90,6 +94,7 @@ function delete_tower(x, y){
 	bX = Math.floor(x / SPRITE_WIDTH);
 	bY = Math.floor(y / SPRITE_HEIGHT);
 	new_map[bY][bX] = 'x';
+
 }
 
 
