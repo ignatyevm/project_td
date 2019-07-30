@@ -102,7 +102,7 @@ class GameSession {
 				}
 		}
 
-		check_tower(this.objects_drawer);
+		check_tower(this.objects_drawer, this.map);
 		for(let tower of this.towers) {
 			/*if (tower.to_sell){
 				game_field_ctx.rect(tower.x, tower.y, SPRITE_WIDTH, SPRITE_HEIGHT);
