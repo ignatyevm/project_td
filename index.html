@@ -10,7 +10,7 @@
 		</div>
 		<div class="game_menu" id="towers" style="position: relative;">
 			<div class="header">
-				<input class="timer" readonly value="00:59">
+				<input id="timer" readonly value="00:59">
 				<output class="round">  round: 1  </output>
 				<output class="game_state">  BUILD   </output>
 				<output class="player_info" id="player_hp"> 20 </output>
@@ -36,7 +36,6 @@
 					<button id="eb3" class="button"> 3 </button>
 				</div>
 				<input class="info" id="enemyInfo" readonly>	
-				<button class="action_button" id="spawn_enemy"> ATTACK </button>
 			</div>
 		</div>
 		<script type="text/javascript" src="constant.js"></script>
@@ -105,8 +104,11 @@
 
 			session.render_map();
 
-			var id_timer1 = setInterval(function(){session.spawn_enemy(0, 1)}, 2000);
-			var id_timer2 = setInterval(function(){session.spawn_enemy(1, 0)}, 2000);
+			//var id_timer1 = setInterval(function(){session.spawn_enemy(player, bot)}, 500);
+			var id_timer2 = setInterval(function(){session.spawn_enemy(bot, player)}, 500);
+
+			session.build_tower(4 * 32, 3 * 32, player);
+			session.build_tower(22 * 32, 23 * 32, player);
 
 			session.render_scene();
 		</script>

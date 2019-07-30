@@ -1,6 +1,9 @@
 function change_selected_object(select1, select2){
 	is_tower_chosen = select1;
 	is_enemy_chosen = select2;
+	for (t of session.towers){
+		t.to_sell = false;
+	}
 }
 
 document.getElementById("tb1").addEventListener("click", ()=>{
@@ -38,14 +41,8 @@ document.getElementById("sell").addEventListener("click", ()=>{
 		let t = session.towers[i];
 		if (t.to_sell){
 			session.towers.splice(i, 1);
+			delete_tower(tower[i].x, tower[i].y);
 		}
 	}
 });
 
-document.getElementById("spawn_enemy").addEventListener("click", ()=>{
-	if (is_base_chosen && is_enemy_chosen){
-		is_enemy_chosen = false;
-		is_base_chosen = false;
-		alert("SPAWN ENEMY");
-	}
-});
