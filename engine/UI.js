@@ -72,17 +72,17 @@ canvas.addEventListener("click", function(event){
 	
 });
 
-function check_tower(ctx){
+function check_tower(drawer, map){
 
-	if (new_map[bY][bX] == 'x' && is_tower_chosen){
-			ctx.fillStyle = 'yellow';
-			ctx.fillRect(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
+	if (map[bY][bX] == 'x' && is_tower_chosen){
+			drawer.ctx.fillStyle = 'yellow';
+			drawer.ctx.fillRect(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
-			ctx.beginPath();
-			ctx.strokeStyle = "red";
-			ctx.arc(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2,  BASIC_TOWER_RADIUS, 0, 2 * Math.PI);
-			ctx.closePath();
-			ctx.stroke();
+			drawer.ctx.beginPath();
+			drawer.ctx.strokeStyle = "red";
+			drawer.ctx.arc(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2,  BASIC_TOWER_RADIUS, 0, 2 * Math.PI);
+			drawer.ctx.closePath();
+			drawer.ctx.stroke();
 	}
 }
 
