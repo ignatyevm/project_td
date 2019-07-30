@@ -10,7 +10,7 @@
 		</div>
 		<div class="game_menu" id="towers" style="position: relative;">
 			<div class="header">
-				<input id="timer" readonly value="00:59">
+				<input id="timer" readonly>
 				<output class="round">  round: 1  </output>
 				<output class="game_state">  BUILD   </output>
 				<output class="player_info" id="player_hp"> 20 </output>
@@ -109,9 +109,10 @@
 
 			session.build_tower(4 * 32, 3 * 32, player);
 			session.build_tower(22 * 32, 23 * 32, player);
-
+			session.start_building();
 			session.render_scene();
 		</script>
 
 	</body>
 </html>
+
