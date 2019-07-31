@@ -7,7 +7,7 @@ function change_selected_object(select1, select2){
 }
 
 document.getElementById("tb1").addEventListener("click", ()=>{
-	if (document.getElementById("player_budget").value >= BASIC_TOWER_PRICE){
+	if (document.getElementById("player_budget").value >= BASIC_TOWER[3][1]){
 		change_selected_object(true, false);
 		towerInfo.value = "tower 1";
 	}
@@ -15,14 +15,14 @@ document.getElementById("tb1").addEventListener("click", ()=>{
 });
 
 document.getElementById("tb2").addEventListener("click", ()=>{
-	if (document.getElementById("player_budget").value >= BASIC_TOWER_PRICE){
+	if (document.getElementById("player_budget").value >= MAGNIT_TOWER[3][1]){
 		change_selected_object(true, false);
 		towerInfo.value = "tower 2";
 	}
 });
 
 document.getElementById("tb3").addEventListener("click", ()=>{
-	if (document.getElementById("player_budget").value >= BASIC_TOWER_PRICE){
+	if (document.getElementById("player_budget").value >= BASIC_TOWER[3][1]){
 		change_selected_object(true, false);
 		towerInfo.value = "tower 3";
 	}
