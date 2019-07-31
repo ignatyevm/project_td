@@ -2,11 +2,11 @@ const MAX_ACTIVE_ENEMIES = 5000;
 const MAX_PLAYER_MONEY = 99999;
 const MAX_ACTIVE_PLAYERS = 4;
 
-const CANVAS_WIDTH = 900
-const CANVAS_HEIGHT = 900;
+const CANVAS_WIDTH = 768;
+const CANVAS_HEIGHT = 768;
 
-const MAP_WIDTH = 25;
-const MAP_HEIGHT = 25;
+const MAP_WIDTH = 24;
+const MAP_HEIGHT = 24;
 
 const SPRITE_WIDTH = 32;
 const SPRITE_HEIGHT = 32;
@@ -27,6 +27,8 @@ const WAR = 2;
 
 const ALIVE = 1;
 const DEAD = 0;
+
+const BACKGROUND_MAP = "sprites/mars/map_sprites/Map.png";
 
 const BASIC_ENEMY_HP = 100;
 const BASIC_ENEMY_SPEED = 1;

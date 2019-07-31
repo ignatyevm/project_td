@@ -1,11 +1,18 @@
 
-let sprites_link = {
-	'x': "sprites/mars/map_sprites/ground.png", 
-	'.': "sprites/mars/map_sprites/straight_road_g.png",
-	',': "sprites/mars/map_sprites/straight_road_v.png",
-	'/': "sprites/mars/map_sprites/top_right_turn.png",
-	'*': "sprites/mars/map_sprites/bottom_right_turn.png",
-	'b': "sprites/mars/map_sprites/main_tower.png",};
+let sprites_link = { 
+	'.': "sprites/mars/map_sprites/road/horizontal_road.png",
+	',': "sprites/mars/map_sprites/road/vertical_road.png",
+	'q': "sprites/mars/map_sprites/road/left_lower_turn.png",
+	'p': "sprites/mars/map_sprites/road/right_lower_turn.png",
+	'b': "sprites/mars/map_sprites/road/right_upper_turn.png",
+	'd': "sprites/mars/map_sprites/road/left_upper_turn.png",
+	'w': "sprites/mars/map_sprites/road/interchange.png",
+	'a': "sprites/mars/map_sprites/road/left_obstacle.png",
+	's': "sprites/mars/map_sprites/road/right_obstacle.png",
+	'e': "sprites/mars/map_sprites/road/upper_obstacle.png",
+	'c': "sprites/mars/map_sprites/road/lower_obstacle.png",
+	'v': "sprites/mars/map_sprites/road/just_road.png",
+};
 
 class Map {
 
@@ -19,16 +26,11 @@ class Map {
 	render() {
 		let local_drawer = this.drawer;
 
-		for(let i = 0; i < this.width; i++) {
-			for(let j = 0; j < this.height; j++) {
-				let sprite = new Image();
-				sprite.onload = function() {
-					local_drawer.render(sprite, j * BLOCK_SIZE, i * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-				}
-               	sprite.src = sprites_link[this.map_src[i][j]];
-			}
-		}
-		
-	}
+		let tmp_image = new Image();
+		tmp_image.src = BACKGROUND_MAP;
 
+		tmp_image.onload = function() {
+			local_drawer.render(tmp_image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		}		
+	}
 }
