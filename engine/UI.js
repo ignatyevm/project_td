@@ -21,7 +21,7 @@ canvas.addEventListener("mousemove", function(event) {
 		tower_x = SPRITE_WIDTH * bX;
 		tower_y = SPRITE_HEIGHT * bY;
 	}
-	for (let t of session.towers){
+	for (let t of game.session.towers){
 		t.selected =
 			Math.abs(t.x + t.width / 2 - x) < t.width / 2 &&
 			Math.abs(t.y + t.height / 2 - y) < t.height / 2;
@@ -47,25 +47,21 @@ canvas.addEventListener("click", function(event){
 	if (is_tower_chosen){
 		if (new_map[bY][bX] == 'x'){
 			new_map = set_tower(new_map, bY, bX);
-			session.build_tower(tower_x, tower_y);
-			is_tower_chosen = false;
-			
-			let money = document.getElementById("player_budget");
-			money.value = String(Number(money.value) - BASIC_TOWER_PRICE);			
+			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.get_personal_id()]);
+			is_tower_chosen = false;		
 		}
 	}
 	if (is_enemy_chosen){
 		if (Math.abs(event.clientX - BASE_X) < SPRITE_WIDTH &&
 			Math.abs(event.clientY - BASE_Y) < SPRITE_HEIGHT){
-			session.spawn_enemy(player, bot);
+			game.session.spawn_enemy(player, bot);
 
 		} 
 	}
 	
-	for (t of session.towers){
+	for (t of game.session.towers){
 		if (t.selected && !t.to_sell){
 			t.to_sell = true;
-			alert("gg");
 			is_tower_to_sell = true;
 		}
 		else{

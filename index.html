@@ -15,7 +15,7 @@
 				<output class="game_state">  BUILD   </output>
 				<output class="player_info" id="player_hp"> 20 </output>
 				<img src="styles/hp.png" id="hp_img">
-				<output class="player_info" id="player_budget"> 2000 </output>
+				<output class="player_info" id="player_budget"> 500 </output>
 				<img src="styles/money.png" id="money_img">
 				<button class="exit"> EXIT </button>
 			</div>
@@ -43,14 +43,14 @@
 		<script type="text/javascript" src="engine/map.js"></script>
 		<script type="text/javascript" src="engine/game_object.js"></script>
 		<script type="text/javascript" src="engine/math_helper.js"></script>
+		<script type="text/javascript" src="engine/UI.js"></script>
+		<script type="text/javascript" src="event_handler.js"></script>
 		<script type="text/javascript" src="enemy.js"></script>
 		<script type="text/javascript" src="tower.js"></script>
-		<script type="text/javascript" src="bullet.js"></script>
-		<script type="text/javascript" src="game_session.js"></script>
-		<script type="text/javascript" src="event_handler.js"></script>
-		<script type="text/javascript" src="engine/UI.js"></script>
+		<script type="text/javascript" src="bullet.js"></script>		
 		<script type="text/javascript" src="player.js"></script>
-	
+		<script type="text/javascript" src="game_session.js"></script>
+		<script type="text/javascript" src="game.js"></script>
 		<script type="text/javascript">
 
 
@@ -82,7 +82,6 @@
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
 			];
-
 			let new_map = map_src.slice();
 
 			let map_ctx = document.getElementById("map").getContext("2d");
@@ -93,24 +92,19 @@
 			let objects_drawer = new Drawer(game_field_ctx, CANVAS_WIDTH, CANVAS_HEIGHT);
 			let meta_drawer = new Drawer(meta_ctx, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-			let session = new GameSession(map_drawer, objects_drawer, meta_drawer);
-			session.set_map(MAP_WIDTH, MAP_HEIGHT, map_src);
-
-			let player = session.add_player(0, 2 * 32);
-			let bot = session.add_player(24 * 32, 22 * 32);
-
-			session.add_path(player, bot, [[19, 2, 2, 0], [19, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]]);
-			session.add_path(bot, player, [[4, 22, -2, 0], [4, 1, 0, -2], [0, 1, -2, 0], [0, 0, 0, 0]]);
-
-			session.render_map();
-
-			//var id_timer1 = setInterval(function(){session.spawn_enemy(player, bot)}, 500);
-			var id_timer2 = setInterval(function(){session.spawn_enemy(bot, player)}, 500);
-
-			session.build_tower(4 * 32, 3 * 32, player);
-			session.build_tower(22 * 32, 23 * 32, player);
-
-			session.render_scene();
+			var game = new Game();
+			game.create_session(map_drawer, objects_drawer, meta_drawer);
+			game.session.set_map(MAP_WIDTH, MAP_HEIGHT, map_src);
+			let player = game.session.add_player(0, 2 * 32);
+			let bot = game.session.add_player(24 * 32, 22 * 32);
+			game.session.set_personal_id(player.id);
+			
+			game.session.add_path(player, bot, [[19, 2, 2, 0], [19, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]]);
+			game.session.add_path(bot, player, [[4, 22, -2, 0], [4, 1, 0, -2], [-1, 1, -2, 0], [0, 0, 0, 0]]);
+			game.session.start_game();
+			game.session.spawn_enemy(bot, player)
+			var id_timer2 = setInterval(function(){game.session.spawn_enemy(bot, player)}, 2000);
+			var id_interval = setInterval(function(){game.session.make_turn()}, 20);
 		</script>
 
 	</body>

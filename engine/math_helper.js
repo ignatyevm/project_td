@@ -47,5 +47,4 @@ function get_rotation_angel(point1, point2){
 	}else{
 		return angle + HALF_PI;
 	}
-
 }

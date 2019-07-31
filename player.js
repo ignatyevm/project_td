@@ -1,10 +1,13 @@
 class Player {
 
-	constructor(id, base_x, base_y, base_hp) {
+	constructor(id, base_x, base_y) {
 		this.id = id;
 		this.base_x = base_x;
 		this.base_y = base_y;
-		this.base_hp = base_hp;
+	}
+
+	set_state(state){
+		this.state = state;
 	}
 
 	set_money(money) {
