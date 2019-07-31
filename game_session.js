@@ -39,9 +39,6 @@ class GameSession {
 	}
 
 	move_objects() {
-		this.objects_drawer.clear();
-		this.meta_drawer.clear();
-
 		for(let i = this.enemies.length - 1; i >= 0; --i) {
 			let enemy = this.enemies[i];
 			let target_index = enemy.target.id;
@@ -94,6 +91,9 @@ class GameSession {
 	}
 
 	render(){
+		this.objects_drawer.clear();
+		this.meta_drawer.clear();
+
 		for (let enemy of this.enemies){
 			enemy.render_rotated(90);
 		}
