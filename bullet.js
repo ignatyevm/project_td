@@ -27,7 +27,7 @@ class Bullet extends GameObject {
 		this.speed = speed;
 	}
 
-	update_motion() {
+	move() {
 		let d = get_distance(this.target, {'x':this.x, 'y':this.y});
 		this.dx = (this.target.x - this.x + ENEMY_HITBOX / 2) / d; 
 		this.dy = (this.target.y - this.y + ENEMY_HITBOX / 2) / d;
