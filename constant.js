@@ -1,4 +1,6 @@
 const MAX_ACTIVE_ENEMIES = 5000;
+const MAX_PLAYER_MONEY = 99999;
+const MAX_ACTIVE_PLAYERS = 4;
 
 const CANVAS_WIDTH = 900
 const CANVAS_HEIGHT = 900;
@@ -19,6 +21,9 @@ const START_PLAYER_MONEY = 500;
 
 const ONLINE = 1;
 const LOCAL = 0;
+
+const BUILDING = 1;
+const WAR = 2;
 
 const ALIVE = 1;
 const DEAD = 0;

@@ -1,7 +1,8 @@
-
+const BUILD_SECONDS = 10;
 class GameSession {
 
 	constructor(map_drawer, objects_drawer, meta_drawer) {
+		this.frames = 0;
 		this.map_drawer = map_drawer;
 		this.objects_drawer = objects_drawer;
 		this.meta_drawer = meta_drawer;
@@ -9,24 +10,52 @@ class GameSession {
 		this.enemies_id = 0;
 		this.players_id = 0;
 		this.interval_id;
-		
+
+		this.state_game = BUILDING;
+		this.build_counter = 60;
+
 		this.enemies = [];
 		this.towers = [];
 		this.players = [];
 
-		this.paths = new Array(2);
+		this.paths = new Array(MAX_ACTIVE_PLAYERS);
 
-		for(let i = 0; i < 2; i++){
-			this.paths[i] = new Array(2);
+		for(let i = 0; i < MAX_ACTIVE_PLAYERS; ++i){
+			this.paths[i] = new Array(MAX_ACTIVE_PLAYERS);
 		}
 
 	}
+
+	change_state(){
+		if (this.state == BUILDING) {
+			disable_menu();
+			this.state = WAR;
+		}
+		else {
+			enable_menu();
+			this.build_counter = 60;
+			this.state = BUILDING;
+		}
+	}
+
+	// start_building(){
+	// 	this.state = BUILDING;
+	// 	this.build_counter = BUILD_SECONDS;
+	// 	this.build_counter_id = window.setInterval(()=>{
+	// 		document.getElementById('timer').value = this.build_counter;
+	// 		this.build_counter--;
+	// 		if (this.build_counter <= 0){
+	// 			this.start_war();
+	// 			window.clearInterval(this.build_counter_id);
+	// 		}
+	// 	}, 1000);
+	// }
 
 	set_map(width, height, map_src) {
 		this.map = new Map(width, height, map_src, this.map_drawer);
 	}
 
-	start_game(){
+	render_map() {
 		this.map.render();
 	}
 
@@ -34,9 +63,17 @@ class GameSession {
 		this.personal_id = id;
 	}
 
-	get_personal_id() {
-		return this.personal_id;
-	}
+	// on_update() {
+	// 	if (this.state == BUILDING){
+	// 		draw_tower_place(this.objects_drawer);
+	// 		for (let t of this.towers){
+	// 			t.render();
+	// 		}
+	// 	}
+	// 	if (this.state == WAR) {
+			
+	// 	}
+	// }
 
 	move_objects() {
 		for(let i = this.enemies.length - 1; i >= 0; --i) {
@@ -56,7 +93,6 @@ class GameSession {
 			enemy.move();
 		}
 
-		check_tower(this.objects_drawer, this.map);
 		for(let tower of this.towers) {
 			for(let i = 0; i < this.enemies.length; i++) {
 				let enemy = this.enemies[i];
@@ -90,7 +126,7 @@ class GameSession {
 		}
 	}
 
-	render(){
+	draw_objects(){
 		this.objects_drawer.clear();
 		this.meta_drawer.clear();
 
@@ -108,7 +144,7 @@ class GameSession {
 
 	make_turn(){
 		this.move_objects();
-		this.render();
+		this.draw_objects();
 	}
 
 	spawn_enemy(source_player, target_player) {

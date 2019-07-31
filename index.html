@@ -10,7 +10,7 @@
 		</div>
 		<div class="game_menu" id="towers" style="position: relative;">
 			<div class="header">
-				<input id="timer" readonly value="00:59">
+				<input id="timer" readonly>
 				<output class="round">  round: 1  </output>
 				<output class="game_state">  BUILD   </output>
 				<output class="player_info" id="player_hp"> 20 </output>
@@ -21,9 +21,9 @@
 			</div>
 			<div class="objects_fields" id="towers_container">
 				<div class="container">
-					<button id="tb1" class="button"> 1 </button>
-					<button id="tb2" class="button"> 2 </button>
-					<button id="tb3" class="button"> 3 </button>
+					<button id="tb1" class="button" style="background: url(sprites/mars/tower_sprites/tower_1/tower1_level_1.png) no-repeat"></button>
+					<button id="tb2" class="button" style="background: url(sprites/mars/tower_sprites/tower_2/magnit_gun_1.png) no-repeat"></button>
+					<button id="tb3" class="button" style="background: url(sprites/mars/tower_sprites/tower_3/aоe_gun_1.png) no-repeat"></button>
 				</div>	
 				<input class="info" id="towerInfo" readonly>
 				<button class="action_button" id="tower_upgrade"> UPGRADE </button>
@@ -31,7 +31,7 @@
 			</div>
 			<div class="objects_fields">
 				<div class="container">
-					<button id="eb1" class="button"> 1 </button>
+					<button id="eb1" class="button" style="background: url(sprites/mars/enemy_sprite/bug_1/bug_1_1.png) no-repeat"></button>
 					<button id="eb2" class="button"> 2 </button>
 					<button id="eb3" class="button"> 3 </button>
 				</div>
@@ -82,6 +82,18 @@
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
 				"xxxxxxxxxxxxxxxxxxxxxxxxx",
 			];
+
+			var buttons = {
+				'tb1': document.getElementById("tb1"),
+				'tb2': document.getElementById("tb2"),
+				'tb3': document.getElementById("tb3"),
+				'eb1': document.getElementById("eb1"),
+				'eb2': document.getElementById("eb2"),
+				'eb3': document.getElementById("eb3"),
+				'ub': document.getElementById("tower_upgrade"),
+				'sb': document.getElementById("sell"),
+			};
+
 			let new_map = map_src.slice();
 
 			let map_ctx = document.getElementById("map").getContext("2d");
@@ -99,13 +111,19 @@
 			let bot = game.session.add_player(24 * 32, 22 * 32);
 			game.session.set_personal_id(player.id);
 			
-			game.session.add_path(player, bot, [[19, 2, 2, 0], [19, 22, 0, 2], [24, 22, 2, 0], [0, 0, 0, 0]]);
-			game.session.add_path(bot, player, [[4, 22, -2, 0], [4, 1, 0, -2], [-1, 1, -2, 0], [0, 0, 0, 0]]);
-			game.session.start_game();
-			game.session.spawn_enemy(bot, player)
-			var id_timer2 = setInterval(function(){game.session.spawn_enemy(bot, player)}, 2000);
+			game.session.add_path(player, bot, [[19, 2, 2, 0], [19, 22, 0, 2], [24, 22, 2, 0],[0, 0, 0, 0]]);
+			game.session.add_path(bot, player, [[4, 22, -2, 0], [4, 1, 0, -2], [-1, 1, -2, 0],[0, 0, 0, 0]]);
+			//game.session.render_map();
+			//game.session.start_building();
+			// game.session.spawn_enemy(bot, player);
+			// game.session.spawn_enemy(bot, player);
+			// game.session.spawn_enemy(bot, player);
+			// game.session.spawn_enemy(bot, player);
+
+			var id_timer2 = setInterval(function(){game.session.spawn_enemy(bot, player)}, 3000);
 			var id_interval = setInterval(function(){game.session.make_turn()}, 20);
 		</script>
 
 	</body>
 </html>
+
