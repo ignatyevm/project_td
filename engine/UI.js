@@ -47,11 +47,11 @@ canvas.addEventListener("click", function(event){
 	if (is_tower_chosen){
 		if (bX < 25 && bY < 25 && new_map[bY][bX] == 'x'){
 			new_map = change_map(new_map, bY, bX, "T");
-			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.personal_id]);
+			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.personal_id], );
 			is_tower_chosen = false;
 			
 			let money = document.getElementById("player_budget");
-			money.value = String(Number(money.value) - BASIC_TOWER_PRICE);			
+			money.value = String(Number(money.value) - BASIC_TOWER[3][0]);			
 		}
 	}
 
@@ -83,7 +83,7 @@ function draw_tower_place(drawer){
 
 		drawer.ctx.beginPath();
 		drawer.ctx.strokeStyle = "red";
-		drawer.ctx.arc(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2,  BASIC_TOWER_RADIUS, 0, 2 * Math.PI);
+		drawer.ctx.arc(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2,  BASIC_TOWER[4][0], 0, 2 * Math.PI);
 		drawer.ctx.closePath();
 		drawer.ctx.stroke();
 	}

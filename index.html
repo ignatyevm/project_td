@@ -115,11 +115,6 @@
 			game.session.add_path(bot, player, [[4, 22, -2, 0], [4, 1, 0, -2], [-1, 1, -2, 0],[0, 0, 0, 0]]);
 			//game.session.render_map();
 			//game.session.start_building();
-			// game.session.spawn_enemy(bot, player);
-			// game.session.spawn_enemy(bot, player);
-			// game.session.spawn_enemy(bot, player);
-			// game.session.spawn_enemy(bot, player);
-
 			var id_timer2 = setInterval(function(){game.session.spawn_enemy(bot, player)}, 3000);
 			var id_interval = setInterval(function(){game.session.make_turn()}, 20);
 		</script>

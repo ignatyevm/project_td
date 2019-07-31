@@ -14,6 +14,7 @@ class Tower extends GameObject {
 		this.meta_drawer = meta_drawer;
 
 		this.rotation_angle = 0;
+		this.lvl = 0;
 		
 		this.selected = false;
 		this.to_sell = false;
@@ -33,16 +34,12 @@ class Tower extends GameObject {
 
 	}
 
-	set_radius(radius) {
-		this.radius = radius;
-	}
-
-	set_damage(damage) {
-		this.damage = damage;
-	}
-
-	set_fire_rate(fire_rate) {
-		this.max_fire_rate = fire_rate * 50;
+	set_properties(){
+		this.set_sprite(BASIC_TOWER[0][this.lvl]);
+		this.damage = BASIC_TOWER[1][this.lvl];
+		this.max_fire_rate = BASIC_TOWER[2][this.lvl] * 50;
+		this.price = BASIC_TOWER[3][this.lvl];
+		this.radius = BASIC_TOWER[4][this.lvl];
 	}
 
 	move_bullets() {

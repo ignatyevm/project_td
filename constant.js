@@ -37,10 +37,18 @@ const BASIC_ENEMY_SPRITE = "sprites/mars/enemy_sprite/bug_1/bug_1_1.png";
 const BASIC_BULLET_SPEED = 10;
 const BASIC_BULLET_SPRITE = "sprites/mars/bullets/res_bullet.png";
 
-const BASIC_TOWER_DAMAGE = 25;
-const BASIC_TOWER_FIRE_RATE = 0.25;
-const BASIC_TOWER_PRICE = 100;
-const BASIC_TOWER_RADIUS = 144;
-const BASIC_TOWER_SPRITE_LVL_1 = "sprites/mars/tower_sprites/tower_1/tower1_level_1.png";
-const BASIC_TOWER_SPRITE_LVL_2 = "sprites/mars/tower_sprites/tower_1/tower1_level_2.png";
-const BASIC_TOWER_SPRITE_LVL_3 = "sprites/mars/tower_sprites/tower_1/tower1_level_3.png";
+const BASIC_TOWER = [["sprites/mars/tower_sprites/tower_1/tower1_level_1.png",
+					  "sprites/mars/tower_sprites/tower_1/tower1_level_2.png",
+					  "sprites/mars/tower_sprites/tower_1/tower1_level_3.png"],
+					 [25, 50, 100],
+					 [0.5, 0.4, 0.3],
+					 [100, 200, 300],
+					 [100, 110, 120]];
+
+const MAGNIT_TOWER = [["sprites/mars/tower_sprites/tower_2/magnit_gun_1.png",
+					  "sprites/mars/tower_sprites/tower_2/magnit_gun_2.png",
+					  "sprites/mars/tower_sprites/tower_2/magnit_gun_3.png"],
+					 [20, 60, 120],
+					 [50, 40, 30],
+					 [150, 200, 300],
+					 [100, 110, 120]];

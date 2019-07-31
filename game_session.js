@@ -163,13 +163,10 @@ class GameSession {
 		this.enemies.push(enemy);
 	}
 
-	build_tower(x, y, player) {
+	build_tower(x, y, player, type) {
 		let tower = new Tower(x, y, player, this.objects_drawer, this.meta_drawer);
-		tower.set_sprite(BASIC_TOWER_SPRITE_LVL_1);
-		tower.set_fire_rate(BASIC_TOWER_FIRE_RATE);
-		tower.set_damage(BASIC_TOWER_DAMAGE);
-		tower.set_radius(BASIC_TOWER_RADIUS);
-		on_player_spend_money(player, BASIC_TOWER_PRICE, this.personal_id);
+		tower.set_properties();
+		on_player_spend_money(player, tower.price, this.personal_id);
 		this.towers.push(tower);
 	}
 
