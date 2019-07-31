@@ -1,12 +1,24 @@
 class Enemy extends GameObject {
-    constructor(x, y, player, drawer) {
+    constructor(x, y, player, target, drawer) {
         super(x, y, drawer);
         this.speed = 1;
         this.current_point_index = 0;
-        this.is_arrive = false;
         this.in_radius = false;
         this.sprite_type = 0;
         this.player = player;
+        this.target = target;
+    }
+
+    set_damage(damage) {
+        this.damage = damage
+    }
+
+    set_price(price){
+        this.price = price;
+    }
+
+    set_id(id){
+        this.id = id;
     }
 
     set_speed(speed) {
@@ -22,18 +34,20 @@ class Enemy extends GameObject {
         this.path_len = path_len;
     }
 
-    take_damage(damage){
+    take_damage(damage) {
         this.hp -= damage;
     }
 
-    is_alive(){
+    is_alive() {
         return this.hp > 0;
     }
 
-    update_motion() {
-        
-        if (this.current_point_index == this.path_len) {
-            this.is_arrive = true;
+    is_arrive() {
+        return this.current_point_index == this.path_len
+    }
+
+    move() {
+        if (this.is_arrive()) {
             return;
         }
 
@@ -47,9 +61,4 @@ class Enemy extends GameObject {
         this.x += point[2] * this.speed;
         this.y += point[3] * this.speed;
     }
-
-    destroy() {
-
-    }
 }
-
