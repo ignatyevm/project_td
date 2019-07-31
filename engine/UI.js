@@ -44,7 +44,7 @@ function set_tower(map, y, x, ch){
 
 canvas.addEventListener("click", function(event){ 
 	if (is_tower_chosen){
-		if (bX < 25 && bY < 25 && new_map[bY][bX] == 'x'){
+		if (bX < 24 && bY < 24 && new_map[bY][bX] == 'x'){
 			new_map = set_tower(new_map, bY, bX, "T");
 			session.build_tower(tower_x, tower_y);
 			is_tower_chosen = false;
@@ -78,7 +78,7 @@ canvas.addEventListener("click", function(event){
 
 function draw_tower_place(drawer){
 
-	if (bX < 25 && bY < 25 && new_map[bY][bX] == 'x' && is_tower_chosen){
+	if (bX < 24 && bY < 24 && new_map[bY][bX] == 'x' && is_tower_chosen){
 		drawer.ctx.fillStyle = 'yellow';
 		drawer.ctx.fillRect(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
 
