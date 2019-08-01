@@ -23,8 +23,8 @@ canvas.addEventListener("mousemove", function(event) {
 	} 
 	for (let t of game.session.towers){ 
 	t.selected = 
-	Math.abs(t.x + t.width / 2 - x) < t.width / 2 && 
-	Math.abs(t.y + t.height / 2 - y) < t.height / 2; 
+		Math.abs(t.x + t.width / 2 - x) < t.width / 2 && 
+		Math.abs(t.y + t.height / 2 - y) < t.height / 2; 
 	} 
 }); 
 
@@ -46,20 +46,18 @@ canvas.addEventListener("click", function(event){
 	if (is_tower_chosen){ 
 		if (bX < 25 && bY < 25 && new_map[bY][bX] == 'x'){ 
 			new_map = change_map(new_map, bY, bX, "T"); 
-			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.personal_id], ); 
-			is_tower_chosen = false; 
-
-			let money = document.getElementById("player_budget"); 
-			money.value = String(Number(money.value) - BASIC_TOWER[3][0]); 
+			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.personal_id], type); 
+			is_tower_chosen = false;
 		} 
 	} 
+	//is_tower_chosen = false;
 	for (t of game.session.towers){ 
-		if (t.selected && !t.to_sell && !is_tower_chosen){ 
-			t.to_sell = true; 
-			is_tower_to_sell = true; 
+		if (t.selected && !is_tower_chosen){
+			alert("gg"); 
+			t.clicked = true; 
 		} 
 		else{ 
-			t.to_sell = false; 
+			t.clicked = false; 
 		} 
 	} 
 	if (is_enemy_chosen && game.session.state == BUILDING){ 
@@ -74,21 +72,16 @@ canvas.addEventListener("click", function(event){
 function draw_tower_place(drawer){ 
 
 	if (bX < 25 && bY < 25 && bX >= 0 && bY >= 0 && new_map[bY][bX] == 'x' && is_tower_chosen){ 
-		drawer.ctx.fillStyle = 'yellow'; 
-		drawer.ctx.fillRect(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT); 
-
-		drawer.ctx.beginPath(); 
-		drawer.ctx.strokeStyle = "red"; 
-		drawer.ctx.arc(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2, BASIC_TOWER[4][0], 0, 2 * Math.PI); 
-		drawer.ctx.closePath(); 
-		drawer.ctx.stroke(); 
+		drawer.render_square(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
+		drawer.render_circle(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2, radius);
 	} 
 } 
 
 function delete_tower(x, y){ 
 	bX = Math.floor(x / SPRITE_WIDTH); 
 	bY = Math.floor(y / SPRITE_HEIGHT); 
-	//new_map[bY][bX] = 'x'; 
 	new_map = change_map(new_map, bY, bX, 'x'); 
+	bX = -50;
+	bY = -50;
 
 }

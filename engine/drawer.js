@@ -36,4 +36,12 @@ class Drawer {
 		this.ctx.fillRect(x, y, width, height);
 	}
 
+	highlight_tower(x,y,width,height){
+		this.ctx.beginPath();
+		this.ctx.rect(x, y, width, height);
+		this.ctx.closePath();
+		this.ctx.stroke();
+
+	}
+
 }
