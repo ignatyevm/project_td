@@ -1,13 +1,5 @@
 
-let sprites_link = {
-	'x': "sprites/mars/map_sprites/ground.png", 
-	'.': "sprites/mars/map_sprites/straight_road_g.png",
-	',': "sprites/mars/map_sprites/straight_road_v.png",
-	'/': "sprites/mars/map_sprites/top_right_turn.png",
-	'*': "sprites/mars/map_sprites/bottom_right_turn.png",
-	'b': "sprites/mars/map_sprites/main_tower.png",};
-
-class Map {
+class GameMap {
 
 	constructor(width, height, map_src, drawer){
 		this.width = width

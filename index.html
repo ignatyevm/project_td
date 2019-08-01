@@ -94,6 +94,9 @@
 				'sb': document.getElementById("sell"),
 			};
 
+			let frames = 0;
+			let timer = document.getElementById('timer')
+
 			let new_map = map_src.slice();
 
 			let map_ctx = document.getElementById("map").getContext("2d");
@@ -110,13 +113,14 @@
 			let player = game.session.add_player(0, 2 * 32);
 			let bot = game.session.add_player(24 * 32, 22 * 32);
 			game.session.set_personal_id(player.id);
-			
+
 			game.session.add_path(player, bot, [[19, 2, 2, 0], [19, 22, 0, 2], [24, 22, 2, 0],[0, 0, 0, 0]]);
 			game.session.add_path(bot, player, [[4, 22, -2, 0], [4, 1, 0, -2], [-1, 1, -2, 0],[0, 0, 0, 0]]);
-			//game.session.render_map();
-			//game.session.start_building();
-			var id_timer2 = setInterval(function(){game.session.spawn_enemy(bot, player)}, 3000);
-			var id_interval = setInterval(function(){game.session.make_turn()}, 20);
+
+			game.session.spawn_enemy(bot, player);
+			game.session.spawn_enemy(bot, player);
+
+			game.session.launch_session();
 		</script>
 
 	</body>

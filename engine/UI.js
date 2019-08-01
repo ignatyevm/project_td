@@ -48,10 +48,7 @@ canvas.addEventListener("click", function(event){
 		if (bX < 25 && bY < 25 && new_map[bY][bX] == 'x'){
 			new_map = change_map(new_map, bY, bX, "T");
 			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.personal_id], );
-			is_tower_chosen = false;
-			
-			let money = document.getElementById("player_budget");
-			money.value = String(Number(money.value) - BASIC_TOWER[3][0]);			
+			is_tower_chosen = false;		
 		}
 	}
 
@@ -97,4 +94,14 @@ function delete_tower(x, y){
 
 }
 
+function enable_buttons(){
+	for (let key in buttons){
+		buttons[key].disabled = false;
+	}
+}
 
+function disable_buttons(){
+	for (let key in buttons){
+		buttons[key].disabled = true;
+	}	
+}

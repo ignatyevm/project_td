@@ -11,25 +11,27 @@ class Bullet extends GameObject {
  		this.target = target;
 
         this.resize(5, 5);
-
-		let d = get_distance(this.target, this.source);
-
-		this.dx = (this.target.x - this.source.x) / d; 
-		this.dy = (this.target.y - this.source.y) / d;
+		
+		let d = get_distance(this.target, {'x':this.x, 'y':this.y});
+		this.dx = (this.target.x - this.x + ENEMY_HITBOX / 2) / d; 
+		this.dy = (this.target.y - this.y + ENEMY_HITBOX / 2) / d;
 		
 	}
-
-	set_damage(damage){
-		this.damage = damage;
-	}
-
 	set_speed(speed) {
 		this.speed = speed;
 	}
 
 	move() {
+		let d = get_distance(this.target, {'x':this.x, 'y':this.y});
+		this.dx = (this.target.x - this.x + ENEMY_HITBOX / 2) / d; 
+		this.dy = (this.target.y - this.y + ENEMY_HITBOX / 2) / d;
 		this.x += this.dx * this.speed;
 		this.y += this.dy * this.speed;
 	}
+}
 
+class MagnetBullet extends Bullet {
+	constructor(source, target, drawer){
+		super(source, target, drawer);
+	}
 }

@@ -9,24 +9,13 @@ class Enemy extends GameObject {
         this.target = target;
     }
 
-    set_damage(damage) {
-        this.damage = damage
-    }
-
-    set_price(price){
-        this.price = price;
-    }
-
-    set_id(id){
+    set_properties(id){
+        this.set_sprite(BASIC_ENEMY[0]);
+        this.hp = BASIC_ENEMY[1];
+        this.speed = BASIC_ENEMY[2];
+        this.damage = BASIC_ENEMY[3];
+        this.price = BASIC_ENEMY[4];
         this.id = id;
-    }
-
-    set_speed(speed) {
-        this.speed = speed;
-    }
-
-    set_hp(hp) {
-        this.hp = hp;
     }
 
     set_path(path, path_len) {
@@ -52,7 +41,6 @@ class Enemy extends GameObject {
         }
 
         let point = this.path[this.current_point_index];
-
         if(Math.floor((this.x - BLOCK_SIZE / 4 + BLOCK_SIZE / 8)  / BLOCK_SIZE) == point[0] && Math.floor((this.y - BLOCK_SIZE / 4 - BLOCK_SIZE / 8) / BLOCK_SIZE)  == point[1]) {
             this.current_point_index++;
             point = this.path[this.current_point_index];
