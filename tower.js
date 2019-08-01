@@ -46,10 +46,7 @@ class Tower extends GameObject {
 		for(let i = 0; i < this.bullets.length; i) {
 			let target = this.bullets[i].target;
 			let bullet_point = [this.bullets[i].x, this.bullets[i].y];
-			let enemy_box = [[target.x, target.y + ENEMY_HITBOX], 
-							 [target.x + ENEMY_HITBOX, target.y + ENEMY_HITBOX],
-			                 [target.x + ENEMY_HITBOX, target.y],
-			                 [target.x, target.y]];
+			let enemy_box = [target.x, target.y];
 			if (is_in_square(enemy_box, bullet_point)) {
 				target.take_damage(this.bullets[i].damage);
 				if (this.targets_queue.length > 0){
