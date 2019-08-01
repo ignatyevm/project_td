@@ -49,7 +49,7 @@ class GameSession {
 		this.interval_id = window.setInterval(()=>{
 			--this.build_counter;
 			timer.value = this.build_counter;
-			draw_tower_place(this.objects_drawer);
+			//draw_tower_place(this.objects_drawer);
 			if (this.build_counter == 0){
 				this.change_state(WAR);
 				this.is_interval_launch = false;
