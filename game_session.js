@@ -26,6 +26,8 @@ class GameSession {
 
 	}
 
+
+
 	change_state(){
 		if (this.state == BUILDING) {
 			disable_menu();
@@ -129,12 +131,15 @@ class GameSession {
 	draw_objects(){
 		this.objects_drawer.clear();
 		this.meta_drawer.clear();
-
+		draw_tower_place(this.objects_drawer);
 		for (let enemy of this.enemies){
 			enemy.render_rotated(90);
 		}
 
 		for (let tower of this.towers){
+			if (tower.clicked){
+				tower.to_highlight(tower.x, tower.y, SPRITE_WIDTH, SPRITE_HEIGHT);
+			}
 			for (let bullet of tower.bullets){
 				bullet.render();
 			}
@@ -164,7 +169,7 @@ class GameSession {
 	}
 
 	build_tower(x, y, player, type) {
-		let tower = new Tower(x, y, player, this.objects_drawer, this.meta_drawer);
+		let tower = new Tower(x, y, player, this.objects_drawer, this.meta_drawer, type);
 		tower.set_properties();
 		on_player_spend_money(player, tower.price, this.personal_id);
 		this.towers.push(tower);
