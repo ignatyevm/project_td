@@ -38,5 +38,4 @@ class GameObject {
 	render_rotated(degrees){
 		this.drawer.render_rotated(this.sprite, this.x, this.y, this.width, this.height, degrees);
 	}
-
 }

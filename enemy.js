@@ -7,6 +7,7 @@ class Enemy extends GameObject {
         this.sprite_type = 0;
         this.player = player;
         this.target = target;
+        this.animation = BASIC_ANIMATION_SPEED;
     }
 
     set_properties(id){
@@ -40,8 +41,13 @@ class Enemy extends GameObject {
             return;
         }
 
-        if (frames % 30 == 0) this.set_sprite(BASIC_ENEMY[1]);
-        else if (this.sprite != BASIC_ENEMY[0]) this.set_sprite(BASIC_ENEMY[0]);
+        if (frames == this.animation) {
+            this.set_sprite(BASIC_ENEMY[1]);
+        }
+        else if (frames == this.animation + BASIC_ANIMATION_SPEED) {
+            this.set_sprite(BASIC_ENEMY[0]);
+            this.animation += BASIC_ANIMATION_SPEED * 2;
+        }
 
         let point = this.path[this.current_point_index];
         if(Math.floor((this.x - BLOCK_SIZE / 4 + BLOCK_SIZE / 8)  / BLOCK_SIZE) == point[0] && Math.floor((this.y - BLOCK_SIZE / 4 - BLOCK_SIZE / 8) / BLOCK_SIZE)  == point[1]) {

@@ -166,7 +166,8 @@ class GameSession {
 		this.meta_drawer.clear();
 		
 		for (let enemy of this.enemies){
-			enemy.render_rotated(90);
+		
+			enemy.render();
 		}
 
 		for (let tower of this.towers){
