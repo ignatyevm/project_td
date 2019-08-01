@@ -1,8 +1,10 @@
 class Tower extends GameObject {
 	
-	constructor(x, y, player, drawer, meta_drawer) {
+	constructor(x, y, player, drawer, meta_drawer, type) {
 
 		super(x, y, drawer);
+
+		this.type = type;
 
 		this.x = x;
 		this.y = y;
@@ -17,7 +19,7 @@ class Tower extends GameObject {
 		this.lvl = 0;
 		
 		this.selected = false;
-		this.to_sell = false;
+		this.clicked = false;
 
 		this.player = player;
 
@@ -34,12 +36,20 @@ class Tower extends GameObject {
 
 	}
 
+	set_id(){
+		this.id = id;
+	}
+
 	set_properties(){
-		this.set_sprite(BASIC_TOWER[0][this.lvl]);
-		this.damage = BASIC_TOWER[1][this.lvl];
-		this.max_fire_rate = BASIC_TOWER[2][this.lvl] * 50;
-		this.price = BASIC_TOWER[3][this.lvl];
-		this.radius = BASIC_TOWER[4][this.lvl];
+		this.set_sprite(this.type[0][this.lvl]);
+		this.damage = this.type[1][this.lvl];
+		this.max_fire_rate = this.type[2][this.lvl] * 50;
+		this.price = this.type[3][this.lvl];
+		this.radius = this.type[4][this.lvl];
+	}
+
+	to_highlight(){
+		this.drawer.highlight_tower(this.x, this.y, this.width, this.height);
 	}
 
 	move_bullets() {
