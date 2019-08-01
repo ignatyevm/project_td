@@ -1,14 +1,6 @@
-class Tower extends GameObject {
-	
+class Tower extends GameObject{
 	constructor(x, y, player, drawer, meta_drawer) {
-
 		super(x, y, drawer);
-
-		this.x = x;
-		this.y = y;
-
-		this.width = SPRITE_WIDTH;
-		this.height = SPRITE_HEIGHT;
 
 		this.drawer = drawer;
 		this.meta_drawer = meta_drawer;
@@ -17,41 +9,44 @@ class Tower extends GameObject {
 		this.lvl = 0;
 		
 		this.selected = false;
-		this.to_sell = false;
+		this.clicked = false;
 
 		this.player = player;
 
-		this.bullets = [];
-
-		// 50 - 1s
-		// 100 - 2s
-		// 25 - 0.5.s
 		this.max_fire_rate = 1;
 		this.current_fire_rate = 0;
 
+		this.bullets = [];
 		this.targets_set = [];
 		this.targets_queue = [];
 
 	}
 
+	set_id(){
+		this.id = id;
+	}
+
 	set_properties(){
-		this.set_sprite(BASIC_TOWER[0][this.lvl]);
-		this.damage = BASIC_TOWER[1][this.lvl];
-		this.max_fire_rate = BASIC_TOWER[2][this.lvl] * 50;
-		this.price = BASIC_TOWER[3][this.lvl];
-		this.radius = BASIC_TOWER[4][this.lvl];
+		if (this.lvl < 2) {
+			this.set_sprite(BASIC_TOWER[0][this.lvl]);
+			this.damage = BASIC_TOWER[1][this.lvl];
+			this.max_fire_rate = BASIC_TOWER[2][this.lvl] * 50;
+			this.price = BASIC_TOWER[3][this.lvl];
+			this.radius = BASIC_TOWER[4][this.lvl];
+		}
+	}
+
+	to_highlight(){
+		this.drawer.highlight_tower(this.x, this.y, this.width, this.height);
 	}
 
 	move_bullets() {
 		for(let i = 0; i < this.bullets.length; i) {
 			let target = this.bullets[i].target;
 			let bullet_point = [this.bullets[i].x, this.bullets[i].y];
-			let enemy_box = [[target.x, target.y + ENEMY_HITBOX], 
-							 [target.x + ENEMY_HITBOX, target.y + ENEMY_HITBOX],
-			                 [target.x + ENEMY_HITBOX, target.y],
-			                 [target.x, target.y]];
+			let enemy_box = [target.x, target.y];
 			if (is_in_square(enemy_box, bullet_point)) {
-				target.take_damage(this.bullets[i].damage);
+				target.take_damage(this.bullets[i].source.damage);
 				if (this.targets_queue.length > 0){
 					if (!target.is_alive() && target.id === this.targets_queue[0].id){
 						this.targets_queue.shift();
@@ -66,9 +61,8 @@ class Tower extends GameObject {
 	}
 
 	fire(target) {
-		if(this.current_fire_rate % this.max_fire_rate == 0) {
+		if (this.current_fire_rate % this.max_fire_rate == 0) {
 			let bullet = new Bullet(this, target, this.drawer);
-			bullet.set_damage(this.damage);
 			bullet.set_sprite(BASIC_BULLET_SPRITE);
 			bullet.set_speed(BASIC_BULLET_SPEED);
 			this.bullets.push(bullet);
@@ -83,4 +77,37 @@ class Tower extends GameObject {
 			this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
 	}
 
+	clear_bullets() {
+		while(this.bullets.length != 0) {
+			this.bullets.pop();
+		}
+	}
+}
+
+class MagnetTower extends Tower{
+	constructor(x, y, player, drawer, meta_drawer){
+		super(x, y, player, drawer, meta_drawer);
+	}
+
+	set_properties(){
+		this.set_sprite(BASIC_TOWER[0][this.lvl]);
+		this.damage = BASIC_TOWER[1][this.lvl];
+		this.max_fire_rate = BASIC_TOWER[2][this.lvl] * 50;
+		this.price = BASIC_TOWER[3][this.lvl];
+		this.radius = BASIC_TOWER[4][this.lvl];
+	}
+}
+
+class AOETower extends Tower{
+	constructor(x, y, player, drawer, meta_drawer){MAGNIT_TOWER
+		super(x, y, player, drawer, MAGNIT_TOWER);
+	}
+
+	set_properties(){
+		this.set_sprite(MAGNIT_TOWER[0][this.lvl]);
+		this.damage = MAGNIT_TOWER[1][this.lvl];
+		this.max_fire_rate = MAGNIT_TOWER[2][this.lvl] * 50;
+		this.price = MAGNIT_TOWER[3][this.lvl];
+		this.radius = MAGNIT_TOWER[4][this.lvl];
+	}	
 }

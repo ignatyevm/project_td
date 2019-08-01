@@ -1,8 +1,7 @@
-const BUILD_SECONDS = 10;
+
 class GameSession {
 
 	constructor(map_drawer, objects_drawer, meta_drawer) {
-		this.frames = 0;
 		this.map_drawer = map_drawer;
 		this.objects_drawer = objects_drawer;
 		this.meta_drawer = meta_drawer;
@@ -11,48 +10,96 @@ class GameSession {
 		this.players_id = 0;
 		this.interval_id;
 
-		this.state_game = BUILDING;
-		this.build_counter = 60;
+		this.game_state = BUILDING;
+		this.build_counter = BUILD_SECONDS;
 
 		this.enemies = [];
 		this.towers = [];
 		this.players = [];
+
+		this.is_interval_launch = false;
 
 		this.paths = new Array(MAX_ACTIVE_PLAYERS);
 
 		for(let i = 0; i < MAX_ACTIVE_PLAYERS; ++i){
 			this.paths[i] = new Array(MAX_ACTIVE_PLAYERS);
 		}
-
 	}
 
-	change_state(){
-		if (this.state == BUILDING) {
-			disable_menu();
-			this.state = WAR;
+	is_gameover() {
+		let count = 0;
+		for (let player of this.players){
+			if (!player.is_dead())
+				++count;
 		}
-		else {
-			enable_menu();
-			this.build_counter = 60;
-			this.state = BUILDING;
+		if (count > 1)
+			return false;
+		return true;
+	}
+
+	change_state(state) {
+		this.game_state = state;
+		if (this.game_state == BUILDING)
+			enable_buttons();
+		else
+			disable_buttons();
+	}
+
+	launch_timer(){
+		this.interval_id = window.setInterval(()=>{
+			--this.build_counter;
+			timer.value = this.build_counter;
+			//draw_tower_place(this.objects_drawer);
+			if (this.build_counter == 0){
+				this.change_state(WAR);
+				this.is_interval_launch = false;
+				window.clearInterval(this.interval_id);
+				this.launch_session()
+			}
+
+		}, 1000);
+	}
+
+	launch_animation(){
+		this.interval_id = setInterval(()=>{
+			this.move_objects();
+			this.draw_objects();
+			++frames;
+
+			if (this.enemies.length == 0){
+
+				this.objects_drawer.clear();
+				for (let tower of this.towers){
+					tower.clear_bullets();
+					tower.render();
+				}
+				
+				this.is_interval_launch = false;
+				this.change_state(BUILDING);			
+				clearInterval(this.interval_id);
+				this.launch_session();
+			}
+		}, 20);
+	}
+
+	start_building_phase(){
+		this.build_counter = BUILD_SECONDS;
+		if (!this.is_interval_launch){
+			this.launch_timer();
+			this.is_interval_launch = true;
+			frames = 0;
 		}
 	}
 
-	// start_building(){
-	// 	this.state = BUILDING;
-	// 	this.build_counter = BUILD_SECONDS;
-	// 	this.build_counter_id = window.setInterval(()=>{
-	// 		document.getElementById('timer').value = this.build_counter;
-	// 		this.build_counter--;
-	// 		if (this.build_counter <= 0){
-	// 			this.start_war();
-	// 			window.clearInterval(this.build_counter_id);
-	// 		}
-	// 	}, 1000);
-	// }
+	start_war_phase(){
+		if (!this.is_interval_launch){ 
+			this.launch_animation()
+			this.is_interval_launch = true;
+		}
+	}
 
 	set_map(width, height, map_src) {
-		this.map = new Map(width, height, map_src, this.map_drawer);
+		this.map = new GameMap(width, height, map_src, this.map_drawer);
 	}
 
 	render_map() {
@@ -62,18 +109,6 @@ class GameSession {
 	set_personal_id(id) {
 		this.personal_id = id;
 	}
-
-	// on_update() {
-	// 	if (this.state == BUILDING){
-	// 		draw_tower_place(this.objects_drawer);
-	// 		for (let t of this.towers){
-	// 			t.render();
-	// 		}
-	// 	}
-	// 	if (this.state == WAR) {
-			
-	// 	}
-	// }
 
 	move_objects() {
 		for(let i = this.enemies.length - 1; i >= 0; --i) {
@@ -129,12 +164,15 @@ class GameSession {
 	draw_objects(){
 		this.objects_drawer.clear();
 		this.meta_drawer.clear();
-
+		
 		for (let enemy of this.enemies){
 			enemy.render_rotated(90);
 		}
 
 		for (let tower of this.towers){
+			if (tower.clicked){
+				tower.to_highlight(tower.x, tower.y, SPRITE_WIDTH, SPRITE_HEIGHT);
+			}
 			for (let bullet of tower.bullets){
 				bullet.render();
 			}
@@ -142,29 +180,19 @@ class GameSession {
 		}
 	}
 
-	make_turn(){
-		this.move_objects();
-		this.draw_objects();
-	}
-
 	spawn_enemy(source_player, target_player) {
 		let target_path = this.paths[source_player.id][target_player.id];
 		let enemy = new Enemy(source_player.base_x + BLOCK_SIZE / 4, source_player.base_y + BLOCK_SIZE / 4 + BLOCK_SIZE / 8, source_player, target_player,objects_drawer);
 		this.enemies_id = (this.enemies_id + 1) % MAX_ACTIVE_ENEMIES;
-		enemy.set_id(this.enemies_id);
 		enemy.resize(ENEMY_HITBOX, ENEMY_HITBOX);
-		enemy.set_sprite(BASIC_ENEMY_SPRITE);
 		enemy.set_path(target_path, target_path.length - 1);
-		enemy.set_speed(BASIC_ENEMY_SPEED);
-		enemy.set_hp(BASIC_ENEMY_HP);
-		enemy.set_damage(BASIC_ENEMY_DAMAGE);
-		enemy.set_price(BASIC_ENEMY_PRICE);
-		on_player_spend_money(source_player, BASIC_ENEMY_PRICE, this.personal_id);
+		enemy.set_properties(this.enemies_id);
+		on_player_spend_money(source_player, enemy.price, this.personal_id);
 		this.enemies.push(enemy);
 	}
 
 	build_tower(x, y, player, type) {
-		let tower = new Tower(x, y, player, this.objects_drawer, this.meta_drawer);
+		let tower = new Tower(x, y, player, this.objects_drawer, this.meta_drawer, type);
 		tower.set_properties();
 		on_player_spend_money(player, tower.price, this.personal_id);
 		this.towers.push(tower);
@@ -182,5 +210,20 @@ class GameSession {
 	add_path(from_player, to_player, path){
 		this.paths[from_player.id][to_player.id] = path;
 	}
+
+	launch_session(){
+		if (this.game_state == BUILDING) {
+			this.start_building_phase();
+		}
+		else {
+			//todo SendPackage from Firebase
+			//todo GetPackage from Firebase
+			this.start_war_phase();
+		}
+		if (this.is_gameover()){
+			clearInterval(this.session_intervar);
+		}
+	}
+
 
 }

@@ -19,6 +19,8 @@ const HALF_PI = 90;
 const START_PLAYER_HP = 20;
 const START_PLAYER_MONEY = 500;
 
+const BUILD_SECONDS = 10;
+
 const ONLINE = 1;
 const LOCAL = 0;
 
@@ -30,14 +32,18 @@ const DEAD = 0;
 
 const BACKGROUND_MAP = "sprites/mars/map_sprites/Map.png";
 
-const BASIC_ENEMY_HP = 100;
-const BASIC_ENEMY_SPEED = 1;
-const BASIC_ENEMY_DAMAGE = 1;
-const BASIC_ENEMY_PRICE = 50;
-const BASIC_ENEMY_SPRITE = "sprites/mars/enemy_sprite/bug_1/bug_1_1.png";
-
-const BASIC_BULLET_SPEED = 10;
+const BASIC_BULLET_SPEED = 5;
 const BASIC_BULLET_SPRITE = "sprites/mars/bullets/res_bullet.png";
+
+//FIRE RATE
+// 50 - 1s
+// 100 - 2s
+// 25 - 0.5.s
+
+const BASIC_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_1_1.png",
+					 "sprites/mars/enemy_sprite/bugs/bug_1_2.png",
+					 1, 0.5, 50, 100];
+const ANT_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_2_1.png"];
 
 const BASIC_TOWER = [["sprites/mars/tower_sprites/tower_1/tower1_level_1.png",
 					  "sprites/mars/tower_sprites/tower_1/tower1_level_2.png",
@@ -54,3 +60,12 @@ const MAGNIT_TOWER = [["sprites/mars/tower_sprites/tower_2/magnit_gun_1.png",
 					 [50, 40, 30],
 					 [150, 200, 300],
 					 [100, 110, 120]];
+
+const AOE_TOWER = [["sprites/mars/tower_sprites/tower_2/magnit_gun_1.png",
+					  "sprites/mars/tower_sprites/tower_2/magnit_gun_2.png",
+					  "sprites/mars/tower_sprites/tower_2/magnit_gun_3.png"],
+					 [50, 150, 300],
+					 [50, 40, 30],
+					 [150, 200, 300],
+					 [100, 110, 120],
+					 [30, 40, 50]];

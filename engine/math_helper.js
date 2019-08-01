@@ -18,10 +18,14 @@ function get_distance(point1, point2) {
 }
 
 function is_in_square(square, point) {
-	let intersection_1 = (square[1][0] - square[0][0]) * (point[1] - square[0][1]) - (square[1][1] - square[0][1]) * (point[0] - square[0][0]);
-	let intersection_2 = (square[2][0] - square[1][0]) * (point[1] - square[1][1]) - (square[2][1] - square[1][1]) * (point[0] - square[1][0]);
-	let intersection_3 = (square[3][0] - square[2][0]) * (point[1] - square[2][1]) - (square[3][1] - square[2][1]) * (point[0] - square[2][0]);
-	let intersection_4 = (square[0][0] - square[3][0]) * (point[1] - square[3][1]) - (square[0][1] - square[3][1]) * (point[0] - square[3][0]);
+	let target = [[square[0], square[1] + ENEMY_HITBOX], 
+				 [square[0] + ENEMY_HITBOX, square[1] + ENEMY_HITBOX],
+            	 [square[0] + ENEMY_HITBOX, square[1]],
+			     [square[0], square[1]]];
+	let intersection_1 = (target[1][0] - target[0][0]) * (point[1] - target[0][1]) - (target[1][1] - target[0][1]) * (point[0] - target[0][0]);
+	let intersection_2 = (target[2][0] - target[1][0]) * (point[1] - target[1][1]) - (target[2][1] - target[1][1]) * (point[0] - target[1][0]);
+	let intersection_3 = (target[3][0] - target[2][0]) * (point[1] - target[2][1]) - (target[3][1] - target[2][1]) * (point[0] - target[2][0]);
+	let intersection_4 = (target[0][0] - target[3][0]) * (point[1] - target[3][1]) - (target[0][1] - target[3][1]) * (point[0] - target[3][0]);
 
 	 return ((intersection_1 >= 0 && intersection_2 >= 0 && intersection_3 >= 0 && intersection_4 >= 0) || 
 		(intersection_1 < 0 && intersection_2 < 0 && intersection_3 < 0 && intersection_4 < 0));

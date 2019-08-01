@@ -9,24 +9,13 @@ class Enemy extends GameObject {
         this.target = target;
     }
 
-    set_damage(damage) {
-        this.damage = damage
-    }
-
-    set_price(price){
-        this.price = price;
-    }
-
-    set_id(id){
+    set_properties(id){
+        this.set_sprite(BASIC_ENEMY[0]);
+        this.damage = BASIC_ENEMY[2];
+        this.speed = BASIC_ENEMY[3];
+        this.price = BASIC_ENEMY[4];
+        this.hp = BASIC_ENEMY[5];
         this.id = id;
-    }
-
-    set_speed(speed) {
-        this.speed = speed;
-    }
-
-    set_hp(hp) {
-        this.hp = hp;
     }
 
     set_path(path, path_len) {
@@ -51,8 +40,10 @@ class Enemy extends GameObject {
             return;
         }
 
-        let point = this.path[this.current_point_index];
+        if (frames % 30 == 0) this.set_sprite(BASIC_ENEMY[1]);
+        else if (this.sprite != BASIC_ENEMY[0]) this.set_sprite(BASIC_ENEMY[0]);
 
+        let point = this.path[this.current_point_index];
         if(Math.floor((this.x - BLOCK_SIZE / 4 + BLOCK_SIZE / 8)  / BLOCK_SIZE) == point[0] && Math.floor((this.y - BLOCK_SIZE / 4 - BLOCK_SIZE / 8) / BLOCK_SIZE)  == point[1]) {
             this.current_point_index++;
             point = this.path[this.current_point_index];
@@ -60,5 +51,10 @@ class Enemy extends GameObject {
 
         this.x += point[2] * this.speed;
         this.y += point[3] * this.speed;
+    }
+
+    set_sprite(sprite_link){
+        this.sprite = new Image();
+        this.sprite.src = sprite_link;
     }
 }
