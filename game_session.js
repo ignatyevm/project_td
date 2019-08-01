@@ -49,7 +49,7 @@ class GameSession {
 		this.interval_id = window.setInterval(()=>{
 			--this.build_counter;
 			timer.value = this.build_counter;
-
+			draw_tower_place(this.objects_drawer);
 			if (this.build_counter == 0){
 				this.change_state(WAR);
 				this.is_interval_launch = false;
@@ -87,6 +87,7 @@ class GameSession {
 		if (!this.is_interval_launch){
 			this.launch_timer();
 			this.is_interval_launch = true;
+			frames = 0;
 		}
 	}
 
@@ -163,12 +164,15 @@ class GameSession {
 	draw_objects(){
 		this.objects_drawer.clear();
 		this.meta_drawer.clear();
-
+		
 		for (let enemy of this.enemies){
 			enemy.render_rotated(90);
 		}
 
 		for (let tower of this.towers){
+			if (tower.clicked){
+				tower.to_highlight(tower.x, tower.y, SPRITE_WIDTH, SPRITE_HEIGHT);
+			}
 			for (let bullet of tower.bullets){
 				bullet.render();
 			}
@@ -188,7 +192,7 @@ class GameSession {
 	}
 
 	build_tower(x, y, player, type) {
-		let tower = new Tower(x, y, player, this.objects_drawer, this.meta_drawer);
+		let tower = new Tower(x, y, player, this.objects_drawer, this.meta_drawer, type);
 		tower.set_properties();
 		on_player_spend_money(player, tower.price, this.personal_id);
 		this.towers.push(tower);

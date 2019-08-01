@@ -11,10 +11,10 @@ class Enemy extends GameObject {
 
     set_properties(id){
         this.set_sprite(BASIC_ENEMY[0]);
-        this.hp = BASIC_ENEMY[1];
+        this.damage = BASIC_ENEMY[1];
         this.speed = BASIC_ENEMY[2];
-        this.damage = BASIC_ENEMY[3];
-        this.price = BASIC_ENEMY[4];
+        this.price = BASIC_ENEMY[3];
+        this.hp = BASIC_ENEMY[4];
         this.id = id;
     }
 

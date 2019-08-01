@@ -2,11 +2,11 @@ const MAX_ACTIVE_ENEMIES = 5000;
 const MAX_PLAYER_MONEY = 99999;
 const MAX_ACTIVE_PLAYERS = 4;
 
-const CANVAS_WIDTH = 900
-const CANVAS_HEIGHT = 900;
+const CANVAS_WIDTH = 768;
+const CANVAS_HEIGHT = 768;
 
-const MAP_WIDTH = 25;
-const MAP_HEIGHT = 25;
+const MAP_WIDTH = 24;
+const MAP_HEIGHT = 24;
 
 const SPRITE_WIDTH = 32;
 const SPRITE_HEIGHT = 32;
@@ -30,7 +30,7 @@ const WAR = 2;
 const ALIVE = 1;
 const DEAD = 0;
 
-const BASIC_ENEMY = ["sprites/mars/enemy_sprite/bug_1/bug_1_1.png", 100, 0.5, 1, 50];
+const BACKGROUND_MAP = "sprites/mars/map_sprites/Map.png";
 
 const BASIC_ENEMY_HP = 100;
 const BASIC_ENEMY_SPEED = 1;
@@ -45,6 +45,8 @@ const BASIC_BULLET_SPRITE = "sprites/mars/bullets/res_bullet.png";
 // 50 - 1s
 // 100 - 2s
 // 25 - 0.5.s
+
+const BASIC_ENEMY = ["sprites/mars/enemy_sprite/bug_1/bug_1_1.png", 1, 0.5, 50, 100];
 
 const BASIC_TOWER = [["sprites/mars/tower_sprites/tower_1/tower1_level_1.png",
 					  "sprites/mars/tower_sprites/tower_1/tower1_level_2.png",

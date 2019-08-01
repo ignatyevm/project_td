@@ -11,16 +11,11 @@ class GameMap {
 	render() {
 		let local_drawer = this.drawer;
 
-		for(let i = 0; i < this.width; i++) {
-			for(let j = 0; j < this.height; j++) {
-				let sprite = new Image();
-				sprite.onload = function() {
-					local_drawer.render(sprite, j * BLOCK_SIZE, i * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-				}
-               	sprite.src = sprites_link[this.map_src[i][j]];
-			}
-		}
-		
-	}
+		let tmp_image = new Image();
+		tmp_image.src = BACKGROUND_MAP;
 
+		tmp_image.onload = function() {
+			local_drawer.render(tmp_image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		}		
+	}
 }

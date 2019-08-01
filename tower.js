@@ -9,7 +9,7 @@ class Tower extends GameObject{
 		this.lvl = 0;
 		
 		this.selected = false;
-		this.to_sell = false;
+		this.clicked = false;
 
 		this.player = player;
 
@@ -22,6 +22,10 @@ class Tower extends GameObject{
 
 	}
 
+	set_id(){
+		this.id = id;
+	}
+
 	set_properties(){
 		if (this.lvl < 2) {
 			this.set_sprite(BASIC_TOWER[0][this.lvl]);
@@ -32,14 +36,15 @@ class Tower extends GameObject{
 		}
 	}
 
+	to_highlight(){
+		this.drawer.highlight_tower(this.x, this.y, this.width, this.height);
+	}
+
 	move_bullets() {
 		for(let i = 0; i < this.bullets.length; i) {
 			let target = this.bullets[i].target;
 			let bullet_point = [this.bullets[i].x, this.bullets[i].y];
-			let enemy_box = [[target.x, target.y + ENEMY_HITBOX], 
-							 [target.x + ENEMY_HITBOX, target.y + ENEMY_HITBOX],
-			                 [target.x + ENEMY_HITBOX, target.y],
-			                 [target.x, target.y]];
+			let enemy_box = [target.x, target.y];
 			if (is_in_square(enemy_box, bullet_point)) {
 				target.take_damage(this.bullets[i].source.damage);
 				if (this.targets_queue.length > 0){
