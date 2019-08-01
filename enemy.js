@@ -49,4 +49,9 @@ class Enemy extends GameObject {
         this.x += point[2] * this.speed;
         this.y += point[3] * this.speed;
     }
+
+    set_sprite(sprite_link){
+        this.sprite = new Image();
+        this.sprite.src = sprite_link;
+    }
 }
