@@ -32,12 +32,6 @@ const DEAD = 0;
 
 const BACKGROUND_MAP = "sprites/mars/map_sprites/Map.png";
 
-const BASIC_ENEMY_HP = 100;
-const BASIC_ENEMY_SPEED = 1;
-const BASIC_ENEMY_DAMAGE = 1;
-const BASIC_ENEMY_PRICE = 50;
-const BASIC_ENEMY_SPRITE = "sprites/mars/enemy_sprite/bug_1/bug_1_1.png";
-
 const BASIC_BULLET_SPEED = 5;
 const BASIC_BULLET_SPRITE = "sprites/mars/bullets/res_bullet.png";
 
@@ -46,7 +40,7 @@ const BASIC_BULLET_SPRITE = "sprites/mars/bullets/res_bullet.png";
 // 100 - 2s
 // 25 - 0.5.s
 
-const BASIC_ENEMY = ["sprites/mars/enemy_sprite/bug_1/bug_1_1.png", 1, 0.5, 50, 100];
+const BASIC_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_1_1.png", 1, 0.5, 50, 100];
 
 const BASIC_TOWER = [["sprites/mars/tower_sprites/tower_1/tower1_level_1.png",
 					  "sprites/mars/tower_sprites/tower_1/tower1_level_2.png",
