@@ -68,7 +68,6 @@ canvas.addEventListener("click", function(event){
 
 function draw_tower_place(drawer){ 
 	if (bX < 25 && bY < 25 && bX >= 0 && bY >= 0 && new_map[bY][bX] == 'x' && is_tower_chosen){ 
-		drawer.clear();
 		drawer.render_square(tower_x, tower_y, SPRITE_WIDTH, SPRITE_HEIGHT);
 		drawer.render_circle(tower_x + SPRITE_WIDTH / 2, tower_y + SPRITE_HEIGHT / 2, radius);
 	} 
