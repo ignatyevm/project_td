@@ -28,7 +28,7 @@ document.getElementById("start_btn_id").addEventListener("click", ()=>{
 	start_button.style.display = "none";
 	bot = game.session.add_player(21 * BLOCK_SIZE, 23 * BLOCK_SIZE);
 	player = game.session.add_player(0, 0);
-	game.session.add_path(bot, player, [[11, 23, -1, 0], [11, 12, 0, -1],[12, 12, -1, 0] ,[13, 14, 1, 0],
+	game.session.add_path(bot, player, [[11, 23, -1, 0], [11, 14, 0, -1], [13, 14, 1, 0],
 										[13, 9, 0, -1], [7, 9, -1, 0], [7, 2, 0, -1],
 										[2, 2, -1, 0], [2, 10, 0, 1], [-1, 10, -1, 0],
 										[-1, -1, 0, -1], [0, 0, 0, 0]]);
