@@ -15,9 +15,37 @@ let tower_x = 0;
 let tower_y = 0; 
 let canvas = document.getElementById("meta"); 
 
+function get_offset(obj) {
+
+	var curr_offset = { x: 0, y: 0 } 
+
+	var new_offset = { x: 0, y: 0 }    
+
+	if (obj !== null) {
+
+		if(obj.scrollTop) curr_offset.y = obj.scrollTop;
+
+	    if(obj.offsetTop) curr_offset.y -= obj.offsetTop;
+
+	    if (obj.parentNode !== undefined) { 
+      		new_offset = get_offset(obj.parentNode);   
+   		}
+
+   		curr_offset.x = curr_offset.x + new_offset.x;
+   		curr_offset.y = curr_offset.y + new_offset.y; 
+
+	}
+
+	return curr_offset;
+}
+
 canvas.addEventListener("mousemove", function(event) { 
-	let x = event.clientX; 
-	let y = event.clientY; 
+
+
+	var offset_pos = get_offset(this);
+
+    let x = event.clientX + offset_pos.x;
+    let y = event.clientY + offset_pos.y;
 
 	if (is_tower_chosen){ 
 		bX = Math.floor(x / SPRITE_WIDTH); 
@@ -30,6 +58,7 @@ canvas.addEventListener("mousemove", function(event) {
 		Math.abs(t.x + t.width / 2 - x) < t.width / 2 && 
 		Math.abs(t.y + t.height / 2 - y) < t.height / 2; 
 	} 
+	console.log(x + " " + y); 		
 }); 
 
 function change_map(map, y, x, ch){ 
