@@ -170,14 +170,21 @@ class GameSession {
 					if(tower.targets_set[enemy.id] === true) {
 						tower.targets_queue.shift();
 						tower.targets_set[enemy.id] = false;
+						if(tower instanceof MagnetTower){
+							tower.has_target = false;
+							enemy.speed = tower.target_original_speed;
+						}
 					}
 				}
 			}
 
 			if (tower.targets_queue.length > 0) {
 				let target = tower.targets_queue[0];
+				tower.target = target;
 				tower.fire(target);
 				tower.rotation_angle = get_rotation_angel(tower, target);
+			}else{
+				tower.target = null;
 			}
 			tower.move_bullets();
 		}
