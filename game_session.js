@@ -83,12 +83,17 @@ class GameSession {
 			this.draw_objects();
 			++frames;
 
+			for (let tower of this.towers){
+				if(tower.selected) tower.draw_radius();
+			}
+
 			if (this.enemies.length == 0){
 
 				this.objects_drawer.clear();
 				for (let tower of this.towers){
 					tower.clear_bullets();
 					tower.render();
+					console.log(tower.selected);
 				}
 				
 				this.is_interval_launch = false;
