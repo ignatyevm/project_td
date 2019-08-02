@@ -80,12 +80,17 @@ class GameSession {
 			this.draw_objects();
 			++frames;
 
+			for (let tower of this.towers){
+				if(tower.selected) tower.draw_radius();
+			}
+
 			if (this.enemies.length == 0){
 
 				this.objects_drawer.clear();
 				for (let tower of this.towers){
 					tower.clear_bullets();
 					tower.render();
+					console.log(tower.selected);
 				}
 				
 				this.is_interval_launch = false;
@@ -108,8 +113,8 @@ class GameSession {
 
 	start_war_phase(){
 		if (!this.is_interval_launch){ 
-			clear_interval_radius()
-			this.launch_animation()
+			clear_interval_radius();
+			this.launch_animation();
 			this.is_interval_launch = true;
 		}
 	}
@@ -173,14 +178,21 @@ class GameSession {
 					if(tower.targets_set[enemy.id] === true) {
 						tower.targets_queue.shift();
 						tower.targets_set[enemy.id] = false;
+						if(tower instanceof MagnetTower){
+							tower.has_target = false;
+							enemy.speed = tower.target_original_speed;
+						}
 					}
 				}
 			}
 
 			if (tower.targets_queue.length > 0) {
 				let target = tower.targets_queue[0];
+				tower.target = target;
 				tower.fire(target);
 				tower.rotation_angle = get_rotation_angel(tower, target);
+			}else{
+				tower.target = null;
 			}
 			tower.move_bullets();
 		}

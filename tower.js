@@ -20,6 +20,8 @@ class Tower extends GameObject{
 		this.targets_set = [];
 		this.targets_queue = [];
 
+		this.target = null;
+
 	}
 
 	set_id(){
@@ -89,6 +91,8 @@ class Tower extends GameObject{
 class MagnetTower extends Tower{
 	constructor(x, y, player, drawer, meta_drawer){
 		super(x, y, player, drawer, meta_drawer);
+		this.has_target = false;
+		this.target_original_speed = null;
 	}
 
 	set_properties(){
@@ -99,7 +103,19 @@ class MagnetTower extends Tower{
 		this.radius = MAGNIT_TOWER[4][this.lvl];
 	}
 
+	fire(target){
+		if(!this.has_target){
+			this.target_original_speed = target.speed;
+			target.speed -= (target.speed / 4);
+			this.has_target = true;
+		}
+	}
+
 	render() {
+		if(this.target != null){
+			this.drawer.render_line(this.x + SPRITE_WIDTH / 2, this.y + SPRITE_HEIGHT / 2, 
+			this.target.x + SPRITE_WIDTH / 2, this.target.y + SPRITE_HEIGHT / 2, "blue");
+		}
 		this.drawer.render(this.sprite, this.x, this.y, this.width, this.height);
 	}
 }
