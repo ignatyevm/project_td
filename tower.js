@@ -77,7 +77,7 @@ class Tower extends GameObject{
 
 	clear_bullets() {
 		while(this.bullets.length != 0) {
-			this.bullets.pop();
+			this.bullets.shift();
 		}
 	}
 

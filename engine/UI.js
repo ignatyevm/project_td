@@ -1,5 +1,3 @@
-const BASE_X = 768; 
-const BASE_Y = 700; 
 
 var is_tower_chosen = false; 
 var is_enemy_chosen = false; 
@@ -65,9 +63,11 @@ canvas.addEventListener("click", function(event){
 		} 
 	} 
 	if (is_enemy_chosen && game.session.game_state == BUILDING){ 
-		if (Math.abs(event.clientX - BASE_X) < SPRITE_WIDTH && Math.abs(event.clientY - BASE_Y) < SPRITE_HEIGHT){ 
-			game.session.spawn_enemy(player, bot, enemy_type); 
-		} 
+		for (let i = 0; i < chosen_number_of_players; ++i) {
+			if (Math.abs(event.clientX - BASES_COORDINATE[i][0]) < SPRITE_WIDTH && Math.abs(event.clientY - BASES_COORDINATE[i][1]) < SPRITE_HEIGHT && i != game.session.personal_id){ 
+				game.session.spawn_enemy(game.session.players[game.session.personal_id], game.session.players[i], enemy_type); 
+			} 
+		}	
 	} 
 }); 
 
@@ -138,6 +138,10 @@ function start_radius_interval(){
 	}, 10);
 }
 
-function clear_interval_radius(){
+function clear_interval_radius() {
 	clearInterval(radius_interval);
+}
+
+function alert_player_turn(personal_id) {
+	alert(PLAYER_COLORS[personal_id] + ' your turn');
 }

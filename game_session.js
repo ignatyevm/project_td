@@ -14,6 +14,7 @@ class GameSession {
 		this.build_counter = BUILD_SECONDS;
 
 		this.active_enemy = 0;
+		this.players_make_turn = 1;
 
 		this.enemies = [];
 		this.towers = [];
@@ -28,29 +29,41 @@ class GameSession {
 		}
 	}
 
-	launch_session(){
-		this.set_personal_id(1);
+	launch_session(type){
+		this.set_personal_id(0);
 		this.render_map();
+		this.game_type = type;
 		this.make_turn();
 	}
 
-	set_map(width, height, map_src) {
-		this.map = new GameMap(width, height, map_src, this.map_drawer);
-	}
-
-	render_map() {
-		this.map.render();
-	}
-
-	is_gameover() {
-		let count = 0;
-		for (let player of this.players){
-			if (!player.is_dead())
-				++count;
-		}
-		if (count > 1)
-			return false;
-		return true;
+	launch_timer(){
+		alert_player_turn(this.personal_id);
+		this.interval_id = window.setInterval(()=>{
+			--this.build_counter;
+			timer.value = this.build_counter;
+			if (this.build_counter == 0){
+				if (this.game_type == BOT){
+					bot_spawn_enemy(bot, player);
+				}
+				if (this.players_make_turn < this.players.length && this.game_type == LOCAL) {					
+					this.change_player();
+					alert_player_turn(this.personal_id);
+					++this.players_make_turn;
+					this.build_counter = BUILD_SECONDS;
+				}
+				else {
+					if (this.game_type == LOCAL) {
+						this.change_player();
+					}
+					this.change_state(WAR);
+					this.is_interval_launch = false;
+					this.active_enemy = 0;
+					this.players_make_turn = 1;
+					window.clearInterval(this.interval_id);
+					this.make_turn();
+				}
+			}
+		}, 1000);
 	}
 
 	change_state(state) {
@@ -59,22 +72,6 @@ class GameSession {
 			enable_buttons();
 		else
 			disable_buttons();
-	}
-
-	launch_timer(){
-		this.interval_id = window.setInterval(()=>{
-			--this.build_counter;
-			timer.value = this.build_counter;
-			//draw_tower_place(this.objects_drawer);
-			if (this.build_counter == 0){
-				this.change_state(WAR);
-				this.is_interval_launch = false;
-				this.active_enemy = 0;
-				window.clearInterval(this.interval_id);
-				this.make_turn();
-			}
-
-		}, 1000);
 	}
 
 	launch_animation(){
@@ -102,7 +99,6 @@ class GameSession {
 	start_building_phase(){
 		this.build_counter = BUILD_SECONDS;
 		if (!this.is_interval_launch){
-			bot_spawn_enemy(bot, player); // delete
 			start_radius_interval();
 			this.launch_timer();
 			this.is_interval_launch = true;
@@ -115,6 +111,18 @@ class GameSession {
 			clear_interval_radius()
 			this.launch_animation()
 			this.is_interval_launch = true;
+		}
+	}
+
+	make_turn(type){
+		if (this.game_state == BUILDING) {
+			this.start_building_phase();
+		}
+		else {
+			this.start_war_phase();
+		}
+		if (this.is_gameover()){
+			clearInterval(this.session_intervar);
 		}
 	}
 
@@ -205,20 +213,6 @@ class GameSession {
 		}	
 	}
 
-	make_turn(){
-		if (this.game_state == BUILDING) {
-			this.start_building_phase();
-		}
-		else {
-			//todo SendPackage from Firebase
-			//todo GetPackage from Firebase
-			this.start_war_phase();
-		}
-		if (this.is_gameover()){
-			clearInterval(this.session_intervar);
-		}
-	}
-
 	spawn_enemy(source_player, target_player, type) {
 		let target_path = this.paths[source_player.id][target_player.id];
 		let enemy;
@@ -258,6 +252,11 @@ class GameSession {
 		}
 	}
 
+	change_player(){
+		this.personal_id = (this.personal_id + 1) % this.players.length;
+		on_player_change_turn(this.personal_id, this.players);
+	}
+
 	add_player(base_x, base_y){
 		let player = new Player(this.players_id++, base_x, base_y);
 		player.set_hp(START_PLAYER_HP);
@@ -274,4 +273,24 @@ class GameSession {
 	set_personal_id(id) {
 		this.personal_id = id;
 	}
+
+	set_map(width, height, map_src) {
+		this.map = new GameMap(width, height, map_src, this.map_drawer);
+	}
+
+	render_map() {
+		this.map.render();
+	}
+
+	is_gameover() {
+		let count = 0;
+		for (let player of this.players){
+			if (!player.is_dead())
+				++count;
+		}
+		if (count > 1)
+			return false;
+		return true;
+	}
+
 }

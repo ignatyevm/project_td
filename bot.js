@@ -5,12 +5,12 @@ function bot_build_towers(bot){
 }
 
 function bot_spawn_enemy(bot, player){
-	while (bot.money > BASIC_ENEMY[4]){
-		if (bot.money > BIGBOY_ENEMY[4])
+	while (bot.money >= BASIC_ENEMY[4]){
+		if (bot.money >= BIGBOY_ENEMY[4])
 			game.session.spawn_enemy(bot, player, 3);
-		else if (bot.money > ANT_ENEMY[4])
+		else if (bot.money >= ANT_ENEMY[4])
 			game.session.spawn_enemy(bot, player, 2);
-		else if (bot.money > BASIC_ENEMY[4])
+		else if (bot.money >= BASIC_ENEMY[4])
 			game.session.spawn_enemy(bot, player, 1);
 	}
 }

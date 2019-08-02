@@ -3,16 +3,11 @@ let price;
 let type;
 let player;
 let bot;
+let chosen_number_of_players = 2;
+let tower_info = document.getElementById('towerInfo');
+let enemy_info = document.getElementById('enemyInfo');
 var enemy_type = 1;
 var tower_type = 1;
-
-function change_selected_object(select1, select2){
-	is_tower_chosen = select1;
-	is_enemy_chosen = select2;
-	for (t of game.session.towers){
-		t.clicked = false;
-	}
-}
 
 document.getElementById("create_session").addEventListener("click", ()=>{
 	let menu = document.getElementById('main_menu');
@@ -23,22 +18,24 @@ document.getElementById("create_session").addEventListener("click", ()=>{
 	game.session.set_map(MAP_WIDTH, MAP_HEIGHT, map_src);			
 });
 
-document.getElementById("start_btn_id").addEventListener("click", ()=>{
-	let start_button = document.getElementById('start_btn_id');
+document.getElementById("bot_button").addEventListener("click", ()=>{
+	let start_button = document.getElementById('start_bot_id');
 	start_button.style.display = "none";
-	bot = game.session.add_player(21 * BLOCK_SIZE, 23 * BLOCK_SIZE);
 	player = game.session.add_player(2 * BLOCK_SIZE, 0);
-	game.session.add_path(bot, player, [[11, 23, -1, 0], [11, 14, 0, -1], [13, 14, 1, 0],
-										[13, 9, 0, -1], [7, 9, -1, 0], [7, 2, 0, -1],
-										[2, 2, -1, 0], [2, 10, 0, 1], [-1, 10, -1, 0],
-										[-1, -1, 0, -1], [0, 1, 0, 0]]);
-	game.session.add_path(player, bot, [[11, 0, 1, 0], [11, 8, 0, 1], [9, 8, -1, 0], 
-										[9, 10, 0, 1], [13, 10, 1, 0], [13, 13, 0, 1],
-										[15, 13, 1, 0], [15, 20, 0, 1], [20, 20, 1, 0],
-										[20, 12, 0, -1], [23, 12, 1, 0], [23, 22, 0, 1], [0, 0, 0, 0]]);
+	bot = game.session.add_player(21 * BLOCK_SIZE, 23 * BLOCK_SIZE);
+	game.session.add_path(bot, player, PATH_FOUR_TO_ONE);
+	game.session.add_path(player, bot, PATH_ONE_TO_FOUR);
 	bot_action(bot, player);
-	game.session.launch_session();
+	game.session.launch_session(BOT);
 });
+
+document.getElementById("local_button").addEventListener("click", ()=>{
+	let start_button = document.getElementById('start_bot_id');
+	start_button.style.display = "none";
+	assign_playes(chosen_number_of_players);
+	game.session.launch_session(LOCAL);
+});
+
 
 document.getElementById("tb1").addEventListener("click", ()=>{
 	if (document.getElementById("player_budget").value >= BASIC_TOWER[3][0]){
@@ -46,9 +43,9 @@ document.getElementById("tb1").addEventListener("click", ()=>{
 		radius = BASIC_TOWER[4][1];
 		price = BASIC_TOWER[3][1];
 		type = BASIC_TOWER;
-		towerInfo.value = "tower 1";
 	}
 	tower_type = 1;
+	write_tower_info(tower_type);
 });
 
 document.getElementById("tb2").addEventListener("click", ()=>{
@@ -57,9 +54,9 @@ document.getElementById("tb2").addEventListener("click", ()=>{
 		radius = MAGNIT_TOWER[4][1];
 		price = MAGNIT_TOWER[3][1];
 		type = MAGNIT_TOWER;
-		towerInfo.value = "tower 2";
 	}
 	tower_type = 2;
+	write_tower_info(tower_type);
 });
 
 document.getElementById("tb3").addEventListener("click", ()=>{
@@ -68,27 +65,30 @@ document.getElementById("tb3").addEventListener("click", ()=>{
 		radius = BASIC_TOWER[4][1];
 		price = BASIC_TOWER[3][1];
 		type = BASIC_TOWER;
-		towerInfo.value = "tower 3";
 	}
 	tower_type = 3;
+	write_tower_info(tower_type);
 });
 
 document.getElementById("eb1").addEventListener("click", ()=>{
 	change_selected_object(false, true);
 	enemyInfo.value = "enemy 1";
 	enemy_type = 1;
+	write_enemy_info(enemy_type)
 });
 
 document.getElementById("eb2").addEventListener("click", ()=>{
 	change_selected_object(false, true);
 	enemyInfo.value = "enemy 2";
 	enemy_type = 2;
+	write_enemy_info(enemy_type)
 });
 
 document.getElementById("eb3").addEventListener("click", ()=>{
 	change_selected_object(false, true);
 	enemyInfo.value = "enemy 3";
 	enemy_type = 3;
+	write_enemy_info(enemy_type)
 });
 
 document.getElementById("sell").addEventListener("click", ()=>{
@@ -150,4 +150,65 @@ function on_player_spend_money(player, money, personal_id){
 		money_bar.innerText = player.money;
 	}
 	return true;
+}
+
+function on_player_change_turn(personal_id, players){
+	let health_bar = document.getElementById('player_hp');
+	let money_bar = document.getElementById('player_budget');
+	health_bar.innerText = players[personal_id].base_hp;
+	money_bar.innerText = players[personal_id].money;
+	//alert(PLAYER_COLORS[personal_id] + ' your turn');
+}
+
+function assign_playes(number_of_players) {
+	for (let i = 0; i < number_of_players; ++i){
+		let player = game.session.add_player(BASES[i][0], BASES[i][1]);
+	}
+	let path_index = 0;
+	for (let i = 0; i < number_of_players; ++i){
+		let source_player = game.session.players[i];
+		for (let j = 0; j < number_of_players; ++j){
+			if (i == j){
+				continue;
+			}
+			let target_player = game.session.players[j];
+			game.session.add_path(source_player, target_player, PATHS[path_index++]);
+		}
+	}
+}
+
+function change_selected_object(select1, select2) {
+	is_tower_chosen = select1;
+	is_enemy_chosen = select2;
+	for (t of game.session.towers){
+		t.clicked = false;
+	}
+}
+
+function write_tower_info(tower_type){
+	let meta_image = new Image();
+	let image = document.getElementById('towerInfo');
+	switch(tower_type){
+			case 1: meta_image.src = 'sprites/mars/map_sprites/characteristics_of_towers/basic.png';
+					break;
+			case 2: meta_image.src = 'sprites/mars/map_sprites/characteristics_of_towers/magnet.png';
+					break;
+			case 3: meta_image.src = 'sprites/mars/map_sprites/characteristics_of_towers/aoe.png';
+					break;
+		}
+	image.src = meta_image.src;
+}
+
+function write_enemy_info(enemy_type){
+	let meta_image = new Image();
+	let image = document.getElementById('enemyInfo');
+	switch(enemy_type){
+			case 1: meta_image.src = 'sprites/mars/map_sprites/characteristics_of_enemies/basic.png';
+					break;
+			case 2: meta_image.src = 'sprites/mars/map_sprites/characteristics_of_enemies/ant.png';
+					break;
+			case 3: meta_image.src = 'sprites/mars/map_sprites/characteristics_of_enemies/bugboi.png';
+					break;
+		}
+	image.src = meta_image.src;
 }
