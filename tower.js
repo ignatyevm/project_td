@@ -90,24 +90,24 @@ class MagnetTower extends Tower{
 	}
 
 	set_properties(){
-		this.set_sprite(BASIC_TOWER[0][this.lvl]);
-		this.damage = BASIC_TOWER[1][this.lvl];
-		this.max_fire_rate = BASIC_TOWER[2][this.lvl] * 50;
-		this.price = BASIC_TOWER[3][this.lvl];
-		this.radius = BASIC_TOWER[4][this.lvl];
-	}
-}
-
-class AOETower extends Tower{
-	constructor(x, y, player, drawer, meta_drawer){MAGNIT_TOWER
-		super(x, y, player, drawer, MAGNIT_TOWER);
-	}
-
-	set_properties(){
 		this.set_sprite(MAGNIT_TOWER[0][this.lvl]);
 		this.damage = MAGNIT_TOWER[1][this.lvl];
 		this.max_fire_rate = MAGNIT_TOWER[2][this.lvl] * 50;
 		this.price = MAGNIT_TOWER[3][this.lvl];
 		this.radius = MAGNIT_TOWER[4][this.lvl];
+	}
+}
+
+class AOETower extends Tower {
+	constructor(x, y, player, drawer, meta_drawer) {
+		super(x, y, player, drawer, meta_drawer);
+	}
+
+	set_properties(){
+		this.set_sprite(AOE_TOWER[0][this.lvl]);
+		this.damage = AOE_TOWER[1][this.lvl];
+		this.max_fire_rate = AOE_TOWER[2][this.lvl] * 50;
+		this.price = AOE_TOWER[3][this.lvl];
+		this.radius = AOE_TOWER[4][this.lvl];
 	}	
 }

@@ -13,6 +13,8 @@ class GameSession {
 		this.game_state = BUILDING;
 		this.build_counter = BUILD_SECONDS;
 
+		this.active_enemy = 0;
+
 		this.enemies = [];
 		this.towers = [];
 		this.players = [];
@@ -53,8 +55,9 @@ class GameSession {
 			if (this.build_counter == 0){
 				this.change_state(WAR);
 				this.is_interval_launch = false;
+				this.active_enemy = 0;
 				window.clearInterval(this.interval_id);
-				this.launch_session()
+				this.make_turn();
 			}
 
 		}, 1000);
@@ -77,7 +80,7 @@ class GameSession {
 				this.is_interval_launch = false;
 				this.change_state(BUILDING);			
 				clearInterval(this.interval_id);
-				this.launch_session();
+				this.make_turn();
 			}
 		}, 20);
 	}
@@ -111,11 +114,16 @@ class GameSession {
 	}
 
 	move_objects() {
-		for(let i = this.enemies.length - 1; i >= 0; --i) {
+		
+		if (this.active_enemy != this.enemies.length && frames % 60 == 0)
+			++this.active_enemy;
+
+		for(let i = this.active_enemy - 1; i >= 0; --i) {
 			let enemy = this.enemies[i];
 			let target_index = enemy.target.id;
 			if (!enemy.is_alive()){
 				on_player_add_money(this.players[target_index], enemy.price * 2, this.personal_id);
+				--this.active_enemy;
 				this.enemies.splice(i, 1);
 			}
 			if (enemy.is_arrive()) {
@@ -123,6 +131,7 @@ class GameSession {
 				if (this.players[target_index].is_dead()){
 					on_base_destroyed(this.players[this.personal_id], this.interval_id);
 				}
+				--this.active_enemy;
 				this.enemies.splice(i, 1);
 			}
 			enemy.move();
@@ -164,9 +173,10 @@ class GameSession {
 	draw_objects(){
 		this.objects_drawer.clear();
 		this.meta_drawer.clear();
-		
-		for (let enemy of this.enemies){
-			enemy.render_rotated(90);
+
+		for (let i = 0; i < this.active_enemy; ++i){
+			let enemy = this.enemies[i];
+			enemy.render();
 		}
 
 		for (let tower of this.towers){
@@ -180,22 +190,43 @@ class GameSession {
 		}
 	}
 
-	spawn_enemy(source_player, target_player) {
+	spawn_enemy(source_player, target_player, type) {
 		let target_path = this.paths[source_player.id][target_player.id];
-		let enemy = new Enemy(source_player.base_x + BLOCK_SIZE / 4, source_player.base_y + BLOCK_SIZE / 4 + BLOCK_SIZE / 8, source_player, target_player,objects_drawer);
+		let enemy;
+		switch(type){
+			case 1: enemy = new Enemy(source_player.base_x, source_player.base_y, source_player, target_player, objects_drawer);;
+					break;
+			case 2: enemy = new AntEnemy(source_player.base_x, source_player.base_y, source_player, target_player, objects_drawer);
+					break;
+			case 3: enemy = new BigboyEnemy(source_player.base_x, source_player.base_y, source_player, target_player, objects_drawer);
+					break;
+		}
 		this.enemies_id = (this.enemies_id + 1) % MAX_ACTIVE_ENEMIES;
-		enemy.resize(ENEMY_HITBOX, ENEMY_HITBOX);
+		//enemy.resize(ENEMY_HITBOX, ENEMY_HITBOX);
 		enemy.set_path(target_path, target_path.length - 1);
 		enemy.set_properties(this.enemies_id);
-		on_player_spend_money(source_player, enemy.price, this.personal_id);
-		this.enemies.push(enemy);
+		let is_able = on_player_spend_money(source_player, enemy.price, this.personal_id);
+		if (is_able == true) {
+			this.enemies.push(enemy);
+		}
 	}
 
 	build_tower(x, y, player, type) {
-		let tower = new Tower(x, y, player, this.objects_drawer, this.meta_drawer, type);
+		let tower;
+		switch(type){
+			case 1: tower = new Tower(x, y, player, this.objects_drawer, this.meta_drawer, type);
+					break;
+			case 2: tower = new MagnetTower(x, y, player, this.objects_drawer, this.meta_drawer, type);
+					break;
+			case 3: tower = new AOETower(x, y, player, this.objects_drawer, this.meta_drawer, type);
+					break;
+		}
+
 		tower.set_properties();
-		on_player_spend_money(player, tower.price, this.personal_id);
-		this.towers.push(tower);
+		let is_able = on_player_spend_money(player, tower.price, this.personal_id);
+		if (is_able == true){
+			this.towers.push(tower);
+		}
 	}
 
 	add_player(base_x, base_y){
@@ -212,6 +243,12 @@ class GameSession {
 	}
 
 	launch_session(){
+		this.set_personal_id(0);
+		this.render_map();
+		this.make_turn();
+	}
+
+	make_turn(){
 		if (this.game_state == BUILDING) {
 			this.start_building_phase();
 		}

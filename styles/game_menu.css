@@ -14,8 +14,8 @@
 
 .canvas
 {
-	width: 800;
-	height: 800;
+	width: 768;
+	height: 768;
 }
 
 #money_img
@@ -33,7 +33,7 @@
 {
 	float: left;
 	width: 500;
-	height: 800;
+	height: 768;
 	background-color: MediumSeaGreen;
 }
 

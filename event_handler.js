@@ -108,9 +108,12 @@ function on_player_add_money(player, money, personal_id){
 }
 
 function on_player_spend_money(player, money, personal_id){
+	if (player.money < money)
+		return false;
 	player.remove_money(money);
 	if (player.id === personal_id){
 		let money_bar = document.getElementById('player_budget');
 		money_bar.innerText = player.money;
 	}
+	return true;
 }

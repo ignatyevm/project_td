@@ -11,10 +11,10 @@ class Enemy extends GameObject {
 
     set_properties(id){
         this.set_sprite(BASIC_ENEMY[0]);
-        this.damage = BASIC_ENEMY[1];
-        this.speed = BASIC_ENEMY[2];
-        this.price = BASIC_ENEMY[3];
-        this.hp = BASIC_ENEMY[4];
+        this.damage = BASIC_ENEMY[2];
+        this.speed = BASIC_ENEMY[3];
+        this.price = BASIC_ENEMY[4];
+        this.hp = BASIC_ENEMY[5];
         this.id = id;
     }
 
@@ -40,18 +40,48 @@ class Enemy extends GameObject {
             return;
         }
 
-        let point = this.path[this.current_point_index];
-        if(Math.floor((this.x - BLOCK_SIZE / 4 + BLOCK_SIZE / 8)  / BLOCK_SIZE) == point[0] && Math.floor((this.y - BLOCK_SIZE / 4 - BLOCK_SIZE / 8) / BLOCK_SIZE)  == point[1]) {
+        this.point = this.path[this.current_point_index];
+        if(Math.floor(this.x  / BLOCK_SIZE) == this.point[0] && Math.floor(this.y / BLOCK_SIZE) == this.point[1]) {
             this.current_point_index++;
-            point = this.path[this.current_point_index];
+            this.point = this.path[this.current_point_index];
         }
 
-        this.x += point[2] * this.speed;
-        this.y += point[3] * this.speed;
+        this.x += this.point[2] * this.speed;
+        this.y += this.point[3] * this.speed;
     }
 
     set_sprite(sprite_link){
         this.sprite = new Image();
         this.sprite.src = sprite_link;
+    }
+}
+
+class AntEnemy extends Enemy{
+    constructor(x, y, player, target, drawer) {
+        super(x, y, player, target, drawer);
+    }
+
+    set_properties(id){
+        this.set_sprite(ANT_ENEMY[0]);
+        this.damage = ANT_ENEMY[2];
+        this.speed = ANT_ENEMY[3];
+        this.price = ANT_ENEMY[4];
+        this.hp = ANT_ENEMY[5];
+        this.id = id;
+    }
+}
+
+class BigboyEnemy extends Enemy{
+    constructor(x, y, player, target, drawer) {
+        super(x, y, player, target, drawer);
+    }
+
+    set_properties(id){
+        this.set_sprite(BIGBOY_ENEMY[0]);
+        this.damage = BIGBOY_ENEMY[2];
+        this.speed = BIGBOY_ENEMY[3];
+        this.price = BIGBOY_ENEMY[4];
+        this.hp = BIGBOY_ENEMY[5];
+        this.id = id;
     }
 }
