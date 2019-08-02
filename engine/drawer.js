@@ -41,7 +41,15 @@ class Drawer {
 		this.ctx.rect(x, y, width, height);
 		this.ctx.closePath();
 		this.ctx.stroke();
+	}
 
+	render_line(x1, y1, x2, y2, color){
+		this.ctx.beginPath();
+		this.ctx.moveTo(x1, y1);
+		this.ctx.strokeStyle = color;
+		this.ctx.lineWidth = "5px";
+		this.ctx.lineTo(x2, y2);
+		this.ctx.stroke();
 	}
 
 }
