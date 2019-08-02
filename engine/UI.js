@@ -48,6 +48,7 @@ canvas.addEventListener("click", function(event){
 			new_map = change_map(new_map, bY, bX, "T"); 
 			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.personal_id], tower_type); 
 			is_tower_chosen = false;
+			meta_drawer.clear();
 		} 
 	} 
 	//is_tower_chosen = false;

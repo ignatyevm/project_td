@@ -179,6 +179,10 @@
 			let player = game.session.add_player(0, 0);
 			let bot = game.session.add_player(21 * 32, 23 * 32);
 
+			setInterval(()=>{
+				draw_tower_place(meta_drawer);
+			}, 20);
+
 			game.session.add_path(player, bot, [[11, 0, 1, 0], [11, 8, 0, 1], [10, 8, -1, 0], 
 										 [10, 10, 0, 1],
 				                         [13, 10, 1, 0], [13, 13, 0, 1], [15, 13, 1, 0], [15, 20, 0, 1],
