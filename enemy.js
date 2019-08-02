@@ -7,6 +7,11 @@ class Enemy extends GameObject {
         this.sprite_type = 0;
         this.player = player;
         this.target = target;
+        this.current_animation_frame = frames;
+    }
+
+    set_frame(frame){
+        this.current_animation_frame = frame;
     }
 
     set_properties(id){
@@ -40,8 +45,16 @@ class Enemy extends GameObject {
             return;
         }
 
+        if (frames == this.current_animation_frame) {
+            this.set_sprite(BASIC_ENEMY[1]);
+        }
+        else if (frames == this.current_animation_frame + BASIC_ANIMATION_SPEED) {
+            this.set_sprite(BASIC_ENEMY[0]);
+            this.current_animation_frame += BASIC_ANIMATION_SPEED * 2;
+        }
+
         this.point = this.path[this.current_point_index];
-        if(Math.floor(this.x  / BLOCK_SIZE) == this.point[0] && Math.floor(this.y / BLOCK_SIZE) == this.point[1]) {
+        if(Math.floor(this.x  / BLOCK_SIZE) == this.point[0] && Math.floor(this.y / BLOCK_SIZE)  == this.point[1]) {
             this.current_point_index++;
             this.point = this.path[this.current_point_index];
         }

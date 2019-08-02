@@ -11,7 +11,7 @@ const MAP_HEIGHT = 24;
 const SPRITE_WIDTH = 32;
 const SPRITE_HEIGHT = 32;
 
-const ENEMY_HITBOX = 16;
+const ENEMY_HITBOX = 20;
 
 const BLOCK_SIZE = 32;
 const HALF_PI = 90;
@@ -29,6 +29,8 @@ const WAR = 2;
 
 const ALIVE = 1;
 const DEAD = 0;
+
+const BASIC_ANIMATION_SPEED = 9;
 
 const BACKGROUND_MAP = "sprites/mars/map_sprites/Map.png";
 
@@ -76,5 +78,3 @@ const AOE_TOWER = [["sprites/mars/tower_sprites/tower_2/magnit_gun_1.png",
 					 [150, 200, 300],
 					 [100, 110, 120],
 					 [30, 40, 50]];
-
-

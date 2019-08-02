@@ -115,8 +115,11 @@ class GameSession {
 
 	move_objects() {
 		
-		if (this.active_enemy != this.enemies.length && frames % 60 == 0)
+		if (this.active_enemy != this.enemies.length && frames % 81 == 0){
+			this.enemies[this.active_enemy].set_frame(frames);
 			++this.active_enemy;
+
+		}
 
 		for(let i = this.active_enemy - 1; i >= 0; --i) {
 			let enemy = this.enemies[i];
