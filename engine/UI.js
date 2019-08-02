@@ -108,6 +108,6 @@ function is_tower_selected(towers, meta_drawer){
 	}
 	if (state == 2 && !is_selected){
 		state = 1;
-		meta_drawer.clear();
+		meta_drawer.clear();	
 	}
 }
