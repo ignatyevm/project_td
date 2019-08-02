@@ -1,4 +1,3 @@
-
 function is_in_radius(center, point, radius) {
 
 	let x = point.x - center.x;
@@ -50,5 +49,9 @@ function get_rotation_angel(point1, point2){
 		return - angle - HALF_PI;
 	}else{
 		return angle + HALF_PI;
+	}
+
+	function get_rotation_enemy(point1, point2) {
+
 	}
 }

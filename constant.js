@@ -11,7 +11,7 @@ const MAP_HEIGHT = 24;
 const SPRITE_WIDTH = 32;
 const SPRITE_HEIGHT = 32;
 
-const ENEMY_HITBOX = 16;
+const ENEMY_HITBOX = 20;
 
 const BLOCK_SIZE = 32;
 const HALF_PI = 90;
@@ -39,6 +39,8 @@ const BASIC_BULLET_SPRITE = "sprites/mars/bullets/res_bullet.png";
 // 50 - 1s
 // 100 - 2s
 // 25 - 0.5.s
+
+const BASIC_ANIMATION_SPEED = 9;
 
 const BASIC_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_1_1.png",
 					 "sprites/mars/enemy_sprite/bugs/bug_1_2.png",
