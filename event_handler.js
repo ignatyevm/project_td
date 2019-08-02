@@ -27,15 +27,15 @@ document.getElementById("start_btn_id").addEventListener("click", ()=>{
 	let start_button = document.getElementById('start_btn_id');
 	start_button.style.display = "none";
 	bot = game.session.add_player(21 * BLOCK_SIZE, 23 * BLOCK_SIZE);
-	player = game.session.add_player(0, 0);
+	player = game.session.add_player(2 * BLOCK_SIZE, 0);
 	game.session.add_path(bot, player, [[11, 23, -1, 0], [11, 14, 0, -1], [13, 14, 1, 0],
 										[13, 9, 0, -1], [7, 9, -1, 0], [7, 2, 0, -1],
 										[2, 2, -1, 0], [2, 10, 0, 1], [-1, 10, -1, 0],
-										[-1, -1, 0, -1], [0, 0, 0, 0]]);
-	game.session.add_path(player, bot, [[11, 0, 1, 0], [11, 8, 0, 1], [10, 8, -1, 0], 
-										[10, 10, 0, 1], [13, 10, 1, 0], [13, 13, 0, 1],
+										[-1, -1, 0, -1], [0, 1, 0, 0]]);
+	game.session.add_path(player, bot, [[11, 0, 1, 0], [11, 8, 0, 1], [9, 8, -1, 0], 
+										[9, 10, 0, 1], [13, 10, 1, 0], [13, 13, 0, 1],
 										[15, 13, 1, 0], [15, 20, 0, 1], [20, 20, 1, 0],
-										[20, 13, 0, -1], [23, 13, 1, 0], [23, 22, 0, 1], [0, 0, 0, 0]]);
+										[20, 12, 0, -1], [23, 12, 1, 0], [23, 22, 0, 1], [0, 0, 0, 0]]);
 	bot_action(bot, player);
 	game.session.launch_session();
 });
@@ -106,12 +106,13 @@ document.getElementById("sell").addEventListener("click", ()=>{
 document.getElementById("tower_upgrade").addEventListener("click", ()=>{
 	for (let i = 0; i < game.session.towers.length; i++){
 		let t = game.session.towers[i];
-		if (t.clicked && t.lvl < 3 && document.getElementById("player_budget").value >= t.price
+		if (t.clicked  && document.getElementById("player_budget").value >= t.price
 			&& t.player == game.session.players[game.session.personal_id]){
 			t.lvl++;
 			t.set_properties();
-			on_player_spend_money(game.session.players[game.session.personal_id], t.price, game.session.personal_id);
-			
+			objects_drawer.clear();
+			game.session.render_tower();
+			on_player_spend_money(game.session.players[game.session.personal_id], t.price, game.session.personal_id)
 		}
 		t.clicked = false;
 	}

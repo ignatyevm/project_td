@@ -28,6 +28,20 @@ class GameSession {
 		}
 	}
 
+	launch_session(){
+		this.set_personal_id(1);
+		this.render_map();
+		this.make_turn();
+	}
+
+	set_map(width, height, map_src) {
+		this.map = new GameMap(width, height, map_src, this.map_drawer);
+	}
+
+	render_map() {
+		this.map.render();
+	}
+
 	is_gameover() {
 		let count = 0;
 		for (let player of this.players){
@@ -45,19 +59,6 @@ class GameSession {
 			enable_buttons();
 		else
 			disable_buttons();
-	}
-
-	start_radius_interval(){
-		this.radius_interval = setInterval(()=>{
-			meta_drawer.clear();
-			draw_tower_place(meta_drawer);
-			is_tower_selected(game.session.towers, meta_drawer);
-			is_tower_clicked(game.session.towers, );
-		}, 10);
-	}
-
-	clear_interval_radius(){
-		clearInterval(this.radius_interval);
 	}
 
 	launch_timer(){
@@ -102,7 +103,7 @@ class GameSession {
 		this.build_counter = BUILD_SECONDS;
 		if (!this.is_interval_launch){
 			bot_spawn_enemy(bot, player); // delete
-			this.start_radius_interval();
+			start_radius_interval();
 			this.launch_timer();
 			this.is_interval_launch = true;
 			frames = 0;
@@ -111,22 +112,10 @@ class GameSession {
 
 	start_war_phase(){
 		if (!this.is_interval_launch){ 
-			this.clear_interval_radius()
+			clear_interval_radius()
 			this.launch_animation()
 			this.is_interval_launch = true;
 		}
-	}
-
-	set_map(width, height, map_src) {
-		this.map = new GameMap(width, height, map_src, this.map_drawer);
-	}
-
-	render_map() {
-		this.map.render();
-	}
-
-	set_personal_id(id) {
-		this.personal_id = id;
 	}
 
 	move_objects() {
@@ -198,6 +187,10 @@ class GameSession {
 			enemy.render();
 		}
 
+		this.render_tower();
+	}
+
+	render_tower(){
 		for (let tower of this.towers){
 			if (tower.clicked){
 				tower.to_highlight(tower.x, tower.y, SPRITE_WIDTH, SPRITE_HEIGHT);
@@ -206,6 +199,20 @@ class GameSession {
 				bullet.render();
 			}
 			tower.render();
+		}	
+	}
+
+	make_turn(){
+		if (this.game_state == BUILDING) {
+			this.start_building_phase();
+		}
+		else {
+			//todo SendPackage from Firebase
+			//todo GetPackage from Firebase
+			this.start_war_phase();
+		}
+		if (this.is_gameover()){
+			clearInterval(this.session_intervar);
 		}
 	}
 
@@ -220,8 +227,8 @@ class GameSession {
 			case 3: enemy = new BigboyEnemy(source_player.base_x, source_player.base_y, source_player, target_player, objects_drawer);
 					break;
 		}
+
 		this.enemies_id = (this.enemies_id + 1) % MAX_ACTIVE_ENEMIES;
-		//enemy.resize(ENEMY_HITBOX, ENEMY_HITBOX);
 		enemy.set_path(target_path, target_path.length - 1);
 		enemy.set_properties(this.enemies_id);
 		let is_able = on_player_spend_money(source_player, enemy.price, this.personal_id);
@@ -261,25 +268,7 @@ class GameSession {
 		this.paths[from_player.id][to_player.id] = path;
 	}
 
-	launch_session(){
-		this.set_personal_id(1);
-		this.render_map();
-		this.make_turn();
+	set_personal_id(id) {
+		this.personal_id = id;
 	}
-
-	make_turn(){
-		if (this.game_state == BUILDING) {
-			this.start_building_phase();
-		}
-		else {
-			//todo SendPackage from Firebase
-			//todo GetPackage from Firebase
-			this.start_war_phase();
-		}
-		if (this.is_gameover()){
-			clearInterval(this.session_intervar);
-		}
-	}
-
-
 }

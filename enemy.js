@@ -58,7 +58,7 @@ class Enemy extends GameObject {
         this.animate()
 
         this.point = this.path[this.current_point_index];
-        if(Math.floor(this.x  / BLOCK_SIZE) == this.point[0] && Math.floor(this.y / BLOCK_SIZE)  == this.point[1]) {
+        if (Math.floor(this.x  / BLOCK_SIZE) == this.point[0] && Math.floor(this.y / BLOCK_SIZE) == this.point[1]) {
             this.current_point_index++;
             this.point = this.path[this.current_point_index];
         }

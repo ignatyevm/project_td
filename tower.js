@@ -27,7 +27,7 @@ class Tower extends GameObject{
 	}
 
 	set_properties(){
-		if (this.lvl < 2) {
+		if (this.lvl < 3) {
 			this.set_sprite(BASIC_TOWER[0][this.lvl]);
 			this.damage = BASIC_TOWER[1][this.lvl];
 			this.max_fire_rate = BASIC_TOWER[2][this.lvl] * 50;

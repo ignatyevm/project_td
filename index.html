@@ -29,7 +29,7 @@
 
 
 
-		<div id="game field" style="display: none">
+		<div id="game field" style="display: none;">
 			<div id="canvas_field" style="position: relative; width: 768; height:768;">
 				<canvas id="game_field" class="canvas" width="768" height="768" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
 				<canvas id="map" class="canvas" width="768" height="768" style="position: absolute; left: 0; top: 0; z-index: -2;"></canvas>
@@ -38,11 +38,9 @@
 			<div class="game_menu" id="towers" style="position: relative;">
 				<div class="header">
 					<input id="timer" readonly>
-					<output class="round">  round: 1  </output>
-					<output class="game_state">  BUILD   </output>
 					<output class="player_info" id="player_hp"> 20 </output>
 					<img src="styles/hp.png" id="hp_img">
-					<output class="player_info" id="player_budget"> 500 </output>
+					<output class="player_info" id="player_budget"> 1000 </output>
 					<img src="styles/money.png" id="money_img">
 					<button class="exit"> EXIT </button>
 				</div>
@@ -50,7 +48,7 @@
 					<div class="container">
 						<button id="tb1" class="button" style="background: url(sprites/mars/tower_sprites/tower_1/tower1_level_1.png) no-repeat"></button>
 						<button id="tb2" class="button" style="background: url(sprites/mars/tower_sprites/tower_2/magnit_gun_1.png) no-repeat"></button>
-						<button id="tb3" class="button" style="background: url(sprites/mars/tower_sprites/tower_3/aоe_gun_1.png) no-repeat"></button>
+						<button id="tb3" class="button" style="background: url(sprites/mars/tower_sprites/tower_3/aoe_gun_1.png) no-repeat"></button>
 					</div>	
 					<input class="info" id="towerInfo" readonly>
 					<button class="action_button" id="tower_upgrade"> UPGRADE </button>

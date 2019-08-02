@@ -7,6 +7,8 @@ var is_base_chosen = false;
 var state = 1;
 let state_c = 2;
 
+let radius_interval;
+
 let bY = -50; 
 let bX = -50; 
 let tower_x = 0; 
@@ -123,6 +125,19 @@ function is_tower_clicked(towers, meta_drawer){
 	}
 	if (state_c == 2 && !is_clicked){
 		state_c = 1;
-		meta_drawer.clear();	
+		meta_drawer.clear();
 	}
+}
+
+function start_radius_interval(){
+	radius_interval = setInterval(()=>{
+		meta_drawer.clear();
+		draw_tower_place(meta_drawer);
+		is_tower_selected(game.session.towers, meta_drawer);
+		is_tower_clicked(game.session.towers, meta_drawer);
+	}, 10);
+}
+
+function clear_interval_radius(){
+	clearInterval(radius_interval);
 }
