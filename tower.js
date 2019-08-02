@@ -73,14 +73,16 @@ class Tower extends GameObject{
 
 	render() {
 		super.render_rotated(this.rotation_angle);
-		if (this.selected)
-			this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
 	}
 
 	clear_bullets() {
 		while(this.bullets.length != 0) {
 			this.bullets.pop();
 		}
+	}
+
+	draw_radius(){
+		this.meta_drawer.render_circle(this.x + this.width / 2, this. y + this.height / 2, this.radius);
 	}
 }
 

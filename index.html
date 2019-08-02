@@ -181,6 +181,7 @@
 
 			setInterval(()=>{
 				draw_tower_place(meta_drawer);
+				is_tower_selected(game.session.towers, meta_drawer);
 			}, 20);
 
 			game.session.add_path(player, bot, [[11, 0, 1, 0], [11, 8, 0, 1], [10, 8, -1, 0], 

@@ -19,7 +19,7 @@ const HALF_PI = 90;
 const START_PLAYER_HP = 20;
 const START_PLAYER_MONEY = 1000;
 
-const BUILD_SECONDS = 10;
+const BUILD_SECONDS = 60;
 
 const ONLINE = 1;
 const LOCAL = 0;

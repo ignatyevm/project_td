@@ -3,7 +3,9 @@ const BASE_Y = 700;
 
 var is_tower_chosen = false; 
 var is_enemy_chosen = false; 
-var is_base_chosen = false; 
+var is_base_chosen = false;
+var state = 1;
+
 
 let bY = -50; 
 let bX = -50; 
@@ -43,12 +45,12 @@ function change_map(map, y, x, ch){
 } 
 
 canvas.addEventListener("click", function(event){ 
+	meta_drawer.clear();
 	if (is_tower_chosen && game.session.game_state == BUILDING){ 
 		if (bX < 25 && bY < 25 && new_map[bY][bX] == 'x'){ 
 			new_map = change_map(new_map, bY, bX, "T"); 
 			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.personal_id], tower_type); 
 			is_tower_chosen = false;
-			meta_drawer.clear();
 		} 
 	} 
 	//is_tower_chosen = false;
@@ -92,5 +94,20 @@ function disable_buttons(){
 function enable_buttons(){
 	for (let key in buttons){
 		buttons[key].disabled = false;
+	}
+}
+
+function is_tower_selected(towers, meta_drawer){
+	let is_selected = false;
+	for (let tower of towers){
+		if (tower.selected){
+			tower.draw_radius();
+			state = 2;
+			is_selected = true;
+		}
+	}
+	if (state == 2 && !is_selected){
+		state = 1;
+		meta_drawer.clear();
 	}
 }
