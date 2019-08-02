@@ -46,7 +46,7 @@ canvas.addEventListener("click", function(event){
 	if (is_tower_chosen && game.session.game_state == BUILDING){ 
 		if (bX < 25 && bY < 25 && new_map[bY][bX] == 'x'){ 
 			new_map = change_map(new_map, bY, bX, "T"); 
-			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.personal_id], 1); 
+			game.session.build_tower(tower_x, tower_y, game.session.players[game.session.personal_id], tower_type); 
 			is_tower_chosen = false;
 		} 
 	} 
@@ -61,7 +61,7 @@ canvas.addEventListener("click", function(event){
 	} 
 	if (is_enemy_chosen && game.session.game_state == BUILDING){ 
 		if (Math.abs(event.clientX - BASE_X) < SPRITE_WIDTH && Math.abs(event.clientY - BASE_Y) < SPRITE_HEIGHT){ 
-			game.session.spawn_enemy(player, bot); 
+			game.session.spawn_enemy(player, bot, enemy_type); 
 		} 
 	} 
 }); 

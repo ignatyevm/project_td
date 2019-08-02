@@ -1,6 +1,8 @@
 let radius;
 let price;
 let type;
+var enemy_type = 1;
+var tower_type = 1;
 
 function change_selected_object(select1, select2){
 	is_tower_chosen = select1;
@@ -18,7 +20,7 @@ document.getElementById("tb1").addEventListener("click", ()=>{
 		type = BASIC_TOWER;
 		towerInfo.value = "tower 1";
 	}
-
+	tower_type = 1;
 });
 
 document.getElementById("tb2").addEventListener("click", ()=>{
@@ -29,6 +31,7 @@ document.getElementById("tb2").addEventListener("click", ()=>{
 		type = MAGNIT_TOWER;
 		towerInfo.value = "tower 2";
 	}
+	tower_type = 2;
 });
 
 document.getElementById("tb3").addEventListener("click", ()=>{
@@ -39,21 +42,25 @@ document.getElementById("tb3").addEventListener("click", ()=>{
 		type = BASIC_TOWER;
 		towerInfo.value = "tower 3";
 	}
+	tower_type = 3;
 });
 
 document.getElementById("eb1").addEventListener("click", ()=>{
 	change_selected_object(false, true);
 	enemyInfo.value = "enemy 1";
+	enemy_type = 1;
 });
 
 document.getElementById("eb2").addEventListener("click", ()=>{
 	change_selected_object(false, true);
 	enemyInfo.value = "enemy 2";
+	enemy_type = 2;
 });
 
 document.getElementById("eb3").addEventListener("click", ()=>{
 	change_selected_object(false, true);
 	enemyInfo.value = "enemy 3";
+	enemy_type = 3;
 });
 
 document.getElementById("sell").addEventListener("click", ()=>{

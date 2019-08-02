@@ -19,7 +19,7 @@ const HALF_PI = 90;
 const START_PLAYER_HP = 20;
 const START_PLAYER_MONEY = 1000;
 
-const BUILD_SECONDS = 3;
+const BUILD_SECONDS = 10;
 
 const ONLINE = 1;
 const LOCAL = 0;
@@ -44,7 +44,7 @@ const BASIC_BULLET_SPRITE = "sprites/mars/bullets/res_bullet.png";
 
 const BASIC_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_1_1.png",
 					 "sprites/mars/enemy_sprite/bugs/bug_1_2.png",
-					 1, 1, 50, 500];
+					 1, 1, 50, 150];
 
 const ANT_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_2_1.png",
 				   "sprites/mars/enemy_sprite/bugs/bug_2_2.png",
@@ -52,7 +52,7 @@ const ANT_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_2_1.png",
 
 const BIGBOY_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_3_1.png",
 				   	   "sprites/mars/enemy_sprite/bugs/bug_3_2.png",
-				   	   1, 0.75, 1000, 200];
+				   	   1, 0.75, 500, 500];
 
 const BASIC_TOWER = [["sprites/mars/tower_sprites/tower_1/tower1_level_1.png",
 					  "sprites/mars/tower_sprites/tower_1/tower1_level_2.png",
@@ -66,15 +66,15 @@ const MAGNIT_TOWER = [["sprites/mars/tower_sprites/tower_2/magnit_gun_1.png",
 					  "sprites/mars/tower_sprites/tower_2/magnit_gun_2.png",
 					  "sprites/mars/tower_sprites/tower_2/magnit_gun_3.png"],
 					 [20, 60, 120],
-					 [3, 2, 1],
+					 [0.8, 0.75, 0.5],
 					 [150, 200, 300],
 					 [100, 110, 120]];
 
-const AOE_TOWER = [["sprites/mars/tower_sprites/tower_2/magnit_gun_1.png",
-					  "sprites/mars/tower_sprites/tower_2/magnit_gun_2.png",
-					  "sprites/mars/tower_sprites/tower_2/magnit_gun_3.png"],
+const AOE_TOWER = [["sprites/mars/tower_sprites/tower_3/aоe_gun_1.png",
+					  "sprites/mars/tower_sprites/tower_3/aоe_gun_1.png",
+					  "sprites/mars/tower_sprites/tower_3/aоe_gun_1.png"],
 					 [50, 150, 300],
-					 [50, 40, 30],
+					 [2, 1.25, 0.75],
 					 [150, 200, 300],
 					 [100, 110, 120],
 					 [30, 40, 50]];
