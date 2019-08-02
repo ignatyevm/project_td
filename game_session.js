@@ -112,8 +112,8 @@ class GameSession {
 
 	start_war_phase(){
 		if (!this.is_interval_launch){ 
-			clear_interval_radius()
-			this.launch_animation()
+			clear_interval_radius();
+			this.launch_animation();
 			this.is_interval_launch = true;
 		}
 	}

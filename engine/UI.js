@@ -57,8 +57,7 @@ canvas.addEventListener("mousemove", function(event) {
 	t.selected = 
 		Math.abs(t.x + t.width / 2 - x) < t.width / 2 && 
 		Math.abs(t.y + t.height / 2 - y) < t.height / 2; 
-	} 
-	console.log(x + " " + y); 		
+	} 	
 }); 
 
 function change_map(map, y, x, ch){ 
