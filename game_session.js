@@ -47,6 +47,17 @@ class GameSession {
 			disable_buttons();
 	}
 
+	start_radius_interval(){
+		this.radius_interval = setInterval(()=>{
+			draw_tower_place(meta_drawer);
+			is_tower_selected(game.session.towers, meta_drawer);
+		}, 10);
+	}
+
+	clear_interval_radius(){
+		clearInterval(this.radius_interval);
+	}
+
 	launch_timer(){
 		this.interval_id = window.setInterval(()=>{
 			--this.build_counter;
@@ -88,6 +99,8 @@ class GameSession {
 	start_building_phase(){
 		this.build_counter = BUILD_SECONDS;
 		if (!this.is_interval_launch){
+			bot_spawn_enemy(bot, player); // delete
+			this.start_radius_interval();
 			this.launch_timer();
 			this.is_interval_launch = true;
 			frames = 0;
@@ -96,6 +109,7 @@ class GameSession {
 
 	start_war_phase(){
 		if (!this.is_interval_launch){ 
+			this.clear_interval_radius()
 			this.launch_animation()
 			this.is_interval_launch = true;
 		}
@@ -144,7 +158,7 @@ class GameSession {
 			for(let i = 0; i < this.enemies.length; i++) {
 				let enemy = this.enemies[i];
 
-				if (tower.player.id === enemy.player.id)
+				if (tower.player.id != enemy.target.id)
 					continue;
 
 				if (is_in_radius(tower, enemy, tower.radius)) {
@@ -246,7 +260,7 @@ class GameSession {
 	}
 
 	launch_session(){
-		this.set_personal_id(0);
+		this.set_personal_id(1);
 		this.render_map();
 		this.make_turn();
 	}

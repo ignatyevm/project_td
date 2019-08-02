@@ -19,7 +19,7 @@ const HALF_PI = 90;
 const START_PLAYER_HP = 20;
 const START_PLAYER_MONEY = 1000;
 
-const BUILD_SECONDS = 60;
+const BUILD_SECONDS = 10;
 
 const ONLINE = 1;
 const LOCAL = 0;
@@ -71,10 +71,23 @@ const MAGNIT_TOWER = [["sprites/mars/tower_sprites/tower_2/magnit_gun_1.png",
 					 [100, 110, 120]];
 
 const AOE_TOWER = [["sprites/mars/tower_sprites/tower_3/aоe_gun_1.png",
-					  "sprites/mars/tower_sprites/tower_3/aоe_gun_1.png",
-					  "sprites/mars/tower_sprites/tower_3/aоe_gun_1.png"],
+					  "sprites/mars/tower_sprites/tower_3/aоe_gun_2.png",
+					  "sprites/mars/tower_sprites/tower_3/aоe_gun_3.png"],
 					 [50, 150, 300],
 					 [2, 1.25, 0.75],
 					 [150, 200, 300],
 					 [100, 110, 120],
 					 [30, 40, 50]];
+
+const BASE_COORDINATE = [[0, 0], [21 * BLOCK_SIZE, 23 * BLOCK_SIZE], [0, 21 * BLOCK_SIZE], [23 * BLOCK_SIZE, 0]]
+
+
+const PATH_FOUR_TO_ONE = [[11, 23, -1, 0], [11, 14, 0, -1], [13, 14, 1, 0],
+ 		  	   			  [13, 9, 0, -1], [7, 9, -1, 0], [7, 2, 0, -1],
+ 			   			  [2, 2, -1, 0], [2, 10, 0, 1], [-1, 10, -1, 0],
+ 			  			  [-1, -1, 0, -1], [0, 0, 0, 0]]
+
+const PATH_ONE_TO_FOUR = [[11, 23, -1, 0], [11, 14, 0, -1], [13, 14, 1, 0],
+ 		  	   			  [13, 9, 0, -1], [7, 9, -1, 0], [7, 2, 0, -1],
+ 			   			  [2, 2, -1, 0], [2, 10, 0, 1], [-1, 10, -1, 0],
+ 			  			  [-1, -1, 0, -1], [0, 0, 0, 0]]

@@ -98,6 +98,10 @@ class MagnetTower extends Tower{
 		this.price = MAGNIT_TOWER[3][this.lvl];
 		this.radius = MAGNIT_TOWER[4][this.lvl];
 	}
+
+	render() {
+		this.drawer.render(this.sprite, this.x, this.y, this.width, this.height);
+	}
 }
 
 class AOETower extends Tower {

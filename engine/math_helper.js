@@ -41,17 +41,13 @@ function get_rotation_angel(point1, point2){
 	let _cos = (ox[0] * vector[0] + ox[1] * vector[1]) / (ox_length * vector_length);
 	let angle = Math.acos(_cos) * (180 / Math.PI);
 
-	if (point1.x >= point2.x && point1.y >= point2.y){
+	if (point1.x >= point2.x && point1.y >= point2.y) {
 		return angle - HALF_PI;
-	}else if (point1.x < point2.x && point1.y >= point2.y){
+	}else if (point1.x < point2.x && point1.y >= point2.y) {
 		return - angle + HALF_PI;
-	}else if (point1.x > point2.x && point1.y <= point2.y){
+	}else if (point1.x > point2.x && point1.y <= point2.y) {
 		return - angle - HALF_PI;
-	}else{
+	}else {
 		return angle + HALF_PI;
-	}
-
-	function get_rotation_enemy(point1, point2) {
-
 	}
 }

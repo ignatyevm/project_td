@@ -40,11 +40,7 @@ class Enemy extends GameObject {
         return this.current_point_index == this.path_len
     }
 
-    move() {
-        if (this.is_arrive()) {
-            return;
-        }
-
+    animate(){
         if (frames == this.current_animation_frame) {
             this.set_sprite(BASIC_ENEMY[1]);
         }
@@ -52,6 +48,14 @@ class Enemy extends GameObject {
             this.set_sprite(BASIC_ENEMY[0]);
             this.current_animation_frame += BASIC_ANIMATION_SPEED * 2;
         }
+    }
+
+    move() {
+        if (this.is_arrive()) {
+            return;
+        }
+
+        this.animate()
 
         this.point = this.path[this.current_point_index];
         if(Math.floor(this.x  / BLOCK_SIZE) == this.point[0] && Math.floor(this.y / BLOCK_SIZE)  == this.point[1]) {
@@ -74,6 +78,16 @@ class AntEnemy extends Enemy{
         super(x, y, player, target, drawer);
     }
 
+    animate(){
+        if (frames == this.current_animation_frame) {
+            this.set_sprite(ANT_ENEMY[1]);
+        }
+        else if (frames == this.current_animation_frame + BASIC_ANIMATION_SPEED) {
+            this.set_sprite(ANT_ENEMY[0]);
+            this.current_animation_frame += BASIC_ANIMATION_SPEED * 2;
+        }
+    }
+
     set_properties(id){
         this.set_sprite(ANT_ENEMY[0]);
         this.damage = ANT_ENEMY[2];
@@ -87,6 +101,16 @@ class AntEnemy extends Enemy{
 class BigboyEnemy extends Enemy{
     constructor(x, y, player, target, drawer) {
         super(x, y, player, target, drawer);
+    }
+
+    animate(){
+        if (frames == this.current_animation_frame) {
+            this.set_sprite(BIGBOY_ENEMY[1]);
+        }
+        else if (frames == this.current_animation_frame + BASIC_ANIMATION_SPEED) {
+            this.set_sprite(BIGBOY_ENEMY[0]);
+            this.current_animation_frame += BASIC_ANIMATION_SPEED * 2;
+        }
     }
 
     set_properties(id){
