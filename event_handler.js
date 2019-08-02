@@ -104,12 +104,10 @@ document.getElementById("sell").addEventListener("click", ()=>{
 });
 
 document.getElementById("tower_upgrade").addEventListener("click", ()=>{
-	alert("GGGGG");
 	for (let i = 0; i < game.session.towers.length; i++){
 		let t = game.session.towers[i];
-		if (t.clicked && t.lvl < 3 && document.getElementById("player_budget").value >= t.type[3][t.lvl + 1]
+		if (t.clicked && t.lvl < 3 && document.getElementById("player_budget").value >= t.price
 			&& t.player == game.session.players[game.session.personal_id]){
-			alert("up");
 			t.lvl++;
 			t.set_properties();
 			on_player_spend_money(game.session.players[game.session.personal_id], t.price, game.session.personal_id);

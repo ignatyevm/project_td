@@ -37,7 +37,7 @@ class Tower extends GameObject{
 	}
 
 	to_highlight(){
-		this.drawer.highlight_tower(this.x, this.y, this.width, this.height);
+		this.meta_drawer.highlight_tower(this.x, this.y, this.width, this.height);
 	}
 
 	move_bullets() {

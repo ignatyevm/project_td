@@ -49,8 +49,10 @@ class GameSession {
 
 	start_radius_interval(){
 		this.radius_interval = setInterval(()=>{
+			meta_drawer.clear();
 			draw_tower_place(meta_drawer);
 			is_tower_selected(game.session.towers, meta_drawer);
+			is_tower_clicked(game.session.towers, );
 		}, 10);
 	}
 
