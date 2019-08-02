@@ -184,7 +184,10 @@ class GameSession {
 
 		for (let i = 0; i < this.active_enemy; ++i){
 			let enemy = this.enemies[i];
-			enemy.render();
+			if (enemy.point[2] == -1) enemy.render_rotated(-90); 
+			if (enemy.point[2] == 1) enemy.render_rotated(90); 
+			if (enemy.point[3] == 1) enemy.render_rotated(-180); 
+			if (enemy.point[3] == -1) enemy.render_rotated(0);
 		}
 
 		this.render_tower();
