@@ -97,7 +97,9 @@ document.getElementById("sell").addEventListener("click", ()=>{
 		if (t.clicked && t.player == game.session.players[game.session.personal_id]){
 			game.session.towers.splice(i, 1);
 			delete_tower(t.x, t.y);
-			on_player_add_money(game.session.players[game.session.personal_id], t.price, game.session.personal_id);
+			objects_drawer.clear();	
+			game.session.render_tower();
+			on_player_add_money(game.session.players[game.session.personal_id], t.price / 2, game.session.personal_id);
 			t.clicked = false;
 		}
 	}
