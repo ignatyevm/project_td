@@ -43,7 +43,7 @@ class GameSession {
 				if (!this.players[i].is_dead())
 					index = i;
 			}
-			if (index > 0)
+			if (index >= 0)
 				alert("Player " + PLAYER_COLORS[index] + " has won!");
 			else 
 				alert("DRAW");
