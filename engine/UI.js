@@ -92,7 +92,14 @@ canvas.addEventListener("click", function(event){
 	} 
 	if (is_enemy_chosen && game.session.game_state == BUILDING){ 
 		for (let i = 0; i < chosen_number_of_players; ++i) {
-			if (Math.abs(event.clientX - HIT_BASE[i][0]) < SPRITE_WIDTH && Math.abs(event.clientY - HIT_BASE[i][1]) < SPRITE_HEIGHT && i != game.session.personal_id){ 
+			var offset_pos = get_offset(this);
+
+    		let x = event.clientX + offset_pos.x;
+		    let y = event.clientY + offset_pos.y;
+
+			//console.log(event.clientX + ' ' + event.clientY);
+			//let x = 
+			if (Math.abs(x - HIT_BASE[i][0]) < SPRITE_WIDTH && Math.abs(y - HIT_BASE[i][1]) < SPRITE_HEIGHT && i != game.session.personal_id){ 
 				game.session.spawn_enemy(game.session.players[game.session.personal_id], game.session.players[i], enemy_type); 
 			} 
 		}	
