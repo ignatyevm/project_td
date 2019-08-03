@@ -113,3 +113,5 @@ const BASES = [[2 * BLOCK_SIZE, 0],
 const PLAYER_COLORS = ['Yellow', 'Red', 'Pink'];
 
 const BASES_COORDINATE = [[0, 32],[768, 700],[768, 32]]
+
+const HIT_BASE = [[0, 0], [23 * BLOCK_SIZE, 23 * BLOCK_SIZE], [21 * BLOCK_SIZE, 0]];
