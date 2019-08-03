@@ -38,12 +38,15 @@ class GameSession {
 
 	launch_timer(){
 		if (this.is_gameover()){
-			let index = 0;
+			let index = -1;
 			for (let i = 0; i < this.players.length; ++i){
 				if (!this.players[i].is_dead())
 					index = i;
 			}
-			alert("Player " + PLAYER_COLORS[index] + " has won!");
+			if (index > 0)
+				alert("Player " + PLAYER_COLORS[index] + " has won!");
+			else 
+				alert("DRAW");
 			return;
 		}
 		alert_player_turn(this.personal_id);
