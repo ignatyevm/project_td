@@ -44,7 +44,7 @@ const BASIC_BULLET_SPRITE = "sprites/mars/bullets/res_bullet.png";
 
 const BASIC_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_1_1.png",
 					 "sprites/mars/enemy_sprite/bugs/bug_1_2.png",
-					 1, 2, 50, 300];
+					 1, 2, 50, 500];
 					 //dmg, speed, price, hp
 
 const ANT_ENEMY = ["sprites/mars/enemy_sprite/bugs/bug_2_1.png",

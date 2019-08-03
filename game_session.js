@@ -37,6 +37,15 @@ class GameSession {
 	}
 
 	launch_timer(){
+		if (this.is_gameover()){
+			let index = 0;
+			for (let i = 0; i < this.players.length; ++i){
+				if (!this.players[i].is_dead())
+					index = i;
+			}
+			alert("Player " + PLAYER_COLORS[index] + " has won!");
+			return;
+		}
 		alert_player_turn(this.personal_id);
 		this.interval_id = window.setInterval(()=>{
 			--this.build_counter;
@@ -150,7 +159,7 @@ class GameSession {
 			if (enemy.is_arrive()) {
 				on_enemy_in_base(this.players[target_index], enemy, this.personal_id);
 				if (this.players[target_index].is_dead()){
-					on_base_destroyed(this.players[this.personal_id], this.interval_id);
+					on_base_destroyed(this.players[target_index]);
 				}
 				--this.active_enemy;
 				this.enemies.splice(i, 1);
@@ -296,6 +305,7 @@ class GameSession {
 
 	is_gameover() {
 		let count = 0;
+		let index = 0;
 		for (let player of this.players){
 			if (!player.is_dead())
 				++count;

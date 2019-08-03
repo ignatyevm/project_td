@@ -110,7 +110,7 @@ document.getElementById("tower_upgrade").addEventListener("click", ()=>{
 			&& t.player == game.session.players[game.session.personal_id]){
 			t.lvl++;
 			t.set_properties();
-			objects_drawer.clear();
+			objects_drawer.clear();	
 			game.session.render_tower();
 			on_player_spend_money(game.session.players[game.session.personal_id], t.price, game.session.personal_id)
 		}
@@ -127,10 +127,8 @@ function on_enemy_in_base(player, enemy, personal_id){
 	}
 }
 
-function on_base_destroyed(player, interval_id){
+function on_base_destroyed(player){
 	player.set_state(DEAD); 
-	clearInterval(id_interval);
-	alert("YOU DIED");
 }
 
 function on_player_add_money(player, money, personal_id){
@@ -157,7 +155,6 @@ function on_player_change_turn(personal_id, players){
 	let money_bar = document.getElementById('player_budget');
 	health_bar.innerText = players[personal_id].base_hp;
 	money_bar.innerText = players[personal_id].money;
-	//alert(PLAYER_COLORS[personal_id] + ' your turn');
 }
 
 function assign_playes(number_of_players) {
